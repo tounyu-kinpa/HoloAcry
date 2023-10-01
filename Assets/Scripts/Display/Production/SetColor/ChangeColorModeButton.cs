@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ChangeColorModeButton : MonoBehaviour
 {
-    public UnityEngine.UI.Dropdown dropdown;
-
+    public TMP_Dropdown dropdown;
+    
     public Slider redSlider;
     public Slider greenSlider;
     public Slider blueSlider;
