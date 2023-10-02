@@ -9,15 +9,26 @@ public class ChangeColorModeButton : MonoBehaviour
     public GameObject HSVModePanel;
     public GameObject RGBModePanel;
 
+    public SetInputField RorH;
+    public SetInputField GorS;
+    public SetInputField BorV;
+
     public void ChangeMode()
     {
+
         if (dropdown.value == 0)
         {
             RGBMode();
+            RorH.ChangeInputFieldText();
+            GorS.ChangeInputFieldText();
+            BorV.ChangeInputFieldText();
         }
         else
         {
             HSVMode();
+            RorH.ChangeInputFieldText();
+            GorS.ChangeInputFieldText();
+            BorV.ChangeInputFieldText();
         }
     }
 

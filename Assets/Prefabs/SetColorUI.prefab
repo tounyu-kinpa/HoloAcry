@@ -203,6 +203,9 @@ MonoBehaviour:
   dropdown: {fileID: 107630786447890426}
   HSVModePanel: {fileID: 8534793473111023327}
   RGBModePanel: {fileID: 7103929308208287504}
+  RorH: {fileID: 2823819494793004990}
+  GorS: {fileID: 8124310999544325008}
+  BorV: {fileID: 3187541029019625811}
 --- !u!1 &298809810616400978
 GameObject:
   m_ObjectHideFlags: 0

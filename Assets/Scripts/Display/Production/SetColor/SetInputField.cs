@@ -19,8 +19,8 @@ public class SetInputField : MonoBehaviour
 
     private void Start()
     {
-        inputField = this.gameObject.GetComponent<TMP_InputField>();    
-        Debug.Log(inputField is null);
+        inputField = this.gameObject.GetComponent<TMP_InputField>();
+        ChangeInputFieldText(); 
     }
 
     public void UpdateSliderValue()
