@@ -4,18 +4,25 @@ using TMPro;
 
 public class SetInputField : MonoBehaviour
 {
+    // InputField
     private TMP_InputField inputField;
 
+    // 現在の色を表示するためのRawImage
     public RawImage CurrentRGBColor;
     public RawImage CurrentHSVColor;
 
+    // 各InputFieldに対応するHSV, RGBのスライダー
     public Slider HSVSlider;
     public Slider RGBSlider;
 
+    // HSVモードのときのUI
     public GameObject HSVModePanel;
-    public GameObject RGBModePanel;
 
-    public float HSVdivisor = 360;
+    // InputFieldのPlaceholder
+    public TMP_Text placeholder;
+
+    // HSVの値を0 - 1に変換するときの割る数
+    public float HSVdivisor;
 
     private void Start()
     {
@@ -23,33 +30,45 @@ public class SetInputField : MonoBehaviour
         ChangeInputFieldText(); 
     }
 
+    // ユーザーがInputFieldに値を入力したときに呼び出す関数
     public void UpdateSliderValue()
     {
-        if (HSVModePanel.activeSelf)
+        // InputFieldの値をintにParse
+        if (int.TryParse(inputField.text, out int inputValue))
         {
-            HSVSlider.value = int.Parse(inputField.text) / HSVdivisor;
-        }
-        else
-        {
-            RGBSlider.value = int.Parse(inputField.text) / 255f;
+            // HSVモードの場合
+            if (HSVModePanel.activeSelf)
+            {
+                // スライダーの値をユーザーが入力した値に対応させる
+                HSVSlider.value = inputValue / HSVdivisor;
+            }
+            // RGBモードの場合
+            else
+            {
+                RGBSlider.value = inputValue / 255f;
+            }
         }
     }
 
-    // InputFieldのテキストを変更するメソッド
-    private void SetInputFieldText(string newText)
-    {
-        inputField.text = newText;
-    }
-
+    // スライダーの値が変更されたときに呼び出す関数
     public void ChangeInputFieldText()
     {
         if (HSVModePanel.activeSelf)
         {
-            SetInputFieldText(((int)(HSVSlider.value * HSVdivisor)).ToString());
+            inputField.text = ((int)(HSVSlider.value * HSVdivisor)).ToString();
         }
         else 
         {
-            SetInputFieldText(((int)(RGBSlider.value * 255)).ToString());
+            inputField.text = ((int)(RGBSlider.value * 255)).ToString();
+        }
+    }
+
+    // ユーザーがInputFieldに何も入力しなかったときに呼び出す関数
+    public  void SetPlaceholder()
+    {
+        if (string.IsNullOrEmpty(inputField.text))
+        {
+            ChangeInputFieldText();
         }
     }
 }
