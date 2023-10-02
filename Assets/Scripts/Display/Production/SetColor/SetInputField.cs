@@ -34,4 +34,22 @@ public class SetInputField : MonoBehaviour
             RGBSlider.value = int.Parse(inputField.text) / 255f;
         }
     }
+
+    // InputFieldのテキストを変更するメソッド
+    private void SetInputFieldText(string newText)
+    {
+        inputField.text = newText;
+    }
+
+    public void ChangeInputFieldText()
+    {
+        if (HSVModePanel.activeSelf)
+        {
+            SetInputFieldText(((int)(HSVSlider.value * HSVdivisor)).ToString());
+        }
+        else 
+        {
+            SetInputFieldText(((int)(RGBSlider.value * 255)).ToString());
+        }
+    }
 }
