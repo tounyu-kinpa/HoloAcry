@@ -2,9 +2,12 @@
 {
     public enum Mode
     {
-        ChangeRotation,
+        ChangeScale,
+        ChangePos,
         ChangeColor,
+        MergeObjects,
         ChangeSlope,
+        ChangeRotation,
         
     }
 }
