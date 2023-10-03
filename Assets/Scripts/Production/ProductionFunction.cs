@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class BaseProduction
+    public class ProductionFunction
     {
         private static float beforeDis = -1f;
         private static Vector3 beforeScale = Vector3.one;
@@ -46,9 +47,11 @@ namespace DefaultNamespace
 
         }
 
-        public static void ChangeColor(GameObject gameObject, Color32 color)
+        public static void ChangeColor(List<GameObject> gameObjects, Color32 color)
         {
-            gameObject.GetComponent<Renderer>().material.color = color;
+            MeshRenderer mesh;
+            mesh = gameObjects[0].GetComponent<MeshRenderer>();
+            mesh.material.color = color;
         }
 
         public static void MergeObjects(GameObject[] gameObjects)
@@ -62,25 +65,31 @@ namespace DefaultNamespace
             }
         }
 
-        public static void ChangeMesh(GameObject gameObject)
+        public static void ChangeSlope(GameObject gameObject)
         {
-            if (flag)
+            Mesh mesh = gameObject.GetComponent<MeshFilter>().mesh;
+            Vector3[] vertices = mesh.vertices;
+            
+            for (int i = 0; i < vertices.Length; i++)
             {
-                Mesh mesh = gameObject.GetComponent<MeshFilter>().mesh;
-                Vector3[] vertices = mesh.vertices;
-                
-                for (int i = 0; i < vertices.Length; i++)
+                if (vertices[i].y == 1.0f)
                 {
-                    if (vertices[i].y == 1.0f)
-                    {
-                        vertices[i] = Vector3.Lerp(vertices[i], vertices[41], 0.5f);
-                    }
-                    Debug.Log($"{vertices[i]} {i}");
+                    vertices[i] = Vector3.Lerp(vertices[i], vertices[41], 0.5f);
                 }
-
-                mesh.vertices = vertices;
-                flag = false;
+                Debug.Log($"{vertices[i]} {i}");
             }
+
+            mesh.vertices = vertices;
+        }
+
+        public static void ChangeRotation(GameObject gameObject, float x, float y, float z)
+        {
+            gameObject.transform.rotation = Quaternion.Euler(x, y, z);
+        }
+
+        public static void ApplyBooleanOp(List<GameObject> gameObjects)
+        {
+            gameObjects[0].AddComponent<ChangePOV>();
         }
     }
 
