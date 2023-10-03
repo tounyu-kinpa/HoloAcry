@@ -47,11 +47,18 @@ namespace DefaultNamespace
 
         }
 
-        public static void ChangeColor(List<GameObject> gameObjects, Color32 color)
+        public static void ChangeColorRGB(List<GameObject> gameObjects, Color32 color)
         {
             MeshRenderer mesh;
             mesh = gameObjects[0].GetComponent<MeshRenderer>();
             mesh.material.color = color;
+        }
+
+        public static void ChangeColorHSV(List<GameObject> gameObjects, float h, float s, float v)
+        {
+            MeshRenderer mesh;
+            mesh = gameObjects[0].GetComponent<MeshRenderer>();
+            mesh.material.color = Color.HSVToRGB(90, 63, 50);
         }
 
         public static void MergeObjects(GameObject[] gameObjects)
