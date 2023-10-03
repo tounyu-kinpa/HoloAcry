@@ -15,7 +15,9 @@ public class ProductionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        selectedGameObjects.Add(GameObject.Find("Cube"));
+        Debug.Log(Color.HSVToRGB(99, 63, 50).r);
+        ProductionFunction.ChangeColorRGB(selectedGameObjects, Color.HSVToRGB(99, 63,50));
     }
 
     // Update is called once per frame
