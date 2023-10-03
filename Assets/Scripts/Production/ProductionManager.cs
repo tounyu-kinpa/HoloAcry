@@ -4,13 +4,13 @@ using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class ProductionManager : MonoBehaviour
 {
     public static Mode CurrentMode = Mode.ChangeColor;
 
-    public static GameObject selectedGameObject;
-    public static GameObject CurrentWork;
+    public static List<GameObject> selectedGameObjects = new List<GameObject>();
 
+    public static GameObject CurrentWork;
     
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-        if (selectedGameObject == null)
+        if (selectedGameObjects == null)
         {
             switch (Input.touchCount)
             {
@@ -45,18 +45,9 @@ public class GameManager : MonoBehaviour
                     //BaseProduction.ChangeScale(selectedGameObject);
                     break;
             }
-            
-            switch (CurrentMode)
-            {
-                case Mode.ChangeColor:
-                    BaseProduction.ChangeColor(selectedGameObject, new Color32(187, 211, 211,1 ));
-                    break;
-            }
         }
-        
-        BaseProduction.ChangePos(selectedGameObject);
-        BaseProduction.ChangeScale(selectedGameObject);
-        BaseProduction.ChangeMesh(selectedGameObject);
+        //BaseProduction.ChangePos(selectedGameObject);
+        //BaseProduction.ChangeScale(selectedGameObject);
         //Debug.Log(CurrentMode);
     }
 }
