@@ -11,12 +11,13 @@ public class CreatePrefab : MonoBehaviour
 
     public int n = 4;//適当に入れて生成されるかテストする。後でxmlなどにある数値を参照する。
 
+    GameObject Obj;
+
     // Start is called before the first frame update
-    void Start()
+    public void OnClick()
     {
         n += 1;//nの見掛け上の値と実際に生成されるprefabの差が1、戻り値を設定する場合は-1する。
 
-        GameObject Obj;
 
 
         if (n == 0)
@@ -39,7 +40,7 @@ public class CreatePrefab : MonoBehaviour
                     Obj.transform.SetParent(canvas.transform, false);
                     vec2.y -= 880.0f;
                 }
-                
+
             }
         }
 
@@ -84,13 +85,13 @@ public class CreatePrefab : MonoBehaviour
 
                     }
                 }
-                
+
             }
-            
+
         }
 
 
     }
 }
 
-    // Update is called once per frame
+// Update is called once per frame
