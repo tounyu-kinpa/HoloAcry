@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -40,11 +41,46 @@ namespace DefaultNamespace
             //前フレームからの指の移動量を取得し、その分だけオブジェクトを移動させる
             if (Input.touchCount == 1)
             {
-                var n = MainCamera.transform.forward;
-                var dis = Input.touches[0].deltaPosition.magnitude;
+                var x = MainCamera.transform.right;
+                var y = MainCamera.transform.up;
+                
+                var deltapos = Input.touches[0].deltaPosition;
+                
+                gameObject.transform.Translate(x * deltapos.x * 0.1f * Time.deltaTime);
+                gameObject.transform.Translate(y * deltapos.y * 0.1f * Time.deltaTime);
 
             }
 
+        }
+
+        public static void MoveCamera()
+        {
+            if (Input.touchCount == 2)
+            {
+                var x = MainCamera.transform.right;
+                var y = MainCamera.transform.up;
+                    
+                var deltapos = Input.touches[0].deltaPosition;
+                    
+                MainCamera.transform.Translate(-x * deltapos.x * 0.1f * Time.deltaTime);
+                MainCamera.transform.Translate(-y * deltapos.y * 0.1f * Time.deltaTime);
+            }
+
+        }
+
+        public static void RotateCamera()
+        {
+            if (Input.touchCount == 1)
+            {
+                var x = MainCamera.transform.right;
+                var y = MainCamera.transform.up;
+                    
+                var deltapos = Input.touches[0].deltaPosition;
+                    
+                MainCamera.transform.RotateAround(MainCamera.transform.position, y, -deltapos.x * 1 * Time.deltaTime);
+                MainCamera.transform.RotateAround(MainCamera.transform.position, x, -deltapos.y * 1 * Time.deltaTime);
+
+            }
         }
 
         public static void ChangeColorRGB(List<GameObject> gameObjects, Color32 color)

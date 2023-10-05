@@ -26,30 +26,15 @@ public class ProductionManager : MonoBehaviour
         
         if (selectedGameObjects == null)
         {
-            switch (Input.touchCount)
-            {
-                case 1:
-                    //視点移動();
-                    break;
-                case 2:
-                    //カメラ位置移動();
-                    break;
-            }
         }
         else
         {
-            switch (Input.touchCount)
-            {
-                case 1:
-                    //BaseProduction.ChangePos(selectedGameObject);
-                    break;
-                case 2:
-                    //BaseProduction.ChangeScale(selectedGameObject);
-                    break;
-            }
+            
+
         }
-        //BaseProduction.ChangePos(selectedGameObject);
-        //BaseProduction.ChangeScale(selectedGameObject);
-        //Debug.Log(CurrentMode);
+        //ProductionFunction.ChangePos(selectedGameObjects[0]);
+        //ProductionFunction.ChangeScale(selectedGameObjects[0]);
+        ProductionFunction.MoveCamera();
+        ProductionFunction.RotateCamera();
     }
 }
