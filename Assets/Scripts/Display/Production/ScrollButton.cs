@@ -15,5 +15,4 @@ public class ScrollButton : MonoBehaviour {
         // newPositionは0から1の範囲で指定する
         scrollbar.value = scrollbar.value - 0.5f;
     }
-
 }
