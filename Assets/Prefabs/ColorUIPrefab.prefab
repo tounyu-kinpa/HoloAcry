@@ -5632,7 +5632,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 313460270251169359}
-        m_TargetAssemblyTypeName: ChangeColorModeButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChangeColorDropDown, Assembly-CSharp
         m_MethodName: ChangeMode
         m_Mode: 1
         m_Arguments:
