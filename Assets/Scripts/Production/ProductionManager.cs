@@ -1,40 +1,64 @@
-using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class ProductionManager : MonoBehaviour
+namespace DefaultNamespace
 {
-    public static Mode CurrentMode = Mode.ChangeColor;
-
-    public static List<GameObject> selectedGameObjects = new List<GameObject>();
-
-    public static GameObject CurrentWork;
     
-    // Start is called before the first frame update
-    void Start()
+    public class ProductionManager : MonoBehaviour
     {
-        selectedGameObjects.Add(GameObject.Find("Cube"));
-        Debug.Log(Color.HSVToRGB(99, 63, 50).r);
-        ProductionFunction.ChangeColorRGB(selectedGameObjects, Color.HSVToRGB(99, 63,50));
-    }
+        public static Mode CurrentMode = Mode.ChangeColor;
 
-    // Update is called once per frame
-    void Update()
-    {
+        public static List<GameObject> selectedGameObjects = new List<GameObject>();
+        public static List<GameObject> createdGameObjects = new List<GameObject>();
+
+        public Material OutlineMaterial;
         
-        if (selectedGameObjects == null)
+        // Start is called before the first frame update
+        void Start()
         {
+            createdGameObjects.Add(GameObject.Find("Cube"));
+            //selectedGameObjects.Add(GameObject.Find("Cube"));
         }
-        else
+
+        // Update is called once per frame
+        void Update()
         {
             
+            if (selectedGameObjects == null)
+            {
+            }
+            else
+            {
+                
 
+            }
+            //ProductionFunction.ChangePos(selectedGameObjects[0]);
+            //ProductionFunction.ChangeScale(selectedGameObjects[0]);
+            ProductionFunction.MoveCamera();
+            ProductionFunction.RotateCamera();
+            ProductionFunction.ChangeCameraScale();
+
+            foreach (var createdGameObject in createdGameObjects)
+            {
+                if (selectedGameObjects.Exists(x => x == createdGameObject))
+                {
+                    ApplyOutline(createdGameObject);
+                }
+                else
+                {
+                    RemoveOutline(createdGameObject); 
+                }
+            }
         }
-        //ProductionFunction.ChangePos(selectedGameObjects[0]);
-        //ProductionFunction.ChangeScale(selectedGameObjects[0]);
-        ProductionFunction.MoveCamera();
-        ProductionFunction.RotateCamera();
+
+        void ApplyOutline(GameObject gameObject)
+        {
+            gameObject.AddComponent<Outline>();
+        }
+
+        void RemoveOutline(GameObject gameObject)
+        {
+            Destroy(gameObject.GetComponent<Outline>());
+        }
     }
 }
