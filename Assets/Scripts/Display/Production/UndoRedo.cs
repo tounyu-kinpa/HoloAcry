@@ -1,7 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Scripts.Managers.SavaLoad.Model;
+
+public class Model
+{
+    public bool NowMaking = false;
+
+    // Elementの名前を格納
+    public string name;
+
+    // Elementの種類を格納
+    public string elementType;
+
+    // ElementのlocalScaleを格納
+    public Vector3 scale;
+
+    // ElementのlocalPositionを格納
+    public Vector3 position;
+
+    // ElementのlocalEulerAnglesを格納
+    public Vector3 rotate;
+
+    // Elementのmeshの頂点座標を格納
+    public Vector3[] meshVertices;
+
+    public Color color;
+}
 
 public class UndoRedo : MonoBehaviour
 {
@@ -40,7 +64,7 @@ public class UndoRedo : MonoBehaviour
         undoStack.Push(PopValue);
     }
 
-    public StackModel NewModel()
+    public Model NewModel()
     {
         NewValue.name = cube.transform.name;  
         NewValue.elementType = cube.tag;
@@ -70,21 +94,20 @@ public class UndoRedo : MonoBehaviour
 
     public void Redo()
     {
-        Debug.Log("redoStack Count = " + redoStack.Count);
-
         // Stackから取り出して代入する関数
         Model RedoValue = redoStack.Pop();
         //取り出した変更後の情報をもとにRedo
         AssignPopValue (RedoValue);
     }
+
     public void Do()
     {
         NewModel();
 
         //変更後のObjectの値をまとめてUndoStackにPush
+        NewValue.NowMaking = false;
         undoStack.Push(NewValue);
         // RedoをClear
-        Debug.Log("do_undostack.count = " + undoStack.Count);
         redoStack.Clear();
     }
 
