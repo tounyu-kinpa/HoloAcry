@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -8,8 +7,9 @@ namespace DefaultNamespace
     {
         private static float beforeDis = -1f;
         private static Vector3 beforeScale = Vector3.one;
-        private static bool flag = true;
 
+        private static float _beforeDis = -1f;
+        
         private static GameObject MainCamera = GameObject.Find("Main Camera");
 
         public static void ChangeScale(GameObject gameObject)
@@ -62,8 +62,11 @@ namespace DefaultNamespace
                     
                 var deltapos = Input.touches[0].deltaPosition;
                     
-                MainCamera.transform.Translate(-x * deltapos.x * 0.1f * Time.deltaTime);
-                MainCamera.transform.Translate(-y * deltapos.y * 0.1f * Time.deltaTime);
+                MainCamera.transform.position += -x * deltapos.x * 0.1f * Time.deltaTime;
+                MainCamera.transform.position += -y * deltapos.y * 0.1f * Time.deltaTime;
+                //MainCamera.transform.position += MainCamera.transform.forward * Time.deltaTime;
+
+                Debug.Log(y);
             }
 
         }
@@ -77,11 +80,35 @@ namespace DefaultNamespace
                     
                 var deltapos = Input.touches[0].deltaPosition;
                     
-                MainCamera.transform.RotateAround(MainCamera.transform.position, y, -deltapos.x * 1 * Time.deltaTime);
-                MainCamera.transform.RotateAround(MainCamera.transform.position, x, -deltapos.y * 1 * Time.deltaTime);
+                MainCamera.transform.RotateAround(MainCamera.transform.position, Vector3.up, deltapos.x * 2 * Time.deltaTime);
+                MainCamera.transform.RotateAround(MainCamera.transform.position, MainCamera.transform.right, -deltapos.y * 2 * Time.deltaTime);
 
             }
         }
+        
+        public static void ChangeCameraScale()
+        {
+            if (Input.touchCount == 2)
+            {
+                if (_beforeDis > 0)
+                {
+                    var dis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
+                    var delta = dis - _beforeDis;
+                    MainCamera.transform.position += MainCamera.transform.forward * delta * 0.1f;
+                }
+                else
+                {
+                    _beforeDis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
+                }
+            }
+
+            if (Input.touchCount < 1 && beforeDis > 0)
+            {
+                _beforeDis = -1f;
+            }
+
+        }
+
 
         public static void ChangeColorRGB(List<GameObject> gameObjects, Color32 color)
         {
