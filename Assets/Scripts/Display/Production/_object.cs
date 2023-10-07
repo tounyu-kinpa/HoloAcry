@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Display.Production;
 
 public class _object : MonoBehaviour, IPointerClickHandler
 {

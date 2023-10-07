@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.EventSystems;
 
-namespace DefaultNamespace
+namespace Display.Production
 {
     public class DoubleClick : MonoBehaviour, IPointerClickHandler 
     {

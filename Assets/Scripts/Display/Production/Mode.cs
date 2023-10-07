@@ -1,4 +1,4 @@
-﻿namespace DefaultNamespace
+﻿namespace Display.Production
 {
     public enum Mode
     {
