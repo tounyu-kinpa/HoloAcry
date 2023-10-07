@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace DefaultNamespace
+namespace Display.Production
 {
     public class DoubleClick : MonoBehaviour, IPointerClickHandler 
     {

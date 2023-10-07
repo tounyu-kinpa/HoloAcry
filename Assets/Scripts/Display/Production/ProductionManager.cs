@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Display.Production
 {
     
     public class ProductionManager : MonoBehaviour
