@@ -159,7 +159,7 @@ namespace DefaultNamespace
 
         public static void ApplyBooleanOp(List<GameObject> gameObjects)
         {
-            gameObjects[0].AddComponent<ChangePOV>();
+            
         }
     }
 
