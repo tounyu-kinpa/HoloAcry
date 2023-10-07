@@ -18,7 +18,6 @@ public class InputNamePrefab : MonoBehaviour
 
     public void DestroyModal()
     {
-        GlobalVariables.ParentsUI = this.SettingsUI.transform;
         
         // ユーザーが入力した作品名を取得
         string NewWorkName = GetInputFieldText();
