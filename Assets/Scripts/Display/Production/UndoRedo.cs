@@ -25,6 +25,7 @@ public class SelectedModel
     // Elementのmeshの頂点座標を格納
     public Vector3[] meshVertices;
 
+    // Elementのcolorを格納
     public Color color;
 }
 
@@ -59,7 +60,7 @@ public class UndoRedo : MonoBehaviour
     {
         SelectedModel DoValue =  NewModel(ProductionManager.selectedGameObjects[0]);
 
-        //変更後のObjectの値をまとめてUndoStackにPush
+        // 変更後のObjectの値をまとめてUndoStackにPush
         DoValue.NowMaking = false;
         undoStack.Push(DoValue);
         // RedoをClear
