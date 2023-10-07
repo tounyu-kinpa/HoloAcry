@@ -9,7 +9,7 @@ public class CreateElementButton : MonoBehaviour
     public GameObject ElementNameList;   // ElementNameの親オブジェクト
     private int i = 0;                   // ElementNameの表示名変更用変数
     
-    public void CreateElement()
+    public GameObject CreateElement()
     {
         // Elementを生成
         GameObject NewElement = Instantiate(ElementPrefab, GlobalVariables.CurrentWork.transform);
@@ -24,5 +24,9 @@ public class CreateElementButton : MonoBehaviour
         name.ChangeElementNameText(NewElement.tag + i.ToString());
 
         i++;
+
+        UndoRedo.Create(NewElement);
+
+        return (NewElement);
     }
 }

@@ -32,53 +32,7 @@ public class UndoRedo : MonoBehaviour
 {
     public static Stack<SelectedModel> undoStack = new Stack<SelectedModel>();
     public static Stack<SelectedModel> redoStack = new Stack<SelectedModel>();
-    SelectedModel NewValue = new SelectedModel();
-
-    public void AssignPopValue(SelectedModel PopValue)
-    {
-        //undoしたとき生成されたばかりだったら消去
-        string ElementName = PopValue.name;
-        GameObject Element = GameObject.Find(ElementName);
-
-        if (PopValue.NowMaking == true){
-            Destroy(Element);
-        }
-        else{
-            //Destroy後のUndo,Redoの処理
-            if (Element == null) {
-                ProductionManager.selectedGameObjects[0] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                Element = ProductionManager.selectedGameObjects[0];
-            }
-                
-            Element.tag = PopValue.elementType;
-            Element.transform.name = PopValue.name;
-            Element.transform.localPosition = PopValue.position;
-            Element.transform.localScale = PopValue.scale;
-            Element.transform.localEulerAngles = PopValue.rotate;
-
-            MeshFilter ElementMeshFilter = Element.GetComponent<MeshFilter>();
-            ElementMeshFilter.mesh.vertices = PopValue.meshVertices;
-
-            Material ElementRenderer = Element.GetComponent<Renderer>().material;
-            ElementRenderer.color = PopValue.color;
-        }
-        undoStack.Push(PopValue);
-    }
-
-    public void NewModel()
-    {
-        NewValue.name = ProductionManager.selectedGameObjects[0].transform.name;  
-        NewValue.elementType = ProductionManager.selectedGameObjects[0].tag;
-        NewValue.position = ProductionManager.selectedGameObjects[0].transform.localPosition;
-        NewValue.scale = ProductionManager.selectedGameObjects[0].transform.localScale;
-        NewValue.rotate = ProductionManager.selectedGameObjects[0].transform.localEulerAngles;
-
-        MeshFilter selectedGameObjectMeshFilter = ProductionManager.selectedGameObjects[0].GetComponent<MeshFilter>();
-        NewValue.meshVertices = selectedGameObjectMeshFilter.mesh.vertices;
-
-        Material selectedGameObjectRenderer = ProductionManager.selectedGameObjects[0].GetComponent<Renderer>().material;
-        NewValue.color = selectedGameObjectRenderer.color;
-    }
+    // SelectedModel NewValue = new SelectedModel();
 
     public void Undo()
     {
@@ -101,15 +55,71 @@ public class UndoRedo : MonoBehaviour
         AssignPopValue (RedoValue);
     }
 
-    public void Do()
+    public static void Do()
     {
-        NewModel();
+        SelectedModel DoValue =  NewModel(ProductionManager.selectedGameObjects[0]);
 
         //変更後のObjectの値をまとめてUndoStackにPush
-        NewValue.NowMaking = false;
-        undoStack.Push(NewValue);
+        DoValue.NowMaking = false;
+        undoStack.Push(DoValue);
         // RedoをClear
         redoStack.Clear();
     }
+    public void AssignPopValue(SelectedModel PopValue)
+    {
+        //undoしたとき生成されたばかりだったら消去
+        GameObject Element = GameObject.Find(PopValue.name);
 
+        if (PopValue.NowMaking == true){
+            Destroy(Element);
+        }
+        else{
+            //Destroy後のUndo,Redoの処理
+            if (Element == null) {
+                CreateElementButton InstanceCreateElement = new CreateElementButton();
+                ProductionManager.selectedGameObjects[0] = InstanceCreateElement.CreateElement();
+                Element = ProductionManager.selectedGameObjects[0];
+            }
+                
+            Element.tag = PopValue.elementType;
+            Element.transform.name = PopValue.name;
+            Element.transform.localPosition = PopValue.position;
+            Element.transform.localScale = PopValue.scale;
+            Element.transform.localEulerAngles = PopValue.rotate;
+
+            MeshFilter ElementMeshFilter = Element.GetComponent<MeshFilter>();
+            ElementMeshFilter.mesh.vertices = PopValue.meshVertices;
+
+            Material ElementRenderer = Element.GetComponent<Renderer>().material;
+            ElementRenderer.color = PopValue.color;
+        }
+        undoStack.Push(PopValue);
+    }
+
+    public static SelectedModel NewModel(GameObject Element)
+    {
+        SelectedModel NewValue = new SelectedModel();
+        NewValue.name = Element.transform.name;  
+        NewValue.elementType = Element.tag;
+        NewValue.position = Element.transform.localPosition;
+        NewValue.scale = Element.transform.localScale;
+        NewValue.rotate = Element.transform.localEulerAngles;
+
+        MeshFilter ElementMeshFilter = Element.GetComponent<MeshFilter>();
+        NewValue.meshVertices = ElementMeshFilter.mesh.vertices;
+
+        Material ElementRenderer = Element.GetComponent<Renderer>().material;
+        NewValue.color = ElementRenderer.color;
+
+        return(NewValue);
+    }
+
+    //オブジェクト生成した時の処理
+    public static void Create(GameObject NewElement)
+    {
+        SelectedModel CreateValue =  NewModel(NewElement);
+        CreateValue.NowMaking = true;
+        undoStack.Push(CreateValue);
+        Do();
+    }
 }
