@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Display.Production
 {
     public class setModeToColor : MonoBehaviour
     {
