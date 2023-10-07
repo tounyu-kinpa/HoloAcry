@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Model
+public class SelectedModel
 {
     public bool NowMaking = false;
 
@@ -29,11 +29,11 @@ public class Model
 
 public class UndoRedo : MonoBehaviour
 {
-    private static Stack<Model> undoStack = new Stack<Model>();
-    private static Stack<Model> redoStack = new Stack<Model>();
-    Model NewValue = new Model();
+    public static Stack<SelectedModel> undoStack = new Stack<SelectedModel>();
+    public static Stack<SelectedModel> redoStack = new Stack<SelectedModel>();
+    SelectedModel NewValue = new SelectedModel();
 
-    public void AssignPopValue(Model PopValue)
+    public void AssignPopValue(SelectedModel PopValue)
     {
         //undoしたとき生成されたばかりだったら消去
         string ElementName = PopValue.name;
@@ -45,8 +45,8 @@ public class UndoRedo : MonoBehaviour
         else{
             //Destroy後のUndo,Redoの処理
             if (Element == null) {
-                cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                Element = cube;
+                ProductionManager.selectedGameObjects[0] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Element = ProductionManager.selectedGameObjects[0];
             }
                 
             Element.tag = PopValue.elementType;
@@ -64,26 +64,26 @@ public class UndoRedo : MonoBehaviour
         undoStack.Push(PopValue);
     }
 
-    public Model NewModel()
+    public void NewModel()
     {
-        NewValue.name = cube.transform.name;  
-        NewValue.elementType = cube.tag;
-        NewValue.position = cube.transform.localPosition;
-        NewValue.scale = cube.transform.localScale;
-        NewValue.rotate = cube.transform.localEulerAngles;
+        NewValue.name = ProductionManager.selectedGameObjects[0].transform.name;  
+        NewValue.elementType = ProductionManager.selectedGameObjects[0].tag;
+        NewValue.position = ProductionManager.selectedGameObjects[0].transform.localPosition;
+        NewValue.scale = ProductionManager.selectedGameObjects[0].transform.localScale;
+        NewValue.rotate = ProductionManager.selectedGameObjects[0].transform.localEulerAngles;
 
-        MeshFilter cubeMeshFilter = cube.GetComponent<MeshFilter>();
-        NewValue.meshVertices = cubeMeshFilter.mesh.vertices;
+        MeshFilter selectedGameObjectMeshFilter = ProductionManager.selectedGameObjects[0].GetComponent<MeshFilter>();
+        NewValue.meshVertices = selectedGameObjectMeshFilter.mesh.vertices;
 
-        Material cubeRenderer = cube.GetComponent<Renderer>().material;
-        NewValue.color = cubeRenderer.color;
+        Material selectedGameObjectRenderer = ProductionManager.selectedGameObjects[0].GetComponent<Renderer>().material;
+        NewValue.color = selectedGameObjectRenderer.color;
     }
 
     public void Undo()
     {
         if(undoStack.Count >= 2){
             // Stackから取り出して代入する関数
-            Model UndoValue = undoStack.Pop();
+            SelectedModel UndoValue = undoStack.Pop();
             //変更後の情報を取り出してredostackにpush
             redoStack.Push(UndoValue);
             //変更前の情報を取り出して、その情報をもとにUndo
@@ -95,7 +95,7 @@ public class UndoRedo : MonoBehaviour
     public void Redo()
     {
         // Stackから取り出して代入する関数
-        Model RedoValue = redoStack.Pop();
+        SelectedModel RedoValue = redoStack.Pop();
         //取り出した変更後の情報をもとにRedo
         AssignPopValue (RedoValue);
     }
