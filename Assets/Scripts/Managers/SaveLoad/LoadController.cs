@@ -60,7 +60,7 @@ public class LoadController : MonoBehaviour
             if(Instance != null)
             {
                 // 必要なコンポーネントの取得
-                Color InstanceColor           = Instance.GetComponent<Renderer>().material.color;
+                Renderer InstanceColor        = Instance.GetComponent<Renderer>();
                 MeshFilter InstanceMeshFilter = Instance.GetComponent<MeshFilter>();
                 
                 // 各種値を設定
@@ -69,10 +69,7 @@ public class LoadController : MonoBehaviour
                 Instance.transform.localPosition    = element.position;
                 Instance.transform.localEulerAngles = element.rotate;
                 InstanceMeshFilter.mesh.vertices    = element.meshVertices;
-                InstanceColor.r                     = element.color_R;
-                InstanceColor.g                     = element.color_G;
-                InstanceColor.b                     = element.color_B;
-                InstanceColor.a                     = element.color_A;
+                InstanceColor.material.color        = element.color;
             }
         }
     }

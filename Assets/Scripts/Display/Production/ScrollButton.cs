@@ -13,5 +13,4 @@ public class ScrollButton : MonoBehaviour {
     {
         scrollbar.value = scrollbar.value - 0.5f;
     }
-
 }

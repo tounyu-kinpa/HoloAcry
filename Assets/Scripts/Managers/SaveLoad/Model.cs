@@ -25,17 +25,8 @@ public class Element
     // Elementのmeshの頂点座標を格納
     public Vector3[] meshVertices;
 
-    // Elementの色のR値を格納
-    public float color_R;
-
-    // Elementの色のG値を格納
-    public float color_G;
-
-    // Elementの色のB値を格納
-    public float color_B;
-
-    // Elementの色のA値を格納
-    public float color_A;
+    // Elementの色の値を格納
+    public Color color;
 }
 
 [System.Serializable]
