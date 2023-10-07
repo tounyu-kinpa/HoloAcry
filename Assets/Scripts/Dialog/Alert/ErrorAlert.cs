@@ -12,7 +12,7 @@ public class ErrorAlert : MonoBehaviour
     {
         //完了ボタンが押されたとき、記入漏れがあったらErrorModalを表示
         Text NoInformErrorStatement = FindErrorModalText();
-        NoInformErrorStatement = "全て選択してください";
+        NoInformErrorStatement.text = "全て選択してください";
         Instantiate(ErrorModal, Canvas);
     }
 
@@ -20,14 +20,14 @@ public class ErrorAlert : MonoBehaviour
     {
         //削除やカラー変更ボタンが押されたときオブジェクトが選択されていなかったらErrorModalを表示
         Text NoSelectErrorStatement = FindErrorModalText();
-        NoSelectErrorStatement = "すべて選択してください";
+        NoSelectErrorStatement.text = "すべて選択してください";
         Instantiate(ErrorModal, Canvas);  
     }
 
     public void FileImportErrorModal(){
         //インポートされたファイルがOBJファイル以外だとErrorModalを表示
         Text FileImportStatement = FindErrorModalText();
-        FileImportStatement = "OBJファイルのみインポートが可能です";
+        FileImportStatement.text = "OBJファイルのみインポートが可能です";
         Instantiate(ErrorModal, Canvas); 
     }
 
