@@ -14,6 +14,8 @@ public class SaveController : MonoBehaviour
         // 作品内のすべてのElementのデータをWorkDataに格納
         StoreElementData(GlobalVariables.CurrentWork, WorkData);
         Debug.Log("格納したよ");
+
+        Debug.Log(WorkData);
         
         // ファイルへの書き込み
         InsertNewSaveData(WorkData);
@@ -34,8 +36,8 @@ public class SaveController : MonoBehaviour
             GameObject element = child.gameObject;
             Debug.Log("Elementの名前 " + element.transform.name);
 
-            // Elementの色の情報を取得
-            Color elementColor = element.GetComponent<Renderer>().material.color;
+            // Elementのコンポーネントを取得
+            Renderer elementColor = element.GetComponent<Renderer>();
             MeshFilter elementMeshFilter = element.GetComponent<MeshFilter>();
 
             // Elementのデータを格納
@@ -47,10 +49,7 @@ public class SaveController : MonoBehaviour
                 position     = element.transform.localPosition,
                 rotate       = element.transform.localEulerAngles,
                 meshVertices = elementMeshFilter.mesh.vertices,
-                color_R      = elementColor.r,
-                color_G      = elementColor.g,
-                color_B      = elementColor.b,
-                color_A      = elementColor.a
+                color        = elementColor.material.color,
             };
             
             // Elementのデータが入ったelementDataをWorkDataに格納

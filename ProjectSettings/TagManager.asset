@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Cube
   - Ball
+  - Cone
+  - Cylinder
+  - SquarePyramid
   layers:
   - Default
   - TransparentFX
