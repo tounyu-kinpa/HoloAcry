@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Display.Production
 {
     public class ProductionFunction
     {
@@ -159,7 +159,7 @@ namespace DefaultNamespace
 
         public static void ApplyBooleanOp(List<GameObject> gameObjects)
         {
-            gameObjects[0].AddComponent<ChangePOV>();
+            
         }
     }
 
