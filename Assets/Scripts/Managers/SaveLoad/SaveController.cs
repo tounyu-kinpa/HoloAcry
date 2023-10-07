@@ -14,6 +14,8 @@ public class SaveController : MonoBehaviour
         // 作品内のすべてのElementのデータをWorkDataに格納
         StoreElementData(GlobalVariables.CurrentWork, WorkData);
         Debug.Log("格納したよ");
+
+        Debug.Log(WorkData);
         
         // ファイルへの書き込み
         InsertNewSaveData(WorkData);
