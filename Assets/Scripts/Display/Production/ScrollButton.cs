@@ -6,11 +6,11 @@ public class ScrollButton : MonoBehaviour {
 
     public void RightButton()
     {
-        scrollbar.value = scrollbar.value + 0.5f;
+        scrollbar.value = (0 <= scrollbar.value && scrollbar.value < 0.5f) ? 0.5f : 1.0f;
     }
 
     public void LeftButton()
     {
-        scrollbar.value = scrollbar.value - 0.5f;
+        scrollbar.value = (1 >= scrollbar.value && scrollbar.value > 0.5f) ? 0.5f : 0.0f;
     }
 }
