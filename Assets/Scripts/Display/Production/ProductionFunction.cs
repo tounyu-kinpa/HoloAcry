@@ -140,6 +140,16 @@ namespace Display.Production
             }
 
         }
+        
+        public static void UnMergeObjects()
+        {
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+                selectedGameObject.transform.parent = null;
+            }
+
+        }
+
 
         public static void ChangeSlope()
         {
