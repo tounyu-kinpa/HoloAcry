@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using DefaultNamespace;
+using Display.Production;
 
 public class CreateElementButton : MonoBehaviour
 {
@@ -31,7 +31,7 @@ public class CreateElementButton : MonoBehaviour
 
         i++;
 
-        ProductionManager.selectedGameObjects[0] = NewElement;
+        ProductionManager.selectedGameObjects = new List<GameObject> { NewElement };
 
         UndoRedo.Create(NewElement);
     }

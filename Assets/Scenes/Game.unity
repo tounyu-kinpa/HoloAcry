@@ -2130,7 +2130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec5f54357867ea44a2fdbf6126e3e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlertModal: {fileID: 1137967478785585788, guid: 149cae0823c3ad24d94f4dbce403992b, type: 3}
+  AlertModal: {fileID: 850740747755923646, guid: 149cae0823c3ad24d94f4dbce403992b, type: 3}
 --- !u!1 &412956140
 GameObject:
   m_ObjectHideFlags: 0

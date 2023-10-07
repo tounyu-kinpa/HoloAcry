@@ -61,7 +61,7 @@ public class ErrorAlert : MonoBehaviour
     {
         // エラー文を表示するTextを取得
         GameObject modal = modalPrefab.transform.Find("Modal").gameObject;
-        GameObject ModalText = modal.transform.Find("Label").gameObject;
+        GameObject ModalText = modal.transform.Find("ErrorText").gameObject;
         TMP_Text ErrorText = ModalText.GetComponent<TMP_Text>();
 
         return(ErrorText);
