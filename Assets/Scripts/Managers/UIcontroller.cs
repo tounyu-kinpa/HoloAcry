@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
     public void ShowProductionUI()
     {
         ListUI.SetActive(false);
+        SettingUI.SetActive(false);
         ProductionUI.SetActive(true);
     }
 
