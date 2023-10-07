@@ -16,14 +16,11 @@ public class CreatePrefab : MonoBehaviour
     // Start is called before the first frame update
     public void OnClick()
     {
-        n += 1;//nの見掛け上の値と実際に生成されるprefabの差が1、戻り値を設定する場合は-1する。
-
-
 
         if (n == 0)
         {
             Vector3 vec = new Vector3(0.0f, 0.0f, 0.0f);
-            Vector3 vec2 = new Vector3(830.0f, 0.0f, 0.0f);
+            Vector3 vec2 = new Vector3(900.0f, 0.0f, 0.0f);
 
             for (int i = 1; i < 30; i++) //30という数値は適当後で変える
             {
@@ -43,6 +40,8 @@ public class CreatePrefab : MonoBehaviour
 
             }
         }
+
+        n += 1;//nの見掛け上の値と実際に生成されるprefabの差が1、戻り値を設定する場合は-1する。
 
         if (0 < n)
         {
