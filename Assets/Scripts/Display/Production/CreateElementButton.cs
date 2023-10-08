@@ -32,8 +32,7 @@ public class CreateElementButton : MonoBehaviour
         i++;
 
         ProductionManager.selectedGameObjects = new List<GameObject> { NewElement };
-
-        UndoRedo.Create(NewElement);
+        UndoRedo.Create();
     }
 
     private string SetElementName(string tag, int i)
