@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Display.Production
 {
     public class ProductionFunction
     {
@@ -111,56 +111,82 @@ namespace DefaultNamespace
         }
 
 
-        public static void ChangeColorRGB(List<GameObject> gameObjects, Color32 color)
+        public static void ChangeColorRGB(Color32 color)
         {
-            MeshRenderer mesh;
-            mesh = gameObjects[0].GetComponent<MeshRenderer>();
-            mesh.material.color = color;
-        }
-
-        public static void ChangeColorHSV(List<GameObject> gameObjects, float h, float s, float v)
-        {
-            MeshRenderer mesh;
-            mesh = gameObjects[0].GetComponent<MeshRenderer>();
-            mesh.material.color = Color.HSVToRGB(90, 63, 50);
-        }
-
-        public static void MergeObjects(GameObject[] gameObjects)
-        {
-            GameObject MergedObjects = new GameObject();
-
-            foreach (var gameObject in gameObjects)
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
-                gameObject.transform.parent = MergedObjects.transform;
-
+                MeshRenderer mesh = selectedGameObject.GetComponent<MeshRenderer>();
+                mesh.material.color = color;
             }
         }
 
-        public static void ChangeSlope(GameObject gameObject)
+        public static void ChangeColorHSV(float h, float s, float v)
         {
-            Mesh mesh = gameObject.GetComponent<MeshFilter>().mesh;
-            Vector3[] vertices = mesh.vertices;
-            
-            for (int i = 0; i < vertices.Length; i++)
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
-                if (vertices[i].y == 1.0f)
+                MeshRenderer mesh = selectedGameObject.GetComponent<MeshRenderer>();
+                mesh.material.color = Color.HSVToRGB(90, 63, 50);
+            }
+
+        }
+
+        public static void MergeObjects()
+        {
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+                GameObject MergedObjects = new GameObject();
+
+                selectedGameObject.transform.parent = MergedObjects.transform;
+
+            }
+
+        }
+        
+        public static void UnMergeObjects()
+        {
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+                selectedGameObject.transform.parent = null;
+            }
+
+        }
+
+
+        public static void ChangeSlope()
+        {
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+                Mesh mesh = selectedGameObject.GetComponent<MeshFilter>().mesh;
+                Vector3[] vertices = mesh.vertices;
+                
+                for (int i = 0; i < vertices.Length; i++)
                 {
-                    vertices[i] = Vector3.Lerp(vertices[i], vertices[41], 0.5f);
+                    if (vertices[i].y == 1.0f)
+                    {
+                        vertices[i] = Vector3.Lerp(vertices[i], vertices[41], 0.5f);
+                    }
                 }
-                Debug.Log($"{vertices[i]} {i}");
+
+                mesh.vertices = vertices;
             }
 
-            mesh.vertices = vertices;
         }
 
-        public static void ChangeRotation(GameObject gameObject, float x, float y, float z)
+        public static void ChangeRotation(float x, float y, float z)
         {
-            gameObject.transform.rotation = Quaternion.Euler(x, y, z);
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+                selectedGameObject.transform.rotation = Quaternion.Euler(x, y, z);
+            }
+
         }
 
-        public static void ApplyBooleanOp(List<GameObject> gameObjects)
+        public static void ApplyBooleanOp()
         {
-            gameObjects[0].AddComponent<ChangePOV>();
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+            }
+
         }
     }
 

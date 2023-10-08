@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
     public GameObject ProductionUI;
     public GameObject SettingUI;
     public GameObject PlayUI;
-
+    
     // 一覧画面を表示
     public void ShowListUI()
     {

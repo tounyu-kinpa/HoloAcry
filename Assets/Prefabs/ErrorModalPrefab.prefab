@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8135400026467326348}
   - component: {fileID: 6869672376829169059}
   - component: {fileID: 6553546323992636121}
+  - component: {fileID: 8610253694288007082}
   m_Layer: 5
-  m_Name: ErrorModaPrefab
+  m_Name: ErrorModalPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,6 +78,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8610253694288007082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850740747755923646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1382c34ac110cc40ac2dd1995692b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4886824831821349786
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +211,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4343280610956380672}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8610253694288007082}
+        m_TargetAssemblyTypeName: AlertPrefab, Assembly-CSharp
+        m_MethodName: OKButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4921582011506103264
 GameObject:
   m_ObjectHideFlags: 0

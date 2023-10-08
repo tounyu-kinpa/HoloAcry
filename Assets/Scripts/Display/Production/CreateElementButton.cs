@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Display.Production;
+
 public class CreateElementButton : MonoBehaviour
 {
     public GameObject ElementPrefab;     // 生成するElementのPrefab
@@ -9,7 +11,7 @@ public class CreateElementButton : MonoBehaviour
     public GameObject ElementNameList;   // ElementNameの親オブジェクト
     private int i = 1;                   // ElementNameの表示名変更用変数
     
-    public GameObject CreateElement()
+    public void CreateElement()
     {
         string NewName;
 
@@ -29,9 +31,8 @@ public class CreateElementButton : MonoBehaviour
 
         i++;
 
+        ProductionManager.selectedGameObjects = new List<GameObject> { NewElement };
         UndoRedo.Create();
-
-        return (NewElement);
     }
 
     private string SetElementName(string tag, int i)

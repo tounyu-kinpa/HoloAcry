@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Display.Production;
 
 public class _object : MonoBehaviour, IPointerClickHandler
 {
@@ -22,7 +20,7 @@ public class _object : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         ProductionManager.selectedGameObjects.Add(gameObject);
-        ProductionFunction.ChangeColorRGB(ProductionManager.selectedGameObjects, new Color32(0, 0, 0, 0));
+        ProductionFunction.ChangeColorRGB(new Color32(0, 0, 0, 0));
         Debug.Log("クリック");
     }
     
