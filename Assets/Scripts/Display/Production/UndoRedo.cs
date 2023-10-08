@@ -48,8 +48,8 @@ public class UndoRedo : MonoBehaviour
             redoStack.Push(UndoValue);
             //変更前の情報を取り出して、その情報をもとにUndo
             UndoValue = undoStack.Pop();
-            SelectedModel SelectedModelUndoValue = (SelectedModel)UndoValue;
-            UndoRedoBranch (SelectedModelUndoValue);
+            // SelectedModel SelectedModelUndoValue = (SelectedModel)UndoValue;
+            UndoRedoBranch (UndoValue);
         }
     }
 
@@ -58,8 +58,8 @@ public class UndoRedo : MonoBehaviour
         // Stackから取り出して代入する関数
         object RedoValue = redoStack.Pop();
         //取り出した変更後の情報をもとにRedo
-        SelectedModel SelectedModelRedoValue = (SelectedModel)RedoValue;
-        UndoRedoBranch (SelectedModelRedoValue);
+        // SelectedModel SelectedModelRedoValue = (SelectedModel)RedoValue;
+        UndoRedoBranch (RedoValue);
     }
 
     public static void Do()
@@ -86,14 +86,15 @@ public class UndoRedo : MonoBehaviour
         Material ElementRenderer = Element.GetComponent<Renderer>().material;
         ElementRenderer.color = PopValue.color;
 
-        undoStack.Push(PopValue);
+        object PushValue = (object)PopValue;
+        undoStack.Push(PushValue);
     }
 
-    public void UndoRedoBranch(SelectedModel PopValue)
+    public void UndoRedoBranch(object popValue)
     { 
         // 結合の値をPopした時
-        if(PopValue is List<SelectedModel>){
-            List<SelectedModel> PopValueList = (List<SelectedModel>)PopValue;
+        if(popValue is List<SelectedModel>){
+            List<SelectedModel> PopValueList = (List<SelectedModel>)popValue;
             //NowMerge = true子をworkspaceへ出して親を消去(Undo)
             if(PopValueList[0].NowMerge == true){
 
@@ -104,11 +105,12 @@ public class UndoRedo : MonoBehaviour
             }
         }
         else{
-            GameObject Element = FindMatchingObjectID((SelectedModel)PopValue.ObjectID);
+            SelectedModel PopValue = (SelectedModel)popValue;
+            GameObject Element = FindMatchingObjectID(PopValue.ObjectID);
             //undoしたとき生成されたばかりだったら消去
-            if ((SelectedModel)PopValue.NowMaking == true){
+            if (PopValue.NowMaking == true){
                 Destroy(Element);
-                undoStack.Push(PopValue);
+                undoStack.Push(popValue);
             }
             else{
                 //Destroy後のUndo,Redoの処理
