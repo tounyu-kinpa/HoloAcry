@@ -29,7 +29,7 @@ public class CreateElementButton : MonoBehaviour
 
         i++;
 
-        UndoRedo.Create(NewElement);
+        UndoRedo.Create();
 
         return (NewElement);
     }
