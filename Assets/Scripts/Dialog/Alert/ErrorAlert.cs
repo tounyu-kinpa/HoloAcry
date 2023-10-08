@@ -66,10 +66,4 @@ public class ErrorAlert : MonoBehaviour
 
         return(ErrorText);
     }
-
-    public void DeleteErrorModal()
-    {
-        //ErrorModalの了解ボタンが押されたらModalを削除
-        Destroy(this.gameObject);
-    }
 }
