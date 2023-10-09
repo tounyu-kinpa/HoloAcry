@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using UnityEngine.SceneManagement;
+
 public class InputWorkNamePrefab : MonoBehaviour
 {
     public ErrorAlert errorAlert = new ErrorAlert();
+
+    private bool isSameName;
 
     public string GetInputFieldText()
     {
@@ -18,6 +22,8 @@ public class InputWorkNamePrefab : MonoBehaviour
 
     public void DestroyModal()
     {
+        isSameName = false;
+        
         // ユーザーが入力した作品名を取得
         string NewWorkName = GetInputFieldText();
 
@@ -28,10 +34,26 @@ public class InputWorkNamePrefab : MonoBehaviour
         }
         else
         {
-            // 入力されてたら名前入力のPrefabを消す
-            Destroy(this.gameObject);
-            // 作品名を変更する
-            GlobalVariables.CurrentWork.transform.name = NewWorkName;
+            GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+
+            foreach (GameObject work in rootObjects)
+            {
+                if (work.transform.name == NewWorkName)
+                {
+                    Debug.Log("名前一緒だよ");
+                    errorAlert.ShowSameNameErrorModal(GlobalVariables.ParentsUI);
+                    isSameName = true;
+                    break;
+                }
+            }
+
+            if (!isSameName)
+            {
+                // 入力されてたら名前入力のPrefabを消す
+                Destroy(this.gameObject);
+                // 作品名の変更
+                GlobalVariables.CurrentWork.transform.name = NewWorkName;
+            }
         }
     }
 }
