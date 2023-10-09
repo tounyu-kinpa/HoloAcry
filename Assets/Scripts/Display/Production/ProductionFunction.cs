@@ -34,6 +34,7 @@ namespace Display.Production
                 beforeScale = gameObject.transform.localScale;
             }
 
+            UndoRedo.Do();
         }
 
         public static void ChangePos(GameObject gameObject)
