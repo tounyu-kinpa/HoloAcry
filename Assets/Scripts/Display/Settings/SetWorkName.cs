@@ -18,6 +18,7 @@ public class SetWorkName : MonoBehaviour
         if (InputName)
         {
             controller.ShowPlayUI();
+            InputName = false;
         }
         else
         {
