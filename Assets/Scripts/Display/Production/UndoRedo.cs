@@ -41,6 +41,8 @@ public class SelectedModel
 
     // 結合したオブジェクトの親オブジェクトを判断
     public bool RedoParentObject = false;
+
+    public string tag;
 }
 
 public class UndoRedo : MonoBehaviour
@@ -98,52 +100,49 @@ public class UndoRedo : MonoBehaviour
     { 
         ProductionManager.selectedGameObjects = new List<GameObject>{};
         GameObject Element = FindMatchingObjectID(PopValue.ObjectID);
-        
-        if(PopValue.ObjectCount > 0){
-            // 結合をUndoした時
-            if(PopValue.RedoParentObject != true){
-                for(int i = 0; i < PopValue.ObjectCount; i++){
-                    SelectedModel popValue = undoStack.Pop();
-                    GameObject MergeElement = FindMatchingObjectID(popValue.ObjectID);
-                    ProductionManager.selectedGameObjects.Add(MergeElement);
-                    AssignPopValue(popValue, MergeElement);
-                }
-                ProductionFunction.UnMergeObjects();
-            }
-            // 結合をRedoした時
-            else{
-                for(int i = 0; i < PopValue.ObjectCount; i++){
-                    SelectedModel ChildObjectValue = undoStack.Pop();
-                    GameObject ChiledElement = FindMatchingObjectID(PopValue.ObjectID);
-                    ProductionManager.selectedGameObjects.Add(ChiledElement);
-                    ProductionFunction.MergeObjects();
-                }
-                
-            }
-            
+
+        if (Element == null) {
+            CreateElementButton InstanceCreateElement = new CreateElementButton();
+            InstanceCreateElement.CreateElement();
+            int ElementID = ProductionManager.selectedGameObjects[0].GetInstanceID();
+            ElementID = PopValue.ObjectID;
+            Element = FindMatchingObjectID(PopValue.ObjectID);
+            AssignPopValue(PopValue, Element);
         }
         else{
-            // undoしたとき生成されたばかりだったらDestroy
-            if (PopValue.NowMaking == true){
-                Destroy(Element);
-                undoStack.Push(PopValue);
-            }
-            else{
-                // Destroy後のUndo,Redoの処理
-                if (Element == null) {
-                    CreateElementButton InstanceCreateElement = new CreateElementButton();
-                    InstanceCreateElement.CreateElement();
-                    int ElementID = ProductionManager.selectedGameObjects[0].GetInstanceID();
-                    ElementID = PopValue.ObjectID;
-                    Element = FindMatchingObjectID(PopValue.ObjectID);
+            switch (PopValue.tag)
+            {
+                // nowmaking true
+                case "NowCreat" :
+                    DeleteElementButton InstanceDeleteElement = new DeleteElementButton();
+                    InstanceDeleteElement.DestroyElement();
+                    undoStack.Push(PopValue);
+
+                // PopValue.RedoParentObject false
+                case "MergeUndo" :
+                    for(int i = 0; i < PopValue.ObjectCount; i++){
+                        SelectedModel popValue = undoStack.Pop();
+                        GameObject MergeElement = FindMatchingObjectID(popValue.ObjectID);
+                        ProductionManager.selectedGameObjects.Add(MergeElement);
+                        // AssignPopValue(popValue, MergeElement);
+                    }
+                    ProductionFunction.UnMergeObjects();
+
+                // PopValue.RedoParentObject true
+                case "MergeRedo" :
+                    for(int i = 0; i < PopValue.ObjectCount; i++){
+                        SelectedModel ChildObjectValue = undoStack.Pop();
+                        GameObject ChiledElement = FindMatchingObjectID(PopValue.ObjectID);
+                        ProductionManager.selectedGameObjects.Add(ChiledElement);
+                        ProductionFunction.MergeObjects();
+                    }
+                
+                default :
                     AssignPopValue(PopValue, Element);
-                }
-                // その他のUndoRedo処理
-                else{
-                    AssignPopValue(PopValue, Element);
-                }
+
             }
         }
+        
     }
 
     public void AssignPopValue(SelectedModel PopValue, GameObject Element)
@@ -195,14 +194,14 @@ public class UndoRedo : MonoBehaviour
         SelectedModel CreateValue =  NewModel(ProductionManager.selectedGameObjects[0]);
         CreateValue.NowMaking = true;
         undoStack.Push(CreateValue);
-        Do();
+        Do(ProductionManager.selectedGameObjects[0]);
     }
 
-    public static void Delete()
+    public static void Destroy()
     {
-        SelectedModel DeleteValue = NewModel(ProductionManager.selectedGameObjects[0]);
-        DeleteValue.NowMaking = true;
-        undoStack.Push(DeleteValue);
+        SelectedModel DestroyValue = NewModel(ProductionManager.selectedGameObjects[0]);
+        DestroyValue.NowMaking = true;
+        undoStack.Push(DestroyValue);
     }
 
     //オブジェクト結合した時の処理
@@ -221,10 +220,11 @@ public class UndoRedo : MonoBehaviour
         
         MergeValue = NewModel(ProductionManager.selectedGameObjects[0]);
         MergeValue.ObjectCount = ChildCount;
+        MergeValue.tag = "MergeUndo";
         undoStack.Push(MergeValue);
-        MergeValue.RedoParentObject = true;
+        // MergeValue.RedoParentObject = true;
+        MergeValue.tag = "MergeRedo";
         undoStack.Push(MergeValue);
-        
     }
 
     public static void UnMerge()
