@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class InputWorkNamePrefab : MonoBehaviour
 {
-    public ErrorAlert errorAlert = new ErrorAlert();
+    public ErrorAlert errorAlert;
 
     private bool isSameName;
 
