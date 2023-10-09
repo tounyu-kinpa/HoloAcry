@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Display.Production;
+using UndoRedo.Production;
 
 public class CreateElementButton : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class CreateElementButton : MonoBehaviour
     public GameObject ElementNamePrefab; // ElementNameのPrefab
     public GameObject ElementNameList;   // ElementNameの親オブジェクト
     private int i = 1;                   // ElementNameの表示名変更用変数
+
+    private void Start() {
+        GlobalVariables.content = this.ElementNameList;
+    }
     
     public void CreateElement()
     {
@@ -22,7 +27,7 @@ public class CreateElementButton : MonoBehaviour
         NewName = SetElementName(NewElement.tag, i);
 
         // ゲームオブジェクト名の変更
-        NewElementName.transform.name = NewElement.tag + i.ToString();
+        NewElementName.transform.name = NewName;
         NewElement.transform.name = NewName;
 
         // 表示名の変更
@@ -32,7 +37,9 @@ public class CreateElementButton : MonoBehaviour
         i++;
 
         ProductionManager.selectedGameObjects = new List<GameObject> { NewElement };
-        UndoRedo.Create();
+        ProductionManager.createdGameObjects.Add(NewElement);
+
+        UndoRedo.Production.UndoRedo.Create();
     }
 
     private string SetElementName(string tag, int i)

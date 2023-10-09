@@ -19,6 +19,8 @@ public class LoadController : MonoBehaviour
 
         foreach (var work in LoadedData.works)
         {
+            GlobalVariables.workNumber++;
+            
             GameObject createdWork = Instantiate(WorkSpace);
 
             createdWork.transform.name = work.work_name;
