@@ -13,7 +13,6 @@ public class SaveController : MonoBehaviour
 
         // 作品内のすべてのElementのデータをWorkDataに格納
         StoreElementData(GlobalVariables.CurrentWork, WorkData);
-        Debug.Log("格納したよ");
 
         Debug.Log(WorkData);
         
@@ -34,7 +33,6 @@ public class SaveController : MonoBehaviour
         foreach (Transform child in CurrentWork.transform)
         {
             GameObject element = child.gameObject;
-            Debug.Log("Elementの名前 " + element.transform.name);
 
             // Elementのコンポーネントを取得
             Renderer elementColor = element.GetComponent<Renderer>();
