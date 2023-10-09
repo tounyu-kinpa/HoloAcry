@@ -84,9 +84,9 @@ namespace UndoRedo.Production
             UndoRedoBranch (RedoValue);
         }
 
-        public static void Do()
+        public static void Do(GameObject SelectedObject)
         {
-            SelectedModel DoValue =  NewModel(ProductionManager.selectedGameObjects[0]); 
+            SelectedModel DoValue =  NewModel(SelectedObject); 
 
             // 変更後のObjectの値をまとめてUndoStackにPush
             undoStack.Push(DoValue);
@@ -109,23 +109,24 @@ namespace UndoRedo.Production
             else{
                 switch (PopValue.tag)
                 {
-                    // nowmaking true
+                    // UndoRedoでオブジェクトを消去する
                     case "NowCreat" :
                         DeleteElementButton InstanceDeleteElement = new DeleteElementButton();
                         InstanceDeleteElement.DestroyElement();
                         undoStack.Push(PopValue);
+                        break;
 
-                    // PopValue.RedoParentObject false
+                    // UndoRedoで結合を解除する
                     case "MergeUndo" :
                         for(int i = 0; i < PopValue.ObjectCount; i++){
                             SelectedModel popValue = undoStack.Pop();
                             GameObject MergeElement = FindMatchingObjectID(popValue.ObjectID);
                             ProductionManager.selectedGameObjects.Add(MergeElement);
-                            // AssignPopValue(popValue, MergeElement);
+                            
                         }
                         ProductionFunction.UnMergeObjects();
-
-                    // PopValue.RedoParentObject true
+                        break;
+                    // UndoRedoで再結合させる
                     case "MergeRedo" :
                         for(int i = 0; i < PopValue.ObjectCount; i++){
                             SelectedModel ChildObjectValue = undoStack.Pop();
@@ -133,9 +134,11 @@ namespace UndoRedo.Production
                             ProductionManager.selectedGameObjects.Add(ChiledElement);
                             ProductionFunction.MergeObjects();
                         }
+                        break;
                     
                     default :
                         AssignPopValue(PopValue, Element);
+                        break;
 
                 }
             }
@@ -189,7 +192,6 @@ namespace UndoRedo.Production
         public static void Create()
         {
             SelectedModel CreateValue =  NewModel(ProductionManager.selectedGameObjects[0]);
-            // CreateValue.NowMaking = true;
             CreateValue.tag = "NowCreat";
             undoStack.Push(CreateValue);
             Do(ProductionManager.selectedGameObjects[0]);
