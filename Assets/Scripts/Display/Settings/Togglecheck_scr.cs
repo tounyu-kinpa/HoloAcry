@@ -13,24 +13,29 @@ public class Togglecheck_scr : MonoBehaviour
     public Toggle toggle4;
     public Toggle toggle5;
 
-
-    // Start is called before the first frame update
-
-
-    // Update is called once per frame
-    void Update()
+    public void ToggleInteraction()
     {
         if (toggle.isOn == true)
         {
-            togglesetactive();
+            toggle1.isOn = false;
+            toggle2.isOn = false;
+            toggle3.isOn = false;
+            toggle4.isOn = false;
+            toggle5.isOn = false;
+
+            toggle1.interactable = false;
+            toggle2.interactable = false;
+            toggle3.interactable = false;
+            toggle4.interactable = false;
+            toggle5.interactable = false;
         }
-    }
-    void togglesetactive()
-    {
-        toggle1.isOn = false;
-        toggle2.isOn = false;
-        toggle3.isOn = false;
-        toggle4.isOn = false;
-        toggle5.isOn = false;
+        else
+        {
+            toggle1.interactable = true;
+            toggle2.interactable = true;
+            toggle3.interactable = true;
+            toggle4.interactable = true;
+            toggle5.interactable = true;
+        }
     }
 }

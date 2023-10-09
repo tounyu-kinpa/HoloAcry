@@ -746,7 +746,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2891338369139601360}
-        m_TargetAssemblyTypeName: InputNamePrefab, Assembly-CSharp
+        m_TargetAssemblyTypeName: InputWorkNamePrefab, Assembly-CSharp
         m_MethodName: DestroyModal
         m_Mode: 1
         m_Arguments:
@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 7182442952322627227}
   - component: {fileID: 2891338369139601360}
   m_Layer: 5
-  m_Name: InputNamePreab
+  m_Name: InputWorkNamePreab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7977425601900470050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6114ea00b9446f34ab7a0062e47753a2, type: 3}
+  m_Script: {fileID: 11500000, guid: c38b6216e16997b43b9b6ad4c9ecfd9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   errorAlert: {fileID: 314601804210116909}

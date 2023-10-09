@@ -11,9 +11,4 @@ public class SetColorButton : MonoBehaviour
     {
         ColorSetUI = Instantiate(ColorUIPrefab, ProductionUI);
     }
-
-    public void DestroyColorSetUI()
-    {
-        Destroy(ColorSetUI);
-    }
 }
