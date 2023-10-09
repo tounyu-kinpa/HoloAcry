@@ -29,14 +29,12 @@ namespace Display.Production
             }
             else
             {
-                
-
+                //ProductionFunction.ChangePos(selectedGameObjects[0]);
+                //ProductionFunction.ChangeScale(selectedGameObjects[0]);
             }
-            //ProductionFunction.ChangePos(selectedGameObjects[0]);
-            //ProductionFunction.ChangeScale(selectedGameObjects[0]);
-            ProductionFunction.MoveCamera();
-            ProductionFunction.RotateCamera();
-            ProductionFunction.ChangeCameraScale();
+            
+            //ProductionFunction.MoveCamera();
+            //ProductionFunction.RotateCamera();
 
             foreach (var createdGameObject in createdGameObjects)
             {
