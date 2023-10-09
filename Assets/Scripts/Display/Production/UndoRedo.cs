@@ -54,7 +54,7 @@ public class UndoRedo : MonoBehaviour
             redoStack.Push(UndoValue);
 
             //結合したオブジェクト分redostack.Pushする処理
-            if (UndoValue.ChildObject == ture){
+            if (UndoValue.ChildObject == true){
                 
                 for (int i = 0; i < UndoValue.ObjectCount ; i++){
                     SelectedModel undoChileVale = undoStack.Pop();
@@ -70,9 +70,9 @@ public class UndoRedo : MonoBehaviour
     public void Redo()
     {
         // Stackから取り出して代入する関数
-        object RedoValue = redoStack.Pop();
-        if (RedoValue.ChildObject == ture){
-            undoStack.push(RedoValue);
+        SelectedModel RedoValue = redoStack.Pop();
+        if (RedoValue.ChildObject == true){
+            undoStack.Push(RedoValue);
             for (int i = 0; i < RedoValue.ObjectCount ; i++){
                 SelectedModel redoChileVale = undoStack.Pop();
                 undoStack.Push(redoChileVale);
@@ -85,7 +85,7 @@ public class UndoRedo : MonoBehaviour
 
     public static void Do()
     {
-        object DoValue =  NewModel(ProductionManager.selectedGameObjects[0]); 
+        SelectedModel DoValue =  NewModel(ProductionManager.selectedGameObjects[0]); 
 
         // 変更後のObjectの値をまとめてUndoStackにPush
         undoStack.Push(DoValue);
@@ -94,7 +94,7 @@ public class UndoRedo : MonoBehaviour
     }
     public void UndoRedoBranch(SelectedModel PopValue)
     { 
-        ProductionManager.selectedGameObjects = new List<GameObject>;
+        ProductionManager.selectedGameObjects = new List<GameObject>{};
         GameObject Element = FindMatchingObjectID(PopValue.ObjectID);
         
         if(PopValue.ObjectCount > 0){
@@ -103,9 +103,9 @@ public class UndoRedo : MonoBehaviour
                 Destroy(Element);
                 for(int i = 0; i < PopValue.ObjectCount; i++){
                     SelectedModel popValue = undoStack.Pop();
-                    GameObject Element = FindMatchingObjectID(popValue.ObjectID);
-                    Element.transform.parent = workspace.transform;
-                    AssignPopValue(popValue, Element);
+                    GameObject CombinedElement = FindMatchingObjectID(popValue.ObjectID);
+                    CombinedElement.transform.parent = GlobalVariables.CurrentWork.transform;;
+                    AssignPopValue(popValue, CombinedElement);
                 }
             }
             // 結合をRedoした時
@@ -113,8 +113,8 @@ public class UndoRedo : MonoBehaviour
                 SelectedModel Parent = PopValue;
                 for(int i = 0; i < PopValue.ObjectCount; i++){
                     SelectedModel ChildObjectValue = undoStack.Pop();
-                    GameObject ChileElement = FindMatchingObjectID(popValue.ObjectID);
-                    ProductionManager.selectedGameObjects.Add(ChileElement);
+                    GameObject ChiledElement = FindMatchingObjectID(PopValue.ObjectID);
+                    ProductionManager.selectedGameObjects.Add(ChiledElement);
                     ProductionFunction.MergeObjects();
                 }
                 
@@ -199,12 +199,14 @@ public class UndoRedo : MonoBehaviour
 
     public static void Merge()
     {
+        SelectedModel MergeValue;
         int ChildCount = ProductionManager.selectedGameObjects[0].transform.childCount;
 
         for (int i = 0; i <= ChildCount; i++){
             GameObject childObject = ProductionManager.selectedGameObjects[0].transform.GetChild(i).gameObject;
-            SelectedModel MergeValue =  NewModel(childObject);
-            MerheValue.ChildObject = true;
+            MergeValue =  NewModel(childObject);
+            MergeValue.ChildObject = true;
+            MergeValue.ObjectCount = ChildCount;
             undoStack.Push(MergeValue);  
         }
         
