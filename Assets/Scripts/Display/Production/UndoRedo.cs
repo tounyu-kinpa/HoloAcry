@@ -198,12 +198,11 @@ public class UndoRedo : MonoBehaviour
         Do();
     }
 
-    public void Destroy()
+    public static void Delete()
     {
-        SelectedModel DestroyValue = NewModel(ProductionManager.selectedGameObjects[0]);
-        DestroyValue.NowMaking = true;
-        undoStack.Push(DestroyValue);
-        Destroy(cube);
+        SelectedModel DeleteValue = NewModel(ProductionManager.selectedGameObjects[0]);
+        DeleteValue.NowMaking = true;
+        undoStack.Push(DeleteValue);
     }
 
     //オブジェクト結合した時の処理
