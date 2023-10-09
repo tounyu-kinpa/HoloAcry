@@ -33,11 +33,13 @@ public class SelectedModel
     // selectedGameObjectsと一致するcreatedGameObjectsのインデックスを格納
     public int ObjectID;
 
-    //結合したオブジェクトの数を格納
+    // 結合したオブジェクトの数を格納
     public int ObjectCount = 0;
 
+    // 結合したオブジェクトを判断
     public bool ChildObject = false;
 
+    // 結合したオブジェクトの親オブジェクトを判断
     public bool RedoParentObject = false;
 }
 
@@ -100,17 +102,16 @@ public class UndoRedo : MonoBehaviour
         if(PopValue.ObjectCount > 0){
             // 結合をUndoした時
             if(PopValue.RedoParentObject != true){
-                Destroy(Element);
                 for(int i = 0; i < PopValue.ObjectCount; i++){
                     SelectedModel popValue = undoStack.Pop();
-                    GameObject CombinedElement = FindMatchingObjectID(popValue.ObjectID);
-                    CombinedElement.transform.parent = GlobalVariables.CurrentWork.transform;;
-                    AssignPopValue(popValue, CombinedElement);
+                    GameObject MergeElement = FindMatchingObjectID(popValue.ObjectID);
+                    ProductionManager.selectedGameObjects.Add(MergeElement);
+                    AssignPopValue(popValue, MergeElement);
                 }
+                ProductionFunction.UnMergeObjects();
             }
             // 結合をRedoした時
             else{
-                SelectedModel Parent = PopValue;
                 for(int i = 0; i < PopValue.ObjectCount; i++){
                     SelectedModel ChildObjectValue = undoStack.Pop();
                     GameObject ChiledElement = FindMatchingObjectID(PopValue.ObjectID);
@@ -197,10 +198,19 @@ public class UndoRedo : MonoBehaviour
         Do();
     }
 
+    public void Destroy()
+    {
+        SelectedModel DestroyValue = NewModel(ProductionManager.selectedGameObjects[0]);
+        DestroyValue.NowMaking = true;
+        undoStack.Push(DestroyValue);
+        Destroy(cube);
+    }
+
+    //オブジェクト結合した時の処理
     public static void Merge()
     {
         SelectedModel MergeValue;
-        int ChildCount = ProductionManager.selectedGameObjects[0].transform.childCount;
+        int ChildCount = ProductionManager.selectedGameObjects[0].transform.childCount;  // 結合したオブジェクトの数を格納
 
         for (int i = 0; i <= ChildCount; i++){
             GameObject childObject = ProductionManager.selectedGameObjects[0].transform.GetChild(i).gameObject;
@@ -216,5 +226,10 @@ public class UndoRedo : MonoBehaviour
         MergeValue.RedoParentObject = true;
         undoStack.Push(MergeValue);
         
+    }
+
+    public static void UnMerge()
+    {
+
     }
 }
