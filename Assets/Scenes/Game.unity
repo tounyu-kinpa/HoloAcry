@@ -1916,7 +1916,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 326676196}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 326676198}
+        m_TargetAssemblyTypeName: SetWorkName, Assembly-CSharp
+        m_MethodName: SetName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &332495279
 GameObject:
   m_ObjectHideFlags: 0
@@ -3834,6 +3846,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806962610}
   m_CullTransparentMesh: 1
+--- !u!1 &810611196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 810611197}
+  m_Layer: 0
+  m_Name: works
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &810611197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810611196}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 844566802}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &813804527
 GameObject:
   m_ObjectHideFlags: 0
@@ -4095,6 +4138,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 810611197}
   - {fileID: 2078066993}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -5967,6 +6011,7 @@ MonoBehaviour:
   ProductionUI: {fileID: 37484688}
   SettingUI: {fileID: 1902608819}
   PlayUI: {fileID: 949805889}
+  list: {fileID: 2111158011}
 --- !u!4 &1236050083
 Transform:
   m_ObjectHideFlags: 0
@@ -10554,7 +10599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HolePrefab: {fileID: 4928991861095622673, guid: d04d30cd377eec2448ed6667e5a1600e, type: 3}
   WallPrefab: {fileID: 3096755535568625568, guid: 04ddac8e767a41248b64a427cb309ef1, type: 3}
-  canvas: {fileID: 844566798}
+  works: {fileID: 810611196}
   n: 0
 --- !u!114 &2111158012
 MonoBehaviour:

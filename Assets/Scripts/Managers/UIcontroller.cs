@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         GlobalVariables.ParentsUI = this.ListUI.transform;
+        // list.OnClick();
     }
     
 

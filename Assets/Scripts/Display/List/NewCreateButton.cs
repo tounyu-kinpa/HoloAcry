@@ -23,5 +23,7 @@ public class WorksObject : MonoBehaviour
 
         // 編集中の作品をあらわす変数に代入
         GlobalVariables.CurrentWork = NewWork;
+
+        GlobalVariables.workNumber++;
     }
 }
