@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InputNamePrefab : MonoBehaviour
+public class InputWorkNamePrefab : MonoBehaviour
 {
     public ErrorAlert errorAlert = new ErrorAlert();
 
@@ -18,7 +18,6 @@ public class InputNamePrefab : MonoBehaviour
 
     public void DestroyModal()
     {
-        
         // ユーザーが入力した作品名を取得
         string NewWorkName = GetInputFieldText();
 

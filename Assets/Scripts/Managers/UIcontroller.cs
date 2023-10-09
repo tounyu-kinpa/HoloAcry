@@ -9,7 +9,15 @@ public class UIController : MonoBehaviour
     public GameObject ProductionUI;
     public GameObject SettingUI;
     public GameObject PlayUI;
+
+    public CreatePrefab list;
+
+    private void Start()
+    {
+        GlobalVariables.ParentsUI = this.ListUI.transform;
+    }
     
+
     // 一覧画面を表示
     public void ShowListUI()
     {
@@ -23,11 +31,14 @@ public class UIController : MonoBehaviour
         ListUI.SetActive(false);
         SettingUI.SetActive(false);
         ProductionUI.SetActive(true);
+
+        GlobalVariables.ParentsUI = this.ProductionUI.transform;
     }
 
     // 設定画面を表示
     public void ShowSettingUI()
     {
+        GlobalVariables.ParentsUI = this.SettingUI.transform;
         ProductionUI.SetActive(false);
         SettingUI.SetActive(true);
     }
@@ -35,6 +46,7 @@ public class UIController : MonoBehaviour
     // 再生画面を表示
     public void ShowPlayUI()
     {
+        GlobalVariables.ParentsUI = this.PlayUI.transform;
         SettingUI.SetActive(false);
         ListUI.SetActive(false);
         PlayUI.SetActive(true);
