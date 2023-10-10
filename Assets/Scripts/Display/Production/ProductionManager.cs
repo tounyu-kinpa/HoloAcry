@@ -37,7 +37,7 @@ namespace Display.Production
             //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)
             {
-                var outline = createdGameObject.GetComponent<Outline>();
+                //var outline = createdGameObject.GetComponent<Outline>();
                 
                 if (selectedGameObjects.Exists(x => x == createdGameObject))
                 {
