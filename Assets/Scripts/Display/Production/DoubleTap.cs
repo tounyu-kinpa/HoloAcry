@@ -1,15 +1,18 @@
+using System;
 using UnityEngine;
 namespace Display.Production
 {
     public class DoubleTap : MonoBehaviour 
     {
-        public void onTouched()
+        private void Update()
         {
-            Debug.Log("タッチされました");
-        }
-        void addSelectedGameObject()
-        {
-            ProductionManager.selectedGameObjects.Add(gameObject);
+            if (Input.touchCount == 1)
+            {
+                if (Input.touches[0].phase == TouchPhase.Began && Input.touches[0].tapCount == 2)
+                {
+                    Debug.Log("ダブルタッチ");
+                }
+            }
         }
     }
     
