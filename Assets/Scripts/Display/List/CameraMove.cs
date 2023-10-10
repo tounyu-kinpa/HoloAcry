@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    public GameObject Createcamera;
+    public GameObject Main_Camera;
     public float CreatecameraX = 5000;
     public float CreatecameraY = 1440;
     public float CreatecameraZ = -1000;
@@ -16,8 +16,8 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     public void OnClick()
     {
-        Createcamera.SetActive(true);
-        Createcamera.transform.position = new Vector3(CreatecameraX, CreatecameraY, CreatecameraZ);
+        Main_Camera.SetActive(true);
+        Main_Camera.transform.position = new Vector3(CreatecameraX, CreatecameraY, CreatecameraZ);
 
     }
 }
