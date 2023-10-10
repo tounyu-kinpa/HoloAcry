@@ -47,7 +47,7 @@ namespace Display.Production
                     }
                     else
                     {
-                        AddOutlineComponent(createdGameObject);
+                        //AddOutlineComponent(createdGameObject);
                     }
                 }
                 else
@@ -60,6 +60,7 @@ namespace Display.Production
             }
         }
 
+        /*
         void AddOutlineComponent(GameObject gameObject)
         {
             var outline = gameObject.AddComponent<Outline>();
@@ -67,5 +68,6 @@ namespace Display.Production
             outline.OutlineColor = Color.red;
             outline.OutlineWidth = 5f;
         }
+        */
     }
 }
