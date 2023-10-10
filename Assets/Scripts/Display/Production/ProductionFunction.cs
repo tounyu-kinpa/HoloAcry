@@ -58,16 +58,14 @@ namespace Display.Production
         {
             if (Input.touchCount == 2)
             {
+                var transform = MainCamera.transform;
                 var x = MainCamera.transform.right;
                 var y = MainCamera.transform.up;
                     
                 var deltapos = Input.touches[0].deltaPosition;
                     
-                MainCamera.transform.position += -x * deltapos.x * 0.1f * Time.deltaTime;
-                MainCamera.transform.position += -y * deltapos.y * 0.1f * Time.deltaTime;
-                //MainCamera.transform.position += MainCamera.transform.forward * Time.deltaTime;
-
-                Debug.Log(y);
+                transform.position += -x * deltapos.x * 0.1f * Time.deltaTime;
+                transform.position += -y * deltapos.y * 0.1f * Time.deltaTime;
             }
 
         }
@@ -95,7 +93,8 @@ namespace Display.Production
                 {
                     var dis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
                     var delta = dis - _beforeDis;
-                    MainCamera.transform.position += MainCamera.transform.forward * delta * 0.1f;
+                    MainCamera.transform.position += MainCamera.transform.forward * delta * 0.7f;
+                    _beforeDis = -1f;
                 }
                 else
                 {
@@ -103,7 +102,7 @@ namespace Display.Production
                 }
             }
 
-            if (Input.touchCount < 1 && beforeDis > 0)
+            if (Input.touchCount < 1 && _beforeDis > 0)
             {
                 _beforeDis = -1f;
             }
@@ -132,9 +131,18 @@ namespace Display.Production
 
         public static void MergeObjects()
         {
+            var flag = true;
+            GameObject MergedObjects = null;
+            
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
-                GameObject MergedObjects = new GameObject();
+                //初回だけ新規オブジェクト作成
+                if (flag)
+                {
+                    MergedObjects = new GameObject();
+                    ProductionManager.createdGameObjects.Add(MergedObjects);
+                    flag = false;
+                }
 
                 selectedGameObject.transform.parent = MergedObjects.transform;
 
@@ -152,6 +160,37 @@ namespace Display.Production
         }
 
 
+        public static void ChangeSlope(float t)
+        {
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+                Mesh mesh = selectedGameObject.GetComponent<MeshFilter>().mesh;
+                Vector3[] vertices = mesh.vertices;
+                Vector3 centerVertex = default;
+                
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    if (vertices[i].y >= 0 && Mathf.Approximately(vertices[i].x, 0.0f) && Mathf.Approximately(vertices[i].z, 0.0f))
+                    {
+                        centerVertex = vertices[i];
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    if (vertices[i].y >= 0)
+                    {
+                        vertices[i] = Vector3.Lerp(vertices[i], centerVertex, t);
+                    }
+                }
+                
+
+                mesh.vertices = vertices;
+            }
+        }
+        
+        /*
         public static void ChangeSlope()
         {
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
@@ -161,7 +200,7 @@ namespace Display.Production
                 
                 for (int i = 0; i < vertices.Length; i++)
                 {
-                    if (vertices[i].y == 1.0f)
+                    if (vertices[i].y >= 0)
                     {
                         vertices[i] = Vector3.Lerp(vertices[i], vertices[41], 0.5f);
                     }
@@ -169,8 +208,9 @@ namespace Display.Production
 
                 mesh.vertices = vertices;
             }
-
         }
+        */
+
 
         public static void ChangeRotation(float x, float y, float z)
         {

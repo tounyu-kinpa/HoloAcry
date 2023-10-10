@@ -1,24 +1,20 @@
+using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
-
 namespace Display.Production
 {
-    public class DoubleClick : MonoBehaviour, IPointerClickHandler 
+    public class DoubleTap : MonoBehaviour 
     {
-        public void OnPointerClick (PointerEventData eventData)
+        private void Update()
         {
-            if( eventData.clickCount > 1 ){
-                Debug.Log(eventData.clickCount);
+            if (Input.touchCount == 1)
+            {
+                if (Input.touches[0].phase == TouchPhase.Began && Input.touches[0].tapCount == 2)
+                {
+                    Debug.Log("ダブルタッチ");
+                }
             }
-        }
-        
-        void addSelectedGameObject()
-        {
-            ProductionManager.selectedGameObjects.Add(gameObject);
         }
     }
     
 }
-    //シングルタップの場合は拡大、ダブルタップの場合は縮小するメソッド
-
 

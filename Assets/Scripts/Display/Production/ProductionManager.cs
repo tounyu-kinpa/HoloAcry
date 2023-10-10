@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 namespace Display.Production
 {
     
@@ -10,14 +9,12 @@ namespace Display.Production
 
         public static List<GameObject> selectedGameObjects = new List<GameObject>();
         public static List<GameObject> createdGameObjects = new List<GameObject>();
-
-        public Material OutlineMaterial;
         
         // Start is called before the first frame update
         void Start()
         {
-            createdGameObjects.Add(GameObject.Find("Cube"));
-            //selectedGameObjects.Add(GameObject.Find("Cube"));
+            createdGameObjects.Add(GameObject.Find("Cylinder"));
+            selectedGameObjects.Add(GameObject.Find("Cylinder"));
         }
 
         // Update is called once per frame
@@ -29,36 +26,46 @@ namespace Display.Production
             }
             else
             {
-                
-
+                //ProductionFunction.ChangePos(selectedGameObjects[0]);
+                //ProductionFunction.ChangeScale(selectedGameObjects[0]);
             }
-            //ProductionFunction.ChangePos(selectedGameObjects[0]);
-            //ProductionFunction.ChangeScale(selectedGameObjects[0]);
-            ProductionFunction.MoveCamera();
-            ProductionFunction.RotateCamera();
-            ProductionFunction.ChangeCameraScale();
-
+            
+            //ProductionFunction.MoveCamera();
+            //ProductionFunction.RotateCamera();
+            ProductionFunction.ChangeSlope(0.5f);
+            
+            //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)
             {
+                var outline = createdGameObject.GetComponent<Outline>();
+                
                 if (selectedGameObjects.Exists(x => x == createdGameObject))
                 {
-                    ApplyOutline(createdGameObject);
+                    if (outline != null)
+                    {
+                        outline.enabled = true;
+                    }
+                    else
+                    {
+                        AddOutlineComponent(createdGameObject);
+                    }
                 }
                 else
                 {
-                    RemoveOutline(createdGameObject); 
+                    if (outline != null)
+                    {
+                        outline.enabled = false;
+                    }
                 }
             }
         }
 
-        void ApplyOutline(GameObject gameObject)
+        void AddOutlineComponent(GameObject gameObject)
         {
-            gameObject.AddComponent<Outline>();
-        }
-
-        void RemoveOutline(GameObject gameObject)
-        {
-            Destroy(gameObject.GetComponent<Outline>());
+            var outline = gameObject.AddComponent<Outline>();
+            outline.OutlineMode = Outline.Mode.OutlineAll;
+            outline.OutlineColor = Color.red;
+            outline.OutlineWidth = 5f;
         }
     }
 }
