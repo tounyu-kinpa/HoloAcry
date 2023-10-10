@@ -9,12 +9,14 @@ namespace Display.Production
 
         public static List<GameObject> selectedGameObjects = new List<GameObject>();
         public static List<GameObject> createdGameObjects = new List<GameObject>();
+
+        public Material material;
         
         // Start is called before the first frame update
         void Start()
         {
-            createdGameObjects.Add(GameObject.Find("Cylinder"));
-            selectedGameObjects.Add(GameObject.Find("Cylinder"));
+            createdGameObjects.Add(GameObject.Find("Cube"));
+            selectedGameObjects.Add(GameObject.Find("Cube"));
         }
 
         // Update is called once per frame
@@ -37,37 +39,16 @@ namespace Display.Production
             //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)
             {
-                //var outline = createdGameObject.GetComponent<Outline>();
                 
                 if (selectedGameObjects.Exists(x => x == createdGameObject))
                 {
-                    if (outline != null)
-                    {
-                        outline.enabled = true;
-                    }
-                    else
-                    {
-                        //AddOutlineComponent(createdGameObject);
-                    }
+                    createdGameObject.GetComponent<MeshRenderer>().material = material;
                 }
                 else
                 {
-                    if (outline != null)
-                    {
-                        outline.enabled = false;
-                    }
+                    createdGameObject.GetComponent<MeshRenderer>().material = default;
                 }
             }
         }
-
-        /*
-        void AddOutlineComponent(GameObject gameObject)
-        {
-            var outline = gameObject.AddComponent<Outline>();
-            outline.OutlineMode = Outline.Mode.OutlineAll;
-            outline.OutlineColor = Color.red;
-            outline.OutlineWidth = 5f;
-        }
-        */
     }
 }
