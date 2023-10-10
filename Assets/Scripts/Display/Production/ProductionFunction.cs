@@ -160,6 +160,37 @@ namespace Display.Production
         }
 
 
+        public static void ChangeSlope(float t)
+        {
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+                Mesh mesh = selectedGameObject.GetComponent<MeshFilter>().mesh;
+                Vector3[] vertices = mesh.vertices;
+                Vector3 centerVertex = default;
+                
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    if (vertices[i].y >= 0 && Mathf.Approximately(vertices[i].x, 0.0f) && Mathf.Approximately(vertices[i].z, 0.0f))
+                    {
+                        centerVertex = vertices[i];
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    if (vertices[i].y >= 0)
+                    {
+                        vertices[i] = Vector3.Lerp(vertices[i], centerVertex, t);
+                    }
+                }
+                
+
+                mesh.vertices = vertices;
+            }
+        }
+        
+        /*
         public static void ChangeSlope()
         {
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
@@ -169,7 +200,7 @@ namespace Display.Production
                 
                 for (int i = 0; i < vertices.Length; i++)
                 {
-                    if (vertices[i].y == 1.0f)
+                    if (vertices[i].y >= 0)
                     {
                         vertices[i] = Vector3.Lerp(vertices[i], vertices[41], 0.5f);
                     }
@@ -177,8 +208,9 @@ namespace Display.Production
 
                 mesh.vertices = vertices;
             }
-
         }
+        */
+
 
         public static void ChangeRotation(float x, float y, float z)
         {
