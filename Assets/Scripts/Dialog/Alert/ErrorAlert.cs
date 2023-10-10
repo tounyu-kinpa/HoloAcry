@@ -59,13 +59,24 @@ public class ErrorAlert : MonoBehaviour
 
     public void ShowSameNameErrorModal(Transform Canvas)
     {
-        // InputFieldに何も入力されてなかったとき
+        // 同じ名前の作品や立体があったとき
 
         modalPrefab = Instantiate(AlertModal, Canvas);
         // Textの取得
         TMP_Text ErrorText = FindErrorModalText();
         // エラー文の設定
         ErrorText.text = "すでに同じ名前のものがあります";
+    }
+
+    public void ShowInputTypeErrorModal(Transform Canvas)
+    {
+        // 数値以外が入力されたとき
+
+        modalPrefab = Instantiate(AlertModal, Canvas);
+        // Textの取得
+        TMP_Text ErrorText = FindErrorModalText();
+        // エラー文の設定
+        ErrorText.text = "数値を入力してください";
     }
 
     public TMP_Text FindErrorModalText()
