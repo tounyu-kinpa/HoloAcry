@@ -3,12 +3,14 @@ using UnityEngine;
 
 namespace Display.Production
 {
-    public class ProductionFunction
+    public class ProductionFunction : MonoBehaviour
     {
         private static float beforeDis = -1f;
         private static Vector3 beforeScale = Vector3.one;
 
         private static float _beforeDis = -1f;
+
+        private static int Objectnamecounter = 1;
         
         private static GameObject MainCamera = GameObject.Find("Main Camera");
 
@@ -134,14 +136,24 @@ namespace Display.Production
             
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
-                //初回だけ新規オブジェクト作成
+                //初回だけ
                 if (flag)
                 {
+                    //新規オブジェクト作成
                     MergedObjects = new GameObject();
+                    
+                    //createdGameObjectsに新規オブジェクトを追加
                     ProductionManager.createdGameObjects.Add(MergedObjects);
+                    
+                    //新規オブジェクトの名前を変更
+                    MergedObjects.name = "結合体" + Objectnamecounter;
+                    
+                    //新規オブジェクトにつける名前の数字をインクリメント
+                    Objectnamecounter++;
+                    
                     flag = false;
                 }
-
+                
                 selectedGameObject.transform.parent = MergedObjects.transform;
 
             }
@@ -150,13 +162,27 @@ namespace Display.Production
         
         public static void UnMergeObjects()
         {
+            var flag = true;
+            
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
+                if (flag)
+                {
+                    Destroy(selectedGameObject.transform.parent.gameObject);
+                    flag = false;
+                }
                 selectedGameObject.transform.parent = null;
             }
 
         }
 
+        private static void ChangeScaleByUI(float x, float y, float z)
+        {
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+                selectedGameObject.transform.localScale = new Vector3(x, y, z);
+            }
+        }
 
         public static void ChangeSlope(float t)
         {
@@ -188,28 +214,6 @@ namespace Display.Production
             }
         }
         
-        /*
-        public static void ChangeSlope()
-        {
-            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
-            {
-                Mesh mesh = selectedGameObject.GetComponent<MeshFilter>().mesh;
-                Vector3[] vertices = mesh.vertices;
-                
-                for (int i = 0; i < vertices.Length; i++)
-                {
-                    if (vertices[i].y >= 0)
-                    {
-                        vertices[i] = Vector3.Lerp(vertices[i], vertices[41], 0.5f);
-                    }
-                }
-
-                mesh.vertices = vertices;
-            }
-        }
-        */
-
-
         public static void ChangeRotation(float x, float y, float z)
         {
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
