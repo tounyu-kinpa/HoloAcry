@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8657,6 +8657,7 @@ GameObject:
   - component: {fileID: 1862461874}
   - component: {fileID: 1862461873}
   - component: {fileID: 1862461872}
+  - component: {fileID: 1862461875}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8731,13 +8732,30 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862461871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 900, y: 1440, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1862461875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862461871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76ac7a41a60465489269820e2be66ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Createcamera: {fileID: 1862461871}
+  CreatecameraX: 5000
+  CreatecameraY: 1440
+  CreatecameraZ: -1000
+  Create: {fileID: 2111158009}
 --- !u!1 &1864930215
 GameObject:
   m_ObjectHideFlags: 0
@@ -10597,10 +10615,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94e59bdcf259fd47b6cce0863ed9bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HolePrefab: {fileID: 4928991861095622673, guid: d04d30cd377eec2448ed6667e5a1600e, type: 3}
-  WallPrefab: {fileID: 3096755535568625568, guid: 04ddac8e767a41248b64a427cb309ef1, type: 3}
-  works: {fileID: 810611196}
-  n: 0
+  Panel: {fileID: 4928991861095622673, guid: d04d30cd377eec2448ed6667e5a1600e, type: 3}
+  Wall: {fileID: 3096755535568625568, guid: 04ddac8e767a41248b64a427cb309ef1, type: 3}
+  ListUI: {fileID: 844566798}
+  n: 4
 --- !u!114 &2111158012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10684,6 +10702,18 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2111158011}
         m_TargetAssemblyTypeName: CreatePrefab, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1862461875}
+        m_TargetAssemblyTypeName: CameraMove, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:

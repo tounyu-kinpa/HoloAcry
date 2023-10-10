@@ -5,9 +5,9 @@ using UnityEngine;
 public class CreatePrefab : MonoBehaviour
 {
     // プレハブ格納用
-    public GameObject HolePrefab;
-    public GameObject WallPrefab;
-    public GameObject canvas;
+    public GameObject Panel;
+    public GameObject Wall;
+    public GameObject ListUI;
 
     public int n = 4;//適当に入れて生成されるかテストする。後でxmlなどにある数値を参照する。
 
@@ -26,15 +26,15 @@ public class CreatePrefab : MonoBehaviour
             {
                 if ((i % 2) == 1)
                 {
-                    Obj = Instantiate(WallPrefab, vec, Quaternion.identity);
-                    Obj.transform.SetParent(canvas.transform, false);
+                    Obj = Instantiate(Wall, vec, Quaternion.identity);
+                    Obj.transform.SetParent(ListUI.transform, false);
                     vec.y -= 880.0f;
                 }
 
                 if ((i % 2) == 0)
                 {
-                    Obj = Instantiate(WallPrefab, vec2, Quaternion.identity);
-                    Obj.transform.SetParent(canvas.transform, false);
+                    Obj = Instantiate(Wall, vec2, Quaternion.identity);
+                    Obj.transform.SetParent(ListUI.transform, false);
                     vec2.y -= 880.0f;
                 }
 
@@ -52,15 +52,15 @@ public class CreatePrefab : MonoBehaviour
             {
                 if ((i % 2) == 1)
                 {
-                    Obj = Instantiate(HolePrefab, vec, Quaternion.identity);
-                    Obj.transform.SetParent(canvas.transform, false);
+                    Obj = Instantiate(Panel, vec, Quaternion.identity);
+                    Obj.transform.SetParent(ListUI.transform, false);
                     vec.y -= 880.0f;
                 }
 
                 if ((i % 2) == 0)
                 {
-                    Obj = Instantiate(HolePrefab, vec2, Quaternion.identity);
-                    Obj.transform.SetParent(canvas.transform, false);
+                    Obj = Instantiate(Panel, vec2, Quaternion.identity);
+                    Obj.transform.SetParent(ListUI.transform, false);
                     vec2.y -= 880.0f;
                 }
                 if ((n - 1) == i)//最後のループであれば
@@ -70,15 +70,15 @@ public class CreatePrefab : MonoBehaviour
                         vec2.x = 900.0f;
                         if ((i % 2) == 1)
                         {
-                            Obj = Instantiate(WallPrefab, vec, Quaternion.identity);
-                            Obj.transform.SetParent(canvas.transform, false);
+                            Obj = Instantiate(Wall, vec, Quaternion.identity); ;
+                            Obj.transform.SetParent(ListUI.transform, false);
                             vec.y -= 880.0f;
                         }
 
                         if ((i % 2) == 0)
                         {
-                            Obj = Instantiate(WallPrefab, vec2, Quaternion.identity);
-                            Obj.transform.SetParent(canvas.transform, false);
+                            Obj = Instantiate(Wall, vec2, Quaternion.identity);
+                            Obj.transform.SetParent(ListUI.transform, false);
                             vec2.y -= 880.0f;
                         }
 
