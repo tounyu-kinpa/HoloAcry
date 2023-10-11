@@ -9,7 +9,7 @@ public class CreatePrefab : MonoBehaviour
     public GameObject Wall;
     public GameObject ListUI;
 
-    public int n = 4;//適当に入れて生成されるかテストする。後でxmlなどにある数値を参照する。
+    public int n = GlobalVariables.workNumber + 1;//適当に入れて生成されるかテストする。後でxmlなどにある数値を参照する。
 
     GameObject Obj;
 
