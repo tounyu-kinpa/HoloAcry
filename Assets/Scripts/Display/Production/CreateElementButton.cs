@@ -30,11 +30,14 @@ public class CreateElementButton : MonoBehaviour
         }
         else
         {
-            foreach (Transform element in GlobalVariables.CurrentWork.transform)
-            {    
-                GameObject namePrefab = Instantiate(ElementNamePrefab, GlobalVariables.content.transform);
-                namePrefab.transform.name = element.transform.name;
-                namePrefab.GetComponent<ElementNamePrefab>().ChangeElementNameText(element.transform.name);
+            if (GlobalVariables.content.transform.childCount == 0)
+            {
+                foreach (Transform element in GlobalVariables.CurrentWork.transform)
+                {
+                    GameObject namePrefab = Instantiate(ElementNamePrefab, GlobalVariables.content.transform);
+                    namePrefab.transform.name = element.transform.name;
+                    namePrefab.GetComponent<ElementNamePrefab>().ChangeElementNameText(element.transform.name);
+                }
             }
         }
     }
