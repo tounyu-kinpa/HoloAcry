@@ -26,7 +26,7 @@ public class Camera4Move : MonoBehaviour
         if((ListUI.activeSelf) && (ProductionManager.selectedGameObjects.Count != 0))
         {
             //4�̃J�����̈ړ��ʒu
-            camera4X = (GlobalVariables.workNumber % 2) == 0 ? 5.0f : 0.0f;
+            camera4X = (GlobalVariables.workNumber % 2) == 0 ? 125.0f : 0.0f;
             camera4Y = (GlobalVariables.workNumber % 2) == 0 ? camera4Y : camera4Y - 125.0f;
             OnClick();
         }           
@@ -34,6 +34,7 @@ public class Camera4Move : MonoBehaviour
 
     public void OnClick()
     {
+        Debug.Log("aa");
         Main_Camera.SetActive(false);
         Black_Camera.SetActive(true);
         //�J�����̈ʒu�ړ��ƃA�N�e�B�u

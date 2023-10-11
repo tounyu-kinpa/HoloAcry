@@ -9,16 +9,15 @@ public class CreatePrefab : MonoBehaviour
     public GameObject Wall;
     public GameObject ListUI;
 
-    //�K���ɓ���Đ�������邩�e�X�g����B���xml�Ȃǂɂ��鐔�l���Q�Ƃ���B
+    public int n = GlobalVariables.workNumber + 1;//�K���ɓ���Đ�������邩�e�X�g����B���xml�Ȃǂɂ��鐔�l���Q�Ƃ���B
 
     GameObject Obj;
 
     // Start is called before the first frame update
     public void OnClick()
     {
-        int n = GlobalVariables.workNumber - 1;
 
-        /*if (n == 0)
+        if (n == 0)
         {
             Vector3 vec = new Vector3(0.0f, 0.0f, 0.0f);
             Vector3 vec2 = new Vector3(900.0f, 0.0f, 0.0f);
@@ -88,7 +87,7 @@ public class CreatePrefab : MonoBehaviour
 
             }
 
-        }*/
+        }
 
         for (int i = 0; i < n; i++)
         {
