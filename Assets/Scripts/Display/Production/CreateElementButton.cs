@@ -42,15 +42,17 @@ public class CreateElementButton : MonoBehaviour
         }
     }
     
-    public void CreateElement()
+    public void CreateElement(string NewName = "")
     {
-        string NewName;
 
         // Elementを生成
         GameObject NewElement = Instantiate(ElementPrefab, GlobalVariables.CurrentWork.transform);
         GameObject NewElementName = Instantiate(ElementNamePrefab, ElementNameList.transform);
 
-        NewName = SetElementName(NewElement.tag, i);
+         if(NewName == ""){
+            NewName = SetElementName(NewElement.tag, i);
+            i++;
+        }
 
         // ゲームオブジェクト名の変更
         NewElementName.transform.name = NewName;
@@ -60,7 +62,6 @@ public class CreateElementButton : MonoBehaviour
         ElementNamePrefab name = NewElementName.GetComponent<ElementNamePrefab>();
         name.ChangeElementNameText(NewName);
 
-        i++;
 
         ProductionManager.selectedGameObjects = new List<GameObject> { NewElement };
         ProductionManager.createdGameObjects.Add(NewElement);

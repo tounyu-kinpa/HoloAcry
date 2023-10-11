@@ -57,6 +57,9 @@ public class InputWorkElementPrefab : MonoBehaviour
                             
                 // 立体名を変更する
                 ProductionManager.selectedGameObjects[0].transform.name = NewElementName;
+                
+                // undostackにPush
+                UndoRedo.Production.UndoRedo.ChangeName();
             }
         }
     }

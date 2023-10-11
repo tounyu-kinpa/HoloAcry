@@ -7,4 +7,5 @@ public class GlobalVariables : MonoBehaviour
     public static Transform ParentsUI;
     public static GameObject content;
     public static int workNumber = 1;
+    public static GameObject ElementContent;
 }
