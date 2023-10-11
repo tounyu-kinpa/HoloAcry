@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1230,6 +1230,7 @@ GameObject:
   - component: {fileID: 162348909}
   - component: {fileID: 162348908}
   - component: {fileID: 162348907}
+  - component: {fileID: 162348910}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -1301,7 +1302,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 162348908}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162348910}
+        m_TargetAssemblyTypeName: UndoRedo.Production.UndoRedo, Assembly-CSharp
+        m_MethodName: Undo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &162348908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1340,6 +1353,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162348905}
   m_CullTransparentMesh: 1
+--- !u!114 &162348910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162348905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &204825888
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,7 +4697,7 @@ MonoBehaviour:
       - m_Target: {fileID: 844639011}
         m_TargetAssemblyTypeName: CreateElementButton, Assembly-CSharp
         m_MethodName: CreateElement
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5663,7 +5688,7 @@ MonoBehaviour:
       - m_Target: {fileID: 989711443}
         m_TargetAssemblyTypeName: CreateElementButton, Assembly-CSharp
         m_MethodName: CreateElement
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6534,6 +6559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f357de3aaec81284b85fd43f14322335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ElementsContent: {fileID: 779007248}
   ListUI: {fileID: 844566798}
   ProductionUI: {fileID: 37484688}
   SettingUI: {fileID: 1902608819}
@@ -6657,6 +6683,7 @@ GameObject:
   - component: {fileID: 1296982619}
   - component: {fileID: 1296982618}
   - component: {fileID: 1296982617}
+  - component: {fileID: 1296982620}
   m_Layer: 5
   m_Name: Forward
   m_TagString: Untagged
@@ -6728,7 +6755,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1296982618}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1296982620}
+        m_TargetAssemblyTypeName: UndoRedo.Production.UndoRedo, Assembly-CSharp
+        m_MethodName: Redo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1296982618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6767,6 +6806,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296982615}
   m_CullTransparentMesh: 1
+--- !u!114 &1296982620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296982615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1311717422
 GameObject:
   m_ObjectHideFlags: 0
@@ -7791,7 +7842,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1564992370}
         m_TargetAssemblyTypeName: CreateElementButton, Assembly-CSharp
         m_MethodName: CreateElement
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7940,7 +7991,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1573144836}
         m_TargetAssemblyTypeName: CreateElementButton, Assembly-CSharp
         m_MethodName: CreateElement
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11362,7 +11413,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2096096113}
         m_TargetAssemblyTypeName: CreateElementButton, Assembly-CSharp
         m_MethodName: CreateElement
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
