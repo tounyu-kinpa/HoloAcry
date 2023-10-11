@@ -13,6 +13,8 @@ public class DeleteElementButton : MonoBehaviour
         }
         else
         {
+            ProductionManager.createdGameObjects.Remove(ProductionManager.selectedGameObjects[0]);
+            
             Destroy(GlobalVariables.content.transform.Find(ProductionManager.selectedGameObjects[0].transform.name).gameObject);
             Destroy(ProductionManager.selectedGameObjects[0]);
         }

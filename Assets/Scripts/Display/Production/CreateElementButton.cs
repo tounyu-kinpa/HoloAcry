@@ -12,8 +12,34 @@ public class CreateElementButton : MonoBehaviour
     public GameObject ElementNameList;   // ElementNameの親オブジェクト
     private int i = 1;                   // ElementNameの表示名変更用変数
 
-    private void Start() {
+    private void Awake() {
         GlobalVariables.content = this.ElementNameList;
+    }
+
+    private void OnEnable() {
+
+        if (GlobalVariables.CurrentWork.transform.childCount == 0)
+        {
+            // CurrentWorkのElementNameListを削除
+            foreach (Transform child in GlobalVariables.content.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            i = 1;
+        }
+        else
+        {
+            if (GlobalVariables.content.transform.childCount == 0)
+            {
+                foreach (Transform element in GlobalVariables.CurrentWork.transform)
+                {
+                    GameObject namePrefab = Instantiate(ElementNamePrefab, GlobalVariables.content.transform);
+                    namePrefab.transform.name = element.transform.name;
+                    namePrefab.GetComponent<ElementNamePrefab>().ChangeElementNameText(element.transform.name);
+                }
+            }
+        }
     }
     
     public void CreateElement()
