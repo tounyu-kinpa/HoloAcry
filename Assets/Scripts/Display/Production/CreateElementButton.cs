@@ -44,12 +44,12 @@ public class CreateElementButton : MonoBehaviour
     
     public void CreateElement(string NewName = "")
     {
-
+        
         // Elementを生成
         GameObject NewElement = Instantiate(ElementPrefab, GlobalVariables.CurrentWork.transform);
         GameObject NewElementName = Instantiate(ElementNamePrefab, ElementNameList.transform);
 
-         if(NewName == ""){
+        if(NewName == ""){
             NewName = SetElementName(NewElement.tag, i);
             i++;
         }
@@ -66,7 +66,6 @@ public class CreateElementButton : MonoBehaviour
         ProductionManager.selectedGameObjects = new List<GameObject> { NewElement };
         ProductionManager.createdGameObjects.Add(NewElement);
 
-        UndoRedo.Production.UndoRedo.Create();
     }
 
     private string SetElementName(string tag, int i)

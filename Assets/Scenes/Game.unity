@@ -4623,6 +4623,7 @@ GameObject:
   - component: {fileID: 844639009}
   - component: {fileID: 844639008}
   - component: {fileID: 844639011}
+  - component: {fileID: 844639012}
   m_Layer: 5
   m_Name: Ball
   m_TagString: Untagged
@@ -4706,6 +4707,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 844639012}
+        m_TargetAssemblyTypeName: UndoRedo.Production.UndoRedo, Assembly-CSharp
+        m_MethodName: Create
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &844639009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4759,6 +4772,18 @@ MonoBehaviour:
   ElementPrefab: {fileID: 4424407031298781816, guid: 0cd603db076d1364d9ebc7106561ad21, type: 3}
   ElementNamePrefab: {fileID: 4427008920244591950, guid: 3afb7081d06fec74dbfb997a61470c5f, type: 3}
   ElementNameList: {fileID: 1897728998}
+--- !u!114 &844639012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844639006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &850360654
 GameObject:
   m_ObjectHideFlags: 0
@@ -5614,6 +5639,7 @@ GameObject:
   - component: {fileID: 989711441}
   - component: {fileID: 989711440}
   - component: {fileID: 989711443}
+  - component: {fileID: 989711444}
   m_Layer: 5
   m_Name: Cone
   m_TagString: Untagged
@@ -5697,6 +5723,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 989711444}
+        m_TargetAssemblyTypeName: UndoRedo.Production.UndoRedo, Assembly-CSharp
+        m_MethodName: Create
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &989711441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5750,6 +5788,18 @@ MonoBehaviour:
   ElementPrefab: {fileID: 1731649283566354995, guid: 1eea8c3555744734ca1552d25926977c, type: 3}
   ElementNamePrefab: {fileID: 4427008920244591950, guid: 3afb7081d06fec74dbfb997a61470c5f, type: 3}
   ElementNameList: {fileID: 1897728998}
+--- !u!114 &989711444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989711438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1109269140
 GameObject:
   m_ObjectHideFlags: 0
@@ -7768,6 +7818,7 @@ GameObject:
   - component: {fileID: 1564992368}
   - component: {fileID: 1564992367}
   - component: {fileID: 1564992370}
+  - component: {fileID: 1564992371}
   m_Layer: 5
   m_Name: Cylinder
   m_TagString: Untagged
@@ -7851,6 +7902,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1564992371}
+        m_TargetAssemblyTypeName: UndoRedo.Production.UndoRedo, Assembly-CSharp
+        m_MethodName: Create
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1564992368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7904,6 +7967,18 @@ MonoBehaviour:
   ElementPrefab: {fileID: 2270937462201742573, guid: a6adc659639934e46aa55aa9349fa55a, type: 3}
   ElementNamePrefab: {fileID: 4427008920244591950, guid: 3afb7081d06fec74dbfb997a61470c5f, type: 3}
   ElementNameList: {fileID: 1897728998}
+--- !u!114 &1564992371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564992365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1573144831
 GameObject:
   m_ObjectHideFlags: 0
@@ -7917,6 +7992,7 @@ GameObject:
   - component: {fileID: 1573144834}
   - component: {fileID: 1573144833}
   - component: {fileID: 1573144836}
+  - component: {fileID: 1573144837}
   m_Layer: 5
   m_Name: Cube
   m_TagString: Untagged
@@ -8000,6 +8076,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1573144837}
+        m_TargetAssemblyTypeName: UndoRedo.Production.UndoRedo, Assembly-CSharp
+        m_MethodName: Create
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1573144834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8053,6 +8141,18 @@ MonoBehaviour:
   ElementPrefab: {fileID: 3879389384648612920, guid: bf6c5af7285a02044b91b85a82b730a9, type: 3}
   ElementNamePrefab: {fileID: 4427008920244591950, guid: 3afb7081d06fec74dbfb997a61470c5f, type: 3}
   ElementNameList: {fileID: 1897728998}
+--- !u!114 &1573144837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573144831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1573597472
 GameObject:
   m_ObjectHideFlags: 0
@@ -11339,6 +11439,7 @@ GameObject:
   - component: {fileID: 2096096111}
   - component: {fileID: 2096096110}
   - component: {fileID: 2096096113}
+  - component: {fileID: 2096096114}
   m_Layer: 5
   m_Name: SquarePyramid
   m_TagString: Untagged
@@ -11422,6 +11523,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2096096114}
+        m_TargetAssemblyTypeName: UndoRedo.Production.UndoRedo, Assembly-CSharp
+        m_MethodName: Create
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2096096111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11475,6 +11588,18 @@ MonoBehaviour:
   ElementPrefab: {fileID: 5359548030117358271, guid: 89a112cbcbfb1f940a6bd28be9255dc0, type: 3}
   ElementNamePrefab: {fileID: 4427008920244591950, guid: 3afb7081d06fec74dbfb997a61470c5f, type: 3}
   ElementNameList: {fileID: 1897728998}
+--- !u!114 &2096096114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096096108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2111158009
 GameObject:
   m_ObjectHideFlags: 0

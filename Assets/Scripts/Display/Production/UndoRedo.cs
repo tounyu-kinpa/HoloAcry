@@ -127,6 +127,7 @@ namespace UndoRedo.Production
         { 
             ProductionManager.selectedGameObjects = new List<GameObject>{};
             GameObject Element = FindMatchingObjectID(PopValue.ObjectID);
+            Debug.Log(Element);
 
             // Undo,Redoするとき対象のオブジェクトがなかったら
             if (Element == null) {
@@ -241,8 +242,8 @@ namespace UndoRedo.Production
         // instanceIDからオブジェクトを識別
         public static GameObject FindMatchingObjectID(int instanceID)
         {
-            
             int index = ProductionManager.createdGameObjects.FindIndex(x => x.GetInstanceID() == instanceID);
+            Debug.Log(index);
             return (ProductionManager.createdGameObjects[index]);
         }
 
