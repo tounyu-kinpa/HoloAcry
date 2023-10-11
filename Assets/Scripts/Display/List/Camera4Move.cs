@@ -21,7 +21,7 @@ public class Camera4Move : MonoBehaviour
     {
         Debug.Log(ProductionManager.selectedGameObjects);
         //オブジェクト選択中の場合
-        if((ListUI.activeSelf) && (ProductionManager.selectedGameObjects != null))
+        if((ListUI.activeSelf) && (ProductionManager.selectedGameObjects.Count != 0))
         {
             //4つのカメラの移動位置
             camera4X = (GlobalVariables.workNumber % 2) == 0 ? 125.0f : 0.0f;

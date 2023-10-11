@@ -89,8 +89,20 @@ public class CreatePrefab : MonoBehaviour
 
         }
 
+        /*for (int i = 0; i < n; i++)
+        {
+            Obj = Instantiate(Panel);
+            Obj.transform.SetParent(ListUI.transform, false);
+        }
+        for (int i = 0; i < 20; i++)
+        {
+            Obj = Instantiate(Wall);
+            Obj.transform.SetParent(ListUI.transform, false);
+        }*/
+
 
     }
+
 }
 
 // Update is called once per frame
