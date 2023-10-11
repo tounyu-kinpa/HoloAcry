@@ -6,5 +6,5 @@ public class GlobalVariables : MonoBehaviour
     public static string SaveFilePath;
     public static Transform ParentsUI;
     public static GameObject content;
-    public static int workNumber = 0;
+    public static int workNumber = 1;
 }
