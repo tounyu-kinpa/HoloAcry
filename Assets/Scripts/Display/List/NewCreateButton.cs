@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WorksObject : MonoBehaviour
+public class NewCreateButton : MonoBehaviour
 {
     public GameObject WorkSpace;  // 作品内のすべてのオブジェクトを格納するPrefab
     private float x = 0;
