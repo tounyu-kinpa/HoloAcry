@@ -32,9 +32,6 @@ namespace UndoRedo.Production
         // selectedGameObjectsと一致するcreatedGameObjectsのインデックスを格納
         public int ObjectID;
 
-        // 結合したオブジェクトの数を格納
-        public int ObjectCount = 0;
-
         // 結合したオブジェクトを判断
         public bool ChildObject = false;
 
@@ -57,14 +54,21 @@ namespace UndoRedo.Production
             if(undoStack.Count >= 2){
   
                 SelectedModel UndoValue = undoStack.Pop();
+
                 // 結合したオブジェクト分redostack.Pushする処理
-                if (UndoValue.ChildObject == true){
-                    for (int i = 0; i < UndoValue.ObjectCount ; i++){
+                if (UndoValue.tag == "Merge"){
+                    if(UndoValue.Undotag == true){
+                        for (int i = 0; i < 2 ; i++){
                         
-                        SelectedModel undoChileVale = undoStack.Pop();
-                        redoStack.Push(undoChileVale);
+                            SelectedModel undoChileVale = undoStack.Pop();
+                            redoStack.Push(undoChileVale);
+
+                        }
+
+                        UndoValue = undoStack.Pop();
+                        // UndoValue = undoStack.Push();
                     }
-                    UndoValue = undoStack.Pop();
+                  
                 }
                 
                 // UndotagがtrueならredoStackにPush
@@ -98,7 +102,7 @@ namespace UndoRedo.Production
 
                 undoStack.Push(RedoValue);
 
-                for (int i = 0; i < RedoValue.ObjectCount ; i++){
+                for (int i = 0; i < 2 ; i++){
 
                     SelectedModel redoChileVale = undoStack.Pop();
                     undoStack.Push(redoChileVale);
@@ -218,31 +222,34 @@ namespace UndoRedo.Production
                         break;
 
                     // UndoRedoで結合を解除する
-                    case "MergeUndo" :
-                        ProductionManager.selectedGameObjects = new List<GameObject> {};
-                        for(int i = 0; i < PopValue.ObjectCount; i++){
-                            SelectedModel popValue = undoStack.Pop();
+                    case "Merge" :
+                        // 結合を解除する
+                        if(PopValue.Undotag == true){
+                            ProductionManager.selectedGameObjects = new List<GameObject> {};
+                            for(int i = 0; i < 2; i++){
+                                    SelectedModel popValue = undoStack.Pop();
 
-                            Index = FindMatchingObjectID(popValue.ObjectID);
-                            GameObject MergeElement = ProductionManager.createdGameObjects[Index];
+                                    Index = FindMatchingObjectID(popValue.ObjectID);
+                                    GameObject MergeElement = ProductionManager.createdGameObjects[Index];
 
-                            ProductionManager.selectedGameObjects.Add(MergeElement);
+                                    ProductionManager.selectedGameObjects.Add(MergeElement);
+                                }
+                            ProductionFunction.UnMergeObjects();
                         }
-                        ProductionFunction.UnMergeObjects();
-                        break;
 
-                    // UndoRedoで再結合させる
-                    case "MergeRedo" :
-                        ProductionManager.selectedGameObjects = new List<GameObject> {};
-                        for(int i = 0; i < PopValue.ObjectCount; i++){
-                            SelectedModel ChildObjectValue = undoStack.Pop();
+                        // 再結合の場合
+                        else{
+                            ProductionManager.selectedGameObjects = new List<GameObject> {};
+                            for(int i = 0; i < 2; i++){
+                                SelectedModel ChildObjectValue = undoStack.Pop();
 
-                            Index = FindMatchingObjectID(PopValue.ObjectID);
-                            GameObject ChiledElement = ProductionManager.createdGameObjects[Index];
+                                Index = FindMatchingObjectID(PopValue.ObjectID);
+                                GameObject ChiledElement = ProductionManager.createdGameObjects[Index];
 
-                            ProductionManager.selectedGameObjects.Add(ChiledElement);
+                                ProductionManager.selectedGameObjects.Add(ChiledElement);
 
-                            ProductionFunction.MergeObjects();
+                                ProductionFunction.MergeObjects();
+                            }
                         }
                         break;
                     
@@ -324,6 +331,8 @@ namespace UndoRedo.Production
 
             DestroyValue.tag = "NowCreat";
             undoStack.Push(DestroyValue);
+
+            redoStack.Clear();
         }
 
         // 名前が変更されたときの処理
@@ -335,35 +344,37 @@ namespace UndoRedo.Production
             NewNameValue.tag = "ChangeName";
 
             undoStack.Push(NewNameValue);
+
+            redoStack.Clear();
         }
 
         //オブジェクト結合されたときの処理
         public static void Merge()
         {
             SelectedModel MergeValue;
-            int ChildCount = ProductionManager.selectedGameObjects[0].transform.childCount;  // 結合したオブジェクトの数を格納
 
-            for (int i = 0; i <= ChildCount; i++){
+            for (int i = 0; i <= 2; i++){
                 GameObject childObject = ProductionManager.selectedGameObjects[0].transform.GetChild(i).gameObject;
                 MergeValue =  NewModel(childObject);
-                MergeValue.ObjectCount = ChildCount;
+                
+                MergeValue.ChildObject = true;
                 undoStack.Push(MergeValue);  
             }
             
             MergeValue = NewModel(ProductionManager.selectedGameObjects[0]);
-            MergeValue.ObjectCount = ChildCount;
-
-            MergeValue.tag = "MergeUndo";
+            MergeValue.tag = "Merge";
+            MergeValue.Undotag = true;
             undoStack.Push(MergeValue);
 
-            MergeValue.tag = "MergeRedo";
+            MergeValue = NewModel(ProductionManager.selectedGameObjects[0]);
+            MergeValue.tag = "Merge";
             undoStack.Push(MergeValue);
 
             redoStack.Clear();
         }
 
         // 結合が解除されたときの処理
-        public static void UnMerge(GameObject UnMergeElement){
+        public static void UnMerge(GameObject UnMergeElement){ // 引数にUnMergeObjectsのselectedGameObject
             SelectedModel UnMergeValue = NewModel(UnMergeElement);
 
             UnMergeValue.ChildObject = true;
