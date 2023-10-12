@@ -38,6 +38,10 @@ public class XYZInputField : MonoBehaviour
                         break;
                 }
             }
+            else
+            {
+                alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
+            }
         }
         else
         {
@@ -71,6 +75,10 @@ public class XYZInputField : MonoBehaviour
                         break;
                 }
             }
+            else
+            {
+                alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
+            }
         }
         else
         {
@@ -85,6 +93,10 @@ public class XYZInputField : MonoBehaviour
             if (float.TryParse(inputField.text, out float floatValue))
             {
                 ProductionFunction.ChangeSlope(floatValue);
+            }
+            else
+            {
+                alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
             }
         }
         else

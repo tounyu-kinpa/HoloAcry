@@ -17,7 +17,6 @@ public class InstantiateUIPrefab : MonoBehaviour
 
     private bool rotate_bool = false;
     private bool scale_bool = false;
-    private bool slope_bool = false;
 
     private void Start() {
         showScaleUI();
@@ -54,10 +53,10 @@ public class InstantiateUIPrefab : MonoBehaviour
 
     public void showSlopeUI()
     {
-        if (!slope_bool)
+        if (!GlobalVariables.slope_bool)
         {
             slope = Instantiate(SlopeUI, GlobalVariables.ParentsUI);
-            slope_bool = true;
+            GlobalVariables.slope_bool = true;
         }
     }
 
@@ -72,11 +71,4 @@ public class InstantiateUIPrefab : MonoBehaviour
         Destroy(scale);
         scale_bool = false;
     }
-
-    public void DestroySlopeUI()
-    {
-        Destroy(slope);
-        slope_bool = false;
-    }
-
 }
