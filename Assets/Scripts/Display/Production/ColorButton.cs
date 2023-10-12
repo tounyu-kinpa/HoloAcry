@@ -9,6 +9,11 @@ public class SetColorButton : MonoBehaviour
 
     public void CreateColorSetUI()
     {
+        if (ColorSetUI != null)
+        {
+            return;
+        }
+        
         ColorSetUI = Instantiate(ColorUIPrefab, ProductionUI);
     }
 }
