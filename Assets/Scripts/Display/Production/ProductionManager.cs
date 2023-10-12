@@ -23,17 +23,19 @@ namespace Display.Production
         void Update()
         {
             
-            if (selectedGameObjects == null)
+            if (selectedGameObjects.Count != 0)
             {
+                ProductionFunction.ChangePos(selectedGameObjects[0]);
+                ProductionFunction.ChangeScale(selectedGameObjects[0]);
             }
+
             else
             {
-                //ProductionFunction.ChangePos(selectedGameObjects[0]);
-                //ProductionFunction.ChangeScale(selectedGameObjects[0]);
+                ProductionFunction.MoveCamera();
+                ProductionFunction.RotateCamera();
             }
             
-            ProductionFunction.MoveCamera();
-            ProductionFunction.RotateCamera();
+            
             // ProductionFunction.ChangeSlope(0.5f);
             
             //選択されているオブジェクトにアウトラインを適用する処理
@@ -42,11 +44,11 @@ namespace Display.Production
                 
                 if (selectedGameObjects.Exists(x => x == createdGameObject))
                 {
-                    createdGameObject.GetComponent<MeshRenderer>().material = material;
+                    // createdGameObject.GetComponent<MeshRenderer>().material = material;
                 }
                 else
                 {
-                    createdGameObject.GetComponent<MeshRenderer>().material = default;
+                    // createdGameObject.GetComponent<MeshRenderer>().material = default;
                 }
             }
         }

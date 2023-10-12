@@ -25,7 +25,7 @@ public class RayDebug : MonoBehaviour
                 if (Physics.Raycast(ray, out hit)){
                     //Rayが当たるオブジェクトがあった場合はそのオブジェクトをProductionManager.selectedGameObjectsに追加
                     Debug.Log(hit.collider.gameObject.name);
-                    ProductionManager.selectedGameObjects.Add(hit.collider.gameObject);
+                    ProductionManager.selectedGameObjects = new List<GameObject> { hit.collider.gameObject };
                 }
                 else
                 {
