@@ -28,14 +28,9 @@ namespace Display.Production
             }
             else
             {
-                //ProductionFunction.ChangePos(selectedGameObjects[0]);
-                //ProductionFunction.ChangeScale(selectedGameObjects[0]);
             }
             
-            //ProductionFunction.MoveCamera();
-            //ProductionFunction.RotateCamera();
-            ProductionFunction.ChangeSlope(0.5f);
-            
+            //ProductionFunction.camera
             //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)
             {
@@ -46,7 +41,7 @@ namespace Display.Production
                 }
                 else
                 {
-                    createdGameObject.GetComponent<MeshRenderer>().material = default;
+                    //createdGameObject.GetComponent<MeshRenderer>().material = default;
                 }
             }
         }
