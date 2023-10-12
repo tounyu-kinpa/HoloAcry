@@ -1,9 +1,11 @@
 using UnityEngine;
+using Display.Production;
 
 public class SetColorButton : MonoBehaviour
 {
     public GameObject ColorUIPrefab;
     public Transform ProductionUI;
+    public ErrorAlert alert;
 
     private GameObject ColorSetUI;
 
@@ -13,7 +15,14 @@ public class SetColorButton : MonoBehaviour
         {
             return;
         }
-        
-        ColorSetUI = Instantiate(ColorUIPrefab, ProductionUI);
+
+        if (ProductionManager.selectedGameObjects.Count == 0)
+        {
+            alert.ShowNoSelectErrorModal(GlobalVariables.ParentsUI);
+        }
+        else
+        {
+            ColorSetUI = Instantiate(ColorUIPrefab, ProductionUI);
+        }
     }
 }
