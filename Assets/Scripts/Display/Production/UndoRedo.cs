@@ -123,18 +123,6 @@ namespace UndoRedo.Production
             
         }
 
-        public static void Do(GameObject SelectedObject, bool Undotag = false)
-        {
-            SelectedModel DoValue =  NewModel(SelectedObject); 
-            DoValue.Undotag = Undotag;
-
-            // 変更後のObjectの値をまとめてUndoStackにPush
-            undoStack.Push(DoValue);
-
-            // RedoをClear
-            redoStack.Clear();
-        }
-
         
         public static void UndoRedoBranch(SelectedModel PopValue)
         { 
@@ -261,6 +249,14 @@ namespace UndoRedo.Production
             
         }
 
+
+        // instanceIDからオブジェクトを識別してインデックスを返す
+        public static int FindMatchingObjectID(int instanceID)
+        {
+            int index = ProductionManager.createdGameObjects.FindIndex(x => x.GetInstanceID() == instanceID);
+            return (index);
+        }
+
         // UndoRedoした時に保存していた値をオブジェクト代入
         public static void AssignPopValue(SelectedModel PopValue, GameObject Element)
         {                
@@ -278,13 +274,6 @@ namespace UndoRedo.Production
             ElementRenderer.color = PopValue.color;
 
         }    
-
-        // instanceIDからオブジェクトを識別してインデックスを返す
-        public static int FindMatchingObjectID(int instanceID)
-        {
-            int index = ProductionManager.createdGameObjects.FindIndex(x => x.GetInstanceID() == instanceID);
-            return (index);
-        }
 
         // Doした時にUndoStackに保存する値
         public static SelectedModel NewModel(GameObject selectedGameObject)
@@ -305,6 +294,19 @@ namespace UndoRedo.Production
             NewValue.color = ElementRenderer.color;
 
             return(NewValue);
+        }
+
+        
+        public static void Do(GameObject SelectedObject, bool Undotag = false)
+        {
+            SelectedModel DoValue =  NewModel(SelectedObject); 
+            DoValue.Undotag = Undotag;
+
+            // 変更後のObjectの値をまとめてUndoStackにPush
+            undoStack.Push(DoValue);
+
+            // RedoをClear
+            redoStack.Clear();
         }
 
         //オブジェクト生成されたときの処理
