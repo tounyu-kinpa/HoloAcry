@@ -14,59 +14,94 @@ public class XYZInputField : MonoBehaviour
 
     public void SetScale()
     {
-        if (float.TryParse(inputField.text, out float floatValue))
+        if (ProductionManager.selectedGameObjects[0] != null)
         {
-            switch (this.gameObject.transform.name)
-            {
-                case "X_InputField":
-                    // ProductionFunction.ChangeRotation(floatValue, rotation.y, rotation.z);
-                    break;
+            Vector3 scale = ProductionManager.selectedGameObjects[0].transform.localScale;
 
-                case "Y_InputField":
-                    // ProductionFunction.ChangeRotation(rotation.x, floatValue, rotation.z);
-                    break;
-                
-                case "Z_InputField":
-                    // ProductionFunction.ChangeRotation(rotation.x, rotation.y, floatValue);
-                    break;
-                
-                default:
-                    break;
+            if (float.TryParse(inputField.text, out float floatValue))
+            {
+                switch (this.gameObject.transform.name)
+                {
+                    case "X_InputField":
+                        ProductionFunction.ChangeScaleByUI(floatValue, scale.y, scale.z);
+                        break;
+
+                    case "Y_InputField":
+                        ProductionFunction.ChangeScaleByUI(scale.x, floatValue, scale.z);
+                        break;
+                    
+                    case "Z_InputField":
+                        ProductionFunction.ChangeScaleByUI(scale.x, scale.y, floatValue);
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
             }
         }
         else
         {
-            alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
+            alert.ShowNoSelectErrorModal(GlobalVariables.ParentsUI);
         }
     }
 
     public void SetRotation()
     {
-        Vector3 rotation = ProductionManager.selectedGameObjects[0].transform.localEulerAngles;
-
-        if (float.TryParse(inputField.text, out float floatValue))
+        if (ProductionManager.selectedGameObjects[0] != null)
         {
-            switch (this.gameObject.transform.name)
-            {
-                case "X_InputField":
-                    ProductionFunction.ChangeRotation(floatValue, rotation.y, rotation.z);
-                    break;
+            Vector3 rotation = ProductionManager.selectedGameObjects[0].transform.localEulerAngles;
 
-                case "Y_InputField":
-                    ProductionFunction.ChangeRotation(rotation.x, floatValue, rotation.z);
-                    break;
-                
-                case "Z_InputField":
-                    ProductionFunction.ChangeRotation(rotation.x, rotation.y, floatValue);
-                    break;
-                
-                default:
-                    break;
+            if (float.TryParse(inputField.text, out float floatValue))
+            {
+                switch (this.gameObject.transform.name)
+                {
+                    case "X_InputField":
+                        ProductionFunction.ChangeRotation(floatValue, rotation.y, rotation.z);
+                        break;
+
+                    case "Y_InputField":
+                        ProductionFunction.ChangeRotation(rotation.x, floatValue, rotation.z);
+                        break;
+                    
+                    case "Z_InputField":
+                        ProductionFunction.ChangeRotation(rotation.x, rotation.y, floatValue);
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
             }
         }
         else
         {
-            alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
+            alert.ShowNoSelectErrorModal(GlobalVariables.ParentsUI);
+        }
+    }
+
+    public void SetSlope()
+    {
+        if (ProductionManager.selectedGameObjects[0] != null)
+        {
+            if (float.TryParse(inputField.text, out float floatValue))
+            {
+                ProductionFunction.ChangeSlope(floatValue);
+            }
+            else
+            {
+                alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
+            }
+        }
+        else
+        {
+            alert.ShowNoSelectErrorModal(GlobalVariables.ParentsUI);
         }
     }
 }

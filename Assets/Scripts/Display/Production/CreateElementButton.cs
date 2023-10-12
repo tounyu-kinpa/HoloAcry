@@ -20,7 +20,7 @@ public class CreateElementButton : MonoBehaviour
 
         if (GlobalVariables.CurrentWork.transform.childCount == 0)
         {
-            // CurrentWorkのElementNameListを削除
+            // CurrentWorkの中身ないのにcontentに子があるとき
             foreach (Transform child in GlobalVariables.content.transform)
             {
                 Destroy(child.gameObject);
@@ -30,6 +30,7 @@ public class CreateElementButton : MonoBehaviour
         }
         else
         {
+            // CurrentWorkの中身あるのに、Contentに子がないとき
             if (GlobalVariables.content.transform.childCount == 0)
             {
                 foreach (Transform element in GlobalVariables.CurrentWork.transform)
@@ -44,12 +45,12 @@ public class CreateElementButton : MonoBehaviour
     
     public void CreateElement(string NewName = "")
     {
-
+        
         // Elementを生成
         GameObject NewElement = Instantiate(ElementPrefab, GlobalVariables.CurrentWork.transform);
         GameObject NewElementName = Instantiate(ElementNamePrefab, ElementNameList.transform);
 
-         if(NewName == ""){
+        if(NewName == ""){
             NewName = SetElementName(NewElement.tag, i);
             i++;
         }
@@ -66,7 +67,6 @@ public class CreateElementButton : MonoBehaviour
         ProductionManager.selectedGameObjects = new List<GameObject> { NewElement };
         ProductionManager.createdGameObjects.Add(NewElement);
 
-        UndoRedo.Production.UndoRedo.Create();
     }
 
     private string SetElementName(string tag, int i)

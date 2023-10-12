@@ -7,7 +7,7 @@ public class DeleteElementButton : MonoBehaviour
 
     public void DestroyElement()
     {
-        if (ProductionManager.selectedGameObjects[0] == null)
+        if (ProductionManager.selectedGameObjects.Count == 0)
         {
             alert.ShowNoSelectErrorModal(GlobalVariables.ParentsUI);
         }
