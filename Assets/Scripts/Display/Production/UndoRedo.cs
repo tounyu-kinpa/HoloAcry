@@ -126,11 +126,11 @@ namespace UndoRedo.Production
         public static void UndoRedoBranch(SelectedModel PopValue)
         { 
             ProductionManager.selectedGameObjects = new List<GameObject>{};
-            GameObject Element = FindMatchingObjectID(PopValue.ObjectID);
-            Debug.Log(Element);
+            int Index = FindMatchingObjectID(PopValue.ObjectID);
+            GameObject Element;
 
             // Undo,Redoするとき対象のオブジェクトがなかったら
-            if (Element == null) {
+            if (Index < 0){
                 GlobalVariables.ElementContent.transform.Find(PopValue.elementType).GetComponent<CreateElementButton>().CreateElement(PopValue.name);
                 int ElementID = ProductionManager.selectedGameObjects[0].GetInstanceID();
 
@@ -164,13 +164,16 @@ namespace UndoRedo.Production
                 }
 
                 PopValue.ObjectID = ElementID;
-                Element = FindMatchingObjectID(ElementID);
+                Index = FindMatchingObjectID(ElementID);
+                Element = ProductionManager.createdGameObjects[Index];
+                
 
                 AssignPopValue(PopValue, Element);
             }
 
             // 対象のオブジェクトがあったら
             else{
+                Element = ProductionManager.createdGameObjects[Index];
                 switch (PopValue.tag)
                 {
 
@@ -196,7 +199,8 @@ namespace UndoRedo.Production
                         ProductionManager.selectedGameObjects = new List<GameObject> {};
                         for(int i = 0; i < PopValue.ObjectCount; i++){
                             SelectedModel popValue = undoStack.Pop();
-                            GameObject MergeElement = FindMatchingObjectID(popValue.ObjectID);
+                            Index = FindMatchingObjectID(popValue.ObjectID);
+                            GameObject MergeElement = ProductionManager.createdGameObjects[Index];
                             ProductionManager.selectedGameObjects.Add(MergeElement);
                         }
                         ProductionFunction.UnMergeObjects();
@@ -207,7 +211,8 @@ namespace UndoRedo.Production
                         ProductionManager.selectedGameObjects = new List<GameObject> {};
                         for(int i = 0; i < PopValue.ObjectCount; i++){
                             SelectedModel ChildObjectValue = undoStack.Pop();
-                            GameObject ChiledElement = FindMatchingObjectID(PopValue.ObjectID);
+                            Index = FindMatchingObjectID(PopValue.ObjectID);
+                            GameObject ChiledElement = ProductionManager.createdGameObjects[Index];
                             ProductionManager.selectedGameObjects.Add(ChiledElement);
                             ProductionFunction.MergeObjects();
                         }
@@ -239,12 +244,11 @@ namespace UndoRedo.Production
 
         }    
 
-        // instanceIDからオブジェクトを識別
-        public static GameObject FindMatchingObjectID(int instanceID)
+        // instanceIDからオブジェクトを識別してインデックスを返す
+        public static int FindMatchingObjectID(int instanceID)
         {
             int index = ProductionManager.createdGameObjects.FindIndex(x => x.GetInstanceID() == instanceID);
-            Debug.Log(index);
-            return (ProductionManager.createdGameObjects[index]);
+            return (index);
         }
 
         // Doした時にUndoStackに保存する値
