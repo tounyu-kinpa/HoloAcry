@@ -28,8 +28,6 @@ namespace Display.Production
             }
             else
             {
-                //ProductionFunction.ChangePos(selectedGameObjects[0]);
-                //ProductionFunction.ChangeScale(selectedGameObjects[0]);
             }
             
             ProductionFunction.MoveCamera();
@@ -46,7 +44,7 @@ namespace Display.Production
                 }
                 else
                 {
-                    createdGameObject.GetComponent<MeshRenderer>().material = default;
+                    //createdGameObject.GetComponent<MeshRenderer>().material = default;
                 }
             }
         }
