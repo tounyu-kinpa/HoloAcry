@@ -20,7 +20,7 @@ public class CreateElementButton : MonoBehaviour
 
         if (GlobalVariables.CurrentWork.transform.childCount == 0)
         {
-            // CurrentWorkのElementNameListを削除
+            // CurrentWorkの中身ないのにcontentに子があるとき
             foreach (Transform child in GlobalVariables.content.transform)
             {
                 Destroy(child.gameObject);
@@ -30,6 +30,7 @@ public class CreateElementButton : MonoBehaviour
         }
         else
         {
+            // CurrentWorkの中身あるのに、Contentに子がないとき
             if (GlobalVariables.content.transform.childCount == 0)
             {
                 foreach (Transform element in GlobalVariables.CurrentWork.transform)

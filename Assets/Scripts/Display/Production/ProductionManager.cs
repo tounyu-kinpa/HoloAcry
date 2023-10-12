@@ -15,8 +15,8 @@ namespace Display.Production
         // Start is called before the first frame update
         void Start()
         {
-            createdGameObjects.Add(GameObject.Find("Cube"));
-            selectedGameObjects.Add(GameObject.Find("Cube"));
+            // createdGameObjects.Add(GameObject.Find("Cube"));
+            // selectedGameObjects.Add(GameObject.Find("Cube"));
         }
 
         // Update is called once per frame
@@ -32,9 +32,9 @@ namespace Display.Production
                 //ProductionFunction.ChangeScale(selectedGameObjects[0]);
             }
             
-            //ProductionFunction.MoveCamera();
-            //ProductionFunction.RotateCamera();
-            ProductionFunction.ChangeSlope(0.5f);
+            ProductionFunction.MoveCamera();
+            ProductionFunction.RotateCamera();
+            // ProductionFunction.ChangeSlope(0.5f);
             
             //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)

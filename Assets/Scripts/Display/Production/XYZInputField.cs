@@ -14,29 +14,27 @@ public class XYZInputField : MonoBehaviour
 
     public void SetScale()
     {
+        Vector3 position = ProductionManager.selectedGameObjects[0].transform.position;
+
         if (float.TryParse(inputField.text, out float floatValue))
         {
             switch (this.gameObject.transform.name)
             {
                 case "X_InputField":
-                    // ProductionFunction.ChangeRotation(floatValue, rotation.y, rotation.z);
+                    ProductionFunction.ChangeScaleByUI(floatValue, position.y, position.z);
                     break;
 
                 case "Y_InputField":
-                    // ProductionFunction.ChangeRotation(rotation.x, floatValue, rotation.z);
+                    ProductionFunction.ChangeScaleByUI(position.x, floatValue, position.z);
                     break;
                 
                 case "Z_InputField":
-                    // ProductionFunction.ChangeRotation(rotation.x, rotation.y, floatValue);
+                    ProductionFunction.ChangeScaleByUI(position.x, position.y, floatValue);
                     break;
                 
                 default:
                     break;
             }
-        }
-        else
-        {
-            alert.ShowInputTypeErrorModal(GlobalVariables.ParentsUI);
         }
     }
 

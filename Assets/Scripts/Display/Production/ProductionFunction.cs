@@ -176,7 +176,7 @@ namespace Display.Production
 
         }
 
-        private static void ChangeScaleByUI(float x, float y, float z)
+        public static void ChangeScaleByUI(float x, float y, float z)
         {
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
