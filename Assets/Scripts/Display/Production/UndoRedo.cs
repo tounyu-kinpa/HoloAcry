@@ -228,16 +228,21 @@ namespace UndoRedo.Production
                         // 再結合の場合
                         else{
                             ProductionManager.selectedGameObjects = new List<GameObject> {};
+
+                            //  Undo用の親オブジェクトをPop
+                            SelectedModel ChildObjectValue = undoStack.Pop();
+
                             for(int i = 0; i < 2; i++){
-                                SelectedModel ChildObjectValue = undoStack.Pop();
+                                ChildObjectValue = undoStack.Pop();
 
                                 Index = FindMatchingObjectID(PopValue.ObjectID);
                                 GameObject ChiledElement = ProductionManager.createdGameObjects[Index];
 
                                 ProductionManager.selectedGameObjects.Add(ChiledElement);
-
-                                ProductionFunction.MergeObjects();
+                                
                             }
+                            
+                            ProductionFunction.MergeObjects();
                         }
                         break;
                     
