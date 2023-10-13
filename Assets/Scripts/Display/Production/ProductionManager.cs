@@ -28,19 +28,18 @@ namespace Display.Production
             }
         }
 
-        // Update is called once per frame
         void Update()
         {
             
             if (selectedGameObjects.Count == 0)
             {
                 ProductionFunction.Camera();
+                //ProductionFunction.ChangeCameraScale();
             }
             else
             {
             }
             
-                        
             //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)
             {

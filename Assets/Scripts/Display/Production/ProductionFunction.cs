@@ -226,6 +226,20 @@ namespace Display.Production
 
         }
 
+        public static void ApplyBooleanOp()
+        {
+            Parabox.CSG.Model result = CSG.Subtract(ProductionManager.selectedGameObjects[0],
+                ProductionManager.selectedGameObjects[1]);
+            
+            
+            var composite = new GameObject();
+            composite.transform.position = ProductionManager.selectedGameObjects[0].transform.position;
+            composite.AddComponent<MeshFilter>().sharedMesh = result.mesh;
+            composite.AddComponent<MeshRenderer>().sharedMaterials = result.materials.ToArray();
+
+            ProductionManager.selectedGameObjects.Add(composite);
+        }
+        
         public static void ChangeScaleByUI(float x, float y, float z)
         {
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
@@ -273,18 +287,6 @@ namespace Display.Production
 
         }
 
-        public static void ApplyBooleanOp()
-        {
-            Parabox.CSG.Model result = CSG.Subtract(ProductionManager.selectedGameObjects[0],
-                ProductionManager.selectedGameObjects[1]);
-            
-            var composite = new GameObject();
-            composite.transform.position = ProductionManager.selectedGameObjects[0].transform.position;
-            composite.AddComponent<MeshFilter>().sharedMesh = result.mesh;
-            composite.AddComponent<MeshRenderer>().sharedMaterials = result.materials.ToArray();
-
-
-        }
 
         public static Vector2 Deltapositionperframe(Touch touch)
         {
