@@ -113,18 +113,18 @@ namespace UndoRedo.Production
             
         }
 
-        
+        // どんな変更をUndoRedoするのかの処理
         public static void UndoRedoBranch(SelectedModel PopValue)
         { 
 
             ProductionManager.selectedGameObjects = new List<GameObject>{};
-            int Index = FindMatchingObjectID(PopValue.ObjectID);
-            GameObject Element;
+            int Index = FindMatchingObjectID(PopValue.ObjectID);        // selectのオブジェクトのcreatGameObjectsのインデックスを格納
+            GameObject Element; // 取得したインデックスのcreatGameObjectsを格納
 
 
-            // Undo,Redoするとき対象のオブジェクトがなかったら
+            // UndoRedoするとき対象のオブジェクトがなかったら
             if (Index < 0){
-
+                // 保存した名前を渡してオブジェクトを生成
                 GlobalVariables.ElementContent.transform.Find(PopValue.elementType).GetComponent<CreateElementButton>().CreateElement(PopValue.name);
 
                 // undoStackのObjectIDの更新
@@ -134,7 +134,7 @@ namespace UndoRedo.Production
 
             // 対象のオブジェクトがあったら
             else{
-
+                
                 Element = ProductionManager.createdGameObjects[Index];
 
                 switch (PopValue.tag)
@@ -143,7 +143,7 @@ namespace UndoRedo.Production
                     // オブジェクトを消去するUndoRedo
                     case "NowCreat" :
                         ProductionManager.selectedGameObjects = new List<GameObject> { Element };
-
+                        
                         DeleteElementButton InstanceDeleteElement = new DeleteElementButton();
                         InstanceDeleteElement.DestroyElement();
 
@@ -151,7 +151,7 @@ namespace UndoRedo.Production
 
                         break;
 
-                    // 名前を変える処理のUndo,Redo
+                    // 名前を変える処理のUndoRedo
                     case "ChangeName" :
                         ProductionManager.selectedGameObjects = new List<GameObject> { Element };
 
@@ -168,9 +168,10 @@ namespace UndoRedo.Production
 
                     // 結合を解除する
                     case "UnMerge" :
-                        SelectedModel UnMergeParentPopValue = null;
-                        SelectedModel ChildpopValue;
+                        SelectedModel UnMergeParentPopValue = null; // Undotag = trueの場合undoStackにある親の値を格納
+                        SelectedModel ChildpopValue;    // undoStackにある子オブジェクトの値を格納
                         ProductionManager.selectedGameObjects = new List<GameObject> {};
+
                         if(PopValue.Undotag != true){
                             UnMergeParentPopValue = undoStack.Pop();
                         }
@@ -182,10 +183,13 @@ namespace UndoRedo.Production
 
                                 ProductionManager.selectedGameObjects.Add(MergeElement);
                             }
+
                         ProductionFunction.UnMergeObjects();
-                        SelectedModel DestroyPopValue = undoStack.Pop();
+
+                        // undoStackに入った親の値を、値を更新するため取り出す
                         DestroyPopValue = undoStack.Pop();
 
+                        // 正しい親の値をPush
                         if(PopValue.Undotag != true){
                             undoStack.Push(UnMergeParentPopValue);
                             undoStack.Push(PopValue);
