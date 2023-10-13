@@ -5,19 +5,37 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     public GameObject Main_Camera;
-    public float CreatecameraX = 5000;
-    public float CreatecameraY = 1440;
-    public float CreatecameraZ = -1000;
-    public GameObject Create;
 
-    // Start is called before the first frame update
+    private float CreatecameraX = 2.5f;
+    private float CreatecameraY = -5.5f;
+    private float CreatecameraZ = -20.0f;
+    
+    private Camera mainCamera;
 
+    private void Start() {
+        mainCamera = Main_Camera.GetComponent<Camera>();
+        ListCamera();
+    }
 
-    // Update is called once per frame
-    public void OnClick()
+    public void ListCamera()
     {
         Main_Camera.SetActive(true);
         Main_Camera.transform.position = new Vector3(CreatecameraX, CreatecameraY, CreatecameraZ);
 
+        if (Main_Camera != null)
+        {
+            // 正射影に変更
+            mainCamera.orthographic = true;
+            mainCamera.orthographicSize = 8.0f;
+        }
+    }
+
+    public void ProductionCamera()
+    {
+        if (Main_Camera != null)
+        {
+            mainCamera.orthographic = false;
+            Main_Camera.transform.position = new Vector3(0.0f, 0.0f, -20.0f);
+        }
     }
 }

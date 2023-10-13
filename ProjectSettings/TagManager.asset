@@ -9,6 +9,7 @@ TagManager:
   - Cone
   - Cylinder
   - SquarePyramid
+  - WorkSpace
   layers:
   - Default
   - TransparentFX

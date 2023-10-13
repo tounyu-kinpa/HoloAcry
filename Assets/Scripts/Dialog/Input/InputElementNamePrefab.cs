@@ -8,7 +8,7 @@ using Display.Production;
 public class InputWorkElementPrefab : MonoBehaviour
 {
     private GameObject ElementNamesList = GlobalVariables.content;
-    public ErrorAlert errorAlert = new ErrorAlert();
+    public ErrorAlert errorAlert;
 
     private bool isSameName = false;
 
@@ -57,6 +57,9 @@ public class InputWorkElementPrefab : MonoBehaviour
                             
                 // 立体名を変更する
                 ProductionManager.selectedGameObjects[0].transform.name = NewElementName;
+                
+                // undostackにPush
+                UndoRedo.Production.UndoRedo.ChangeName();
             }
         }
     }

@@ -7,10 +7,13 @@ using UnityEngine.UIElements;
 
 public class Camera4Move : MonoBehaviour
 {
+    public GameObject Main_Camera;
+
+    public GameObject Black_Camera;
     public GameObject camera4;
 
     private float camera4X = 0;
-    private float camera4Y = 125;
+    private float camera4Y = 0;
     private float camera4Z = 0;
 
     public GameObject ListUI;
@@ -19,12 +22,11 @@ public class Camera4Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(ProductionManager.selectedGameObjects);
-        //ƒIƒuƒWƒFƒNƒg‘I‘ğ’†‚Ìê‡
-        if((ListUI.activeSelf) && (ProductionManager.selectedGameObjects != null))
+        //ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Iï¿½ğ’†‚Ìê‡
+        if((ListUI.activeSelf) && (ProductionManager.selectedGameObjects.Count != 0))
         {
-            //4‚Â‚ÌƒJƒƒ‰‚ÌˆÚ“®ˆÊ’u
-            camera4X = (GlobalVariables.workNumber % 2) == 0 ? 125.0f : 0.0f;
+            //4ï¿½Â‚ÌƒJï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÚ“ï¿½ï¿½Ê’u
+            camera4X = (GlobalVariables.workNumber % 2) == 0 ? 5.0f : 0.0f;
             camera4Y = (GlobalVariables.workNumber % 2) == 0 ? camera4Y : camera4Y - 125.0f;
             OnClick();
         }           
@@ -32,7 +34,9 @@ public class Camera4Move : MonoBehaviour
 
     public void OnClick()
     {
-        //ƒJƒƒ‰‚ÌˆÊ’uˆÚ“®‚ÆƒAƒNƒeƒBƒu
+        Main_Camera.SetActive(false);
+        Black_Camera.SetActive(true);
+        //ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÊ’uï¿½Ú“ï¿½ï¿½ÆƒAï¿½Nï¿½eï¿½Bï¿½u
         camera4.transform.position = new Vector3(camera4X, camera4Y, camera4Z);
         camera4.SetActive(true);
     }

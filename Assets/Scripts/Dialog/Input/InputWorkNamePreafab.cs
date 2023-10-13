@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class InputWorkNamePrefab : MonoBehaviour
 {
-    public ErrorAlert errorAlert = new ErrorAlert();
+    public ErrorAlert errorAlert;
 
     private bool isSameName;
 
@@ -53,6 +53,12 @@ public class InputWorkNamePrefab : MonoBehaviour
                 Destroy(this.gameObject);
                 // 作品名の変更
                 GlobalVariables.CurrentWork.transform.name = NewWorkName;
+                
+                // CurrentWorkのElementNameListを削除
+                foreach (Transform child in GlobalVariables.content.transform)
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
     }

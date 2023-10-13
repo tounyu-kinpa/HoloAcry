@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class CreatePrefab : MonoBehaviour
 {
-    // ƒvƒŒƒnƒuŠi”[—p
+    // ï¿½vï¿½ï¿½ï¿½nï¿½uï¿½iï¿½[ï¿½p
     public GameObject Panel;
     public GameObject Wall;
     public GameObject ListUI;
 
-    public int n = GlobalVariables.workNumber + 1;//“K“–‚É“ü‚ê‚Ä¶¬‚³‚ê‚é‚©ƒeƒXƒg‚·‚éBŒã‚Åxml‚È‚Ç‚É‚ ‚é”’l‚ğQÆ‚·‚éB
+    //ï¿½Kï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚©ï¿½eï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½xmlï¿½È‚Ç‚É‚ï¿½ï¿½é”ï¿½lï¿½ï¿½ï¿½Qï¿½Æ‚ï¿½ï¿½ï¿½B
 
     GameObject Obj;
 
     // Start is called before the first frame update
     public void OnClick()
     {
+        int n = GlobalVariables.workNumber - 1;
 
-        if (n == 0)
+        /*if (n == 0)
         {
             Vector3 vec = new Vector3(0.0f, 0.0f, 0.0f);
             Vector3 vec2 = new Vector3(900.0f, 0.0f, 0.0f);
 
-            for (int i = 1; i < 30; i++) //30‚Æ‚¢‚¤”’l‚Í“K“–Œã‚Å•Ï‚¦‚é
+            for (int i = 1; i < 30; i++) //30ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Í“Kï¿½ï¿½ï¿½ï¿½Å•Ï‚ï¿½ï¿½ï¿½
             {
                 if ((i % 2) == 1)
                 {
@@ -41,14 +42,14 @@ public class CreatePrefab : MonoBehaviour
             }
         }
 
-        n += 1;//n‚ÌŒ©Š|‚¯ã‚Ì’l‚ÆÀÛ‚É¶¬‚³‚ê‚éprefab‚Ì·‚ª1A–ß‚è’l‚ğİ’è‚·‚éê‡‚Í-1‚·‚éB
+        n += 1;//nï¿½ÌŒï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½Ì’lï¿½Æï¿½ï¿½Û‚Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½prefabï¿½Ìï¿½ï¿½ï¿½1ï¿½Aï¿½ß‚ï¿½lï¿½ï¿½İ’è‚·ï¿½ï¿½ê‡ï¿½ï¿½-1ï¿½ï¿½ï¿½ï¿½B
 
         if (0 < n)
         {
             Vector3 vec = new Vector3(0.0f, 0.0f, 0.0f);
             Vector3 vec2 = new Vector3(830.0f, 0.0f, 0.0f);
 
-            for (int i = 1; i < n; i++) //30‚Æ‚¢‚¤”’l‚Í“K“–Œã‚Å•Ï‚¦‚é
+            for (int i = 1; i < n; i++) //30ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Í“Kï¿½ï¿½ï¿½ï¿½Å•Ï‚ï¿½ï¿½ï¿½
             {
                 if ((i % 2) == 1)
                 {
@@ -63,9 +64,9 @@ public class CreatePrefab : MonoBehaviour
                     Obj.transform.SetParent(ListUI.transform, false);
                     vec2.y -= 880.0f;
                 }
-                if ((n - 1) == i)//ÅŒã‚Ìƒ‹[ƒv‚Å‚ ‚ê‚Î
+                if ((n - 1) == i)//ï¿½ÅŒï¿½Ìƒï¿½ï¿½[ï¿½vï¿½Å‚ï¿½ï¿½ï¿½ï¿½
                 {
-                    for (; i < 30; i++) //30‚Æ‚¢‚¤”’l‚Í“K“–Œã‚Å•Ï‚¦‚é
+                    for (; i < 30; i++) //30ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Í“Kï¿½ï¿½ï¿½ï¿½Å•Ï‚ï¿½ï¿½ï¿½
                     {
                         vec2.x = 900.0f;
                         if ((i % 2) == 1)
@@ -87,10 +88,22 @@ public class CreatePrefab : MonoBehaviour
 
             }
 
+        }*/
+
+        for (int i = 0; i < n; i++)
+        {
+            Obj = Instantiate(Panel);
+            Obj.transform.SetParent(ListUI.transform, false);
+        }
+        for (int i = 0; i < 20; i++)
+        {
+            Obj = Instantiate(Wall);
+            Obj.transform.SetParent(ListUI.transform, false);
         }
 
 
     }
+
 }
 
 // Update is called once per frame

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Display.Production
 {
     
@@ -10,43 +11,50 @@ namespace Display.Production
         public static List<GameObject> selectedGameObjects = new List<GameObject>();
         public static List<GameObject> createdGameObjects = new List<GameObject>();
 
-        public Material material;
+        public Material Default_material;
         
         // Start is called before the first frame update
         void Start()
         {
             createdGameObjects.Add(GameObject.Find("Cube"));
-            selectedGameObjects.Add(GameObject.Find("Cube"));
+            
+            foreach (var createdGameObject in createdGameObjects)
+            {
+                var outline = createdGameObject.AddComponent<Outline>();
+                outline.OutlineMode = Outline.Mode.OutlineAll;
+                outline.OutlineColor =Color.red;
+                outline.OutlineWidth = 5f;
+
+            }
         }
 
-        // Update is called once per frame
         void Update()
         {
             
-            if (selectedGameObjects == null)
+            if (selectedGameObjects.Count == 0)
             {
+                ProductionFunction.Camera();
+                //ProductionFunction.ChangeCameraScale();
             }
+
             else
             {
-                //ProductionFunction.ChangePos(selectedGameObjects[0]);
-                //ProductionFunction.ChangeScale(selectedGameObjects[0]);
+                ProductionFunction.MoveCamera();
+                ProductionFunction.RotateCamera();
             }
-            
-            //ProductionFunction.MoveCamera();
-            //ProductionFunction.RotateCamera();
-            ProductionFunction.ChangeSlope(0.5f);
             
             //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)
             {
+                var outline = createdGameObject.GetComponent<Outline>();
                 
                 if (selectedGameObjects.Exists(x => x == createdGameObject))
                 {
-                    createdGameObject.GetComponent<MeshRenderer>().material = material;
+                    outline.OutlineMode = Outline.Mode.OutlineAll;
                 }
                 else
                 {
-                    createdGameObject.GetComponent<MeshRenderer>().material = default;
+                    outline.OutlineMode = Outline.Mode.OutlineHidden;
                 }
             }
         }

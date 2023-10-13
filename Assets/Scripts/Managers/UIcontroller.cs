@@ -5,6 +5,7 @@ using UnityEngine;
 // UIの遷移を行うクラス
 public class UIController : MonoBehaviour
 {
+    public GameObject ElementsContent;
     public GameObject ListUI;
     public GameObject ProductionUI;
     public GameObject SettingUI;
@@ -15,6 +16,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         GlobalVariables.ParentsUI = this.ListUI.transform;
+        GlobalVariables.ElementContent = this.ElementsContent;
         // list.OnClick();
     }
     

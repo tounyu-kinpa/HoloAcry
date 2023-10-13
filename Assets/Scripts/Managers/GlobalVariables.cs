@@ -6,5 +6,10 @@ public class GlobalVariables : MonoBehaviour
     public static string SaveFilePath;
     public static Transform ParentsUI;
     public static GameObject content;
-    public static int workNumber = 0;
+    public static int workNumber = 1;
+    public static GameObject ElementContent;
+
+    // public bool isUIEventHandled = false;
+
+    public static bool slope_bool = false;
 }

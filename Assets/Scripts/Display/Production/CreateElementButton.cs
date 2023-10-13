@@ -12,19 +12,48 @@ public class CreateElementButton : MonoBehaviour
     public GameObject ElementNameList;   // ElementNameの親オブジェクト
     private int i = 1;                   // ElementNameの表示名変更用変数
 
-    private void Start() {
+    private void Awake() {
         GlobalVariables.content = this.ElementNameList;
     }
-    
-    public void CreateElement()
-    {
-        string NewName;
 
+    private void OnEnable() {
+
+        if (GlobalVariables.CurrentWork.transform.childCount == 0)
+        {
+            // CurrentWorkの中身ないのにcontentに子があるとき
+            foreach (Transform child in GlobalVariables.content.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            i = 1;
+        }
+        else
+        {
+            // CurrentWorkの中身あるのに、Contentに子がないとき
+            if (GlobalVariables.content.transform.childCount == 0)
+            {
+                foreach (Transform element in GlobalVariables.CurrentWork.transform)
+                {
+                    GameObject namePrefab = Instantiate(ElementNamePrefab, GlobalVariables.content.transform);
+                    namePrefab.transform.name = element.transform.name;
+                    namePrefab.GetComponent<ElementNamePrefab>().ChangeElementNameText(element.transform.name);
+                }
+            }
+        }
+    }
+    
+    public void CreateElement(string NewName = "")
+    {
+        
         // Elementを生成
         GameObject NewElement = Instantiate(ElementPrefab, GlobalVariables.CurrentWork.transform);
         GameObject NewElementName = Instantiate(ElementNamePrefab, ElementNameList.transform);
 
-        NewName = SetElementName(NewElement.tag, i);
+        if(NewName == ""){
+            NewName = SetElementName(NewElement.tag, i);
+            i++;
+        }
 
         // ゲームオブジェクト名の変更
         NewElementName.transform.name = NewName;
@@ -34,12 +63,10 @@ public class CreateElementButton : MonoBehaviour
         ElementNamePrefab name = NewElementName.GetComponent<ElementNamePrefab>();
         name.ChangeElementNameText(NewName);
 
-        i++;
 
         ProductionManager.selectedGameObjects = new List<GameObject> { NewElement };
         ProductionManager.createdGameObjects.Add(NewElement);
 
-        UndoRedo.Production.UndoRedo.Create();
     }
 
     private string SetElementName(string tag, int i)
