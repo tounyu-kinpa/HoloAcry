@@ -36,8 +36,11 @@ namespace Display.Production
                 ProductionFunction.Camera();
                 //ProductionFunction.ChangeCameraScale();
             }
+
             else
             {
+                ProductionFunction.MoveCamera();
+                ProductionFunction.RotateCamera();
             }
             
             //選択されているオブジェクトにアウトラインを適用する処理

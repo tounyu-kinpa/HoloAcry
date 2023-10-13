@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Parabox.CSG;
-using System.Collections.Generic;
+
 namespace Display.Production
 {
     public class ProductionFunction : MonoBehaviour
@@ -206,7 +205,7 @@ namespace Display.Production
                 }
                 
                 selectedGameObject.transform.parent = MergedObjects.transform;
-                ProductionManager.selectedGameObjects.Insert(0, MergedObjects);
+
             }
 
         }
