@@ -59,6 +59,7 @@ namespace Display.Production
         {
             if (Input.touchCount == 2)
             {
+                
                 var transform = MainCamera.transform;
                 var x = MainCamera.transform.right;
                 var y = MainCamera.transform.up;
@@ -103,11 +104,59 @@ namespace Display.Production
                 }
             }
 
-            if (Input.touchCount < 1 && _beforeDis > 0)
+            if (Input.touchCount < 2 && _beforeDis > 0)
             {
                 _beforeDis = -1f;
             }
 
+        }
+
+        public static void Camera()
+        {
+            if (Input.touchCount == 1)
+            {
+                //RotateCamera
+                var x = MainCamera.transform.right;
+                var y = MainCamera.transform.up;
+                    
+                var deltapos = Deltapositionperframe(Input.touches[0]);
+                    
+                MainCamera.transform.RotateAround(MainCamera.transform.position, Vector3.up, deltapos.x * 2 * Time.deltaTime);
+                MainCamera.transform.RotateAround(MainCamera.transform.position, MainCamera.transform.right, -deltapos.y * 2 * Time.deltaTime);
+
+            }
+
+            if (Input.touchCount == 2)
+            {
+                //MoveCamera
+                var transform = MainCamera.transform;
+                var x = MainCamera.transform.right;
+                var y = MainCamera.transform.up;
+                    
+                var deltapos = Deltapositionperframe(Input.touches[0]);
+                    
+                transform.position += -x * deltapos.x * 0.1f * Time.deltaTime;
+                transform.position += -y * deltapos.y * 0.1f * Time.deltaTime;
+                
+                //ChangeCameraScale
+                if (_beforeDis > 0)
+                {
+                    var dis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
+                    var delta = dis - _beforeDis;
+                    MainCamera.transform.position += MainCamera.transform.forward * delta * 0.02f;
+                    _beforeDis = -1f;
+                }
+                else
+                {
+                    _beforeDis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
+                }
+            }
+            
+            if (Input.touchCount < 2 && _beforeDis > 0)
+            {
+                _beforeDis = -1f;
+            }
+            
         }
 
 
@@ -235,6 +284,12 @@ namespace Display.Production
             composite.AddComponent<MeshRenderer>().sharedMaterials = result.materials.ToArray();
 
 
+        }
+
+        public static Vector2 Deltapositionperframe(Touch touch)
+        {
+            var moveDist = (touch.deltaPosition / touch.deltaTime) * Time.deltaTime;
+            return moveDist;
         }
     }
 
