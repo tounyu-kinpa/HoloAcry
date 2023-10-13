@@ -10,7 +10,6 @@ public class Object_Deactive : MonoBehaviour
     public void OnClick()
     {
         GameObject[] works = GameObject.FindGameObjectsWithTag("WorkSpace");
-        int n = 0;
         works_save = works;
         foreach (GameObject work in works)
         {
