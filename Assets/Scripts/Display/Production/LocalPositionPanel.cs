@@ -23,7 +23,7 @@ public class LocalPositionPanel : MonoBehaviour
 
     public void SetPositionValue()
     {
-        if (ProductionManager.selectedGameObjects.Count != 0)
+        if (ProductionManager.selectedGameObjects.Count != 0 && ProductionManager.selectedGameObjects[0] != null)
         {
             elementName.text = ProductionManager.selectedGameObjects[0].transform.name;   
 
@@ -38,9 +38,7 @@ public class LocalPositionPanel : MonoBehaviour
             value_x.text = "X";
             value_y.text = "Y";
             value_z.text = "Z";
-        }
-
-        
+        } 
     }
     
 }
