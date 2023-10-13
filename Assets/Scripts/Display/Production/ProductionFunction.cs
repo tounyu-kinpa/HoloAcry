@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Parabox.CSG;
-using System.Collections.Generic;
+
 namespace Display.Production
 {
     public class ProductionFunction : MonoBehaviour
@@ -156,7 +155,7 @@ namespace Display.Production
                 }
                 
                 selectedGameObject.transform.parent = MergedObjects.transform;
-                ProductionManager.selectedGameObjects.Insert(0, MergedObjects);
+
             }
 
         }
@@ -226,14 +225,9 @@ namespace Display.Production
 
         public static void ApplyBooleanOp()
         {
-            Parabox.CSG.Model result = CSG.Subtract(ProductionManager.selectedGameObjects[0],
-                ProductionManager.selectedGameObjects[1]);
-            
-            var composite = new GameObject();
-            composite.transform.position = ProductionManager.selectedGameObjects[0].transform.position;
-            composite.AddComponent<MeshFilter>().sharedMesh = result.mesh;
-            composite.AddComponent<MeshRenderer>().sharedMaterials = result.materials.ToArray();
-
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+            {
+            }
 
         }
     }
