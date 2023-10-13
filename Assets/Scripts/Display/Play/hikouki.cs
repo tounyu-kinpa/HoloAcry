@@ -9,11 +9,18 @@ public class hikouki : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TargetObject=GameObject.Find("hikouki");
         TargetTransform=TargetObject.GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource();
+        audioSource.clip = audioClip;
     }
     public void OnClick()
     {
         TargetTransform.velocity=new Vector3(6.0f,0.0f,0.0f);
+        Invoke("object_reset",5.0f);
+        audioSource.Play();
+    }
+    private void object_reset()
+    {
+        TargetTransform.velocity=new Vector3(0.0f,0.0f,0.0f);
     }
 }

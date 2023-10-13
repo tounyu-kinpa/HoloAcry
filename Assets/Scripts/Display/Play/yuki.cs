@@ -9,14 +9,15 @@ public class yuki : MonoBehaviour
     void Start()
     {
         particle.Pause();
+        audioSource = GetComponent<AudioSource();
+        audioSource.clip = audioClip;
     }
     public void Onclic(){
-        particle.Play();
+        particle.gameObject.SetActive(true);
+        audioSource.Play();
+        Invoke("particle_Pause",25f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void particle_Pause(){
+        particle.gameObject.SetActive(false);
     }
 }

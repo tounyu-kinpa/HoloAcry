@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class ame : MonoBehaviour
 {
+   
     [SerializeField] private ParticleSystem particle;
     // Start is called before the first frame update
     void Start()
     {
+        // 音声ファイルを取得
+        audioSource = GetComponent<AudioSource();
+        audioSource.clip = audioClip;
         particle.Pause();
     }
     public void Onclic(){
-        particle.Play();
+        particle.gameObject.SetActive(true);
+        audioSource.Play();
+        Invoke("particle_Pause",25f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void particle_Pause(){
+        particle.gameObject.SetActive(false);
     }
 }
+

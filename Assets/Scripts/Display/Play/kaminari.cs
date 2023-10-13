@@ -13,26 +13,25 @@ public class kaminari : MonoBehaviour
     public void Start()
     {
         // 
-        aida=Random.Range(1.3f,1.5f);
+        aida=Random.Range(0.8f,1.0f);
         kesu=Random.Range(0.7f,1.0f);
         dasu=Random.Range(0.3f,0.5f);
         Thunder.gameObject.SetActive(false);
+        audioSource = GetComponent<AudioSource();
+        audioSource.clip = audioClip;
     }
     // Update is called once per frame
     public void OnClick()
     {
-        if(dasu>aida){
-            dasu=Random.Range(0.3f,0.5f);;
-
-            Thunder.gameObject.SetActive(true);
-        }
+        dasu=Random.Range(0.3f,0.5f);
+        audioSource.Play();
+        Thunder.gameObject.SetActive(true);
+        Invoke("thunder_move",aida);
     
     }
-    public void Update() {
-        dasu+=Time.deltaTime;
-        if(dasu>kesu){
-            kesu=Random.Range(0.7f,1.0f);
-            Thunder.gameObject.SetActive(false);
-        }
+    public void thunder_move() {
+        kesu=Random.Range(0.7f,1.0f);
+        aida=Random.Range(0.8f,1.0f);
+        Thunder.gameObject.SetActive(false);
     }
 }
