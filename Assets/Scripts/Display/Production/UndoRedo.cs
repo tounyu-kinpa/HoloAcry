@@ -52,9 +52,12 @@ namespace UndoRedo.Production
         private static int n = 0;   // UnMergeのとき親の値をstackに入れるときの変数
         public static SelectedModel ParentValue;
 
+
+        
         public static void Undo()
         {
             if(undoStack.Count >= 2){
+            
                 SelectedModel UndoValue = undoStack.Pop();
 
                 // UndotagがtrueならredoStackにPush
@@ -77,13 +80,13 @@ namespace UndoRedo.Production
                 UndoValue = undoStack.Pop();
 
                 UndoRedoBranch (UndoValue);
-                
-            }
+            }    
 
         }
 
         public static void Redo()
         {
+
             // Stackから取り出して代入する関数
             SelectedModel RedoValue = redoStack.Pop();
             
@@ -110,8 +113,9 @@ namespace UndoRedo.Production
             //取り出した変更後の情報をもとにRedo
             UndoRedoBranch (RedoValue);
             // undoStack.Push(RedoValue);
-            
         }
+  
+
 
         // どんな変更をUndoRedoするのかの処理
         public static void UndoRedoBranch(SelectedModel PopValue)
@@ -187,7 +191,7 @@ namespace UndoRedo.Production
                         ProductionFunction.UnMergeObjects();
 
                         // undoStackに入った親の値を、値を更新するため取り出す
-                        DestroyPopValue = undoStack.Pop();
+                        SelectedModel DestroyPopValue = undoStack.Pop();
 
                         // 正しい親の値をPush
                         if(PopValue.Undotag != true){
