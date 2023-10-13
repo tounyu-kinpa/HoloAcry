@@ -133,10 +133,11 @@ namespace Display.Production
                 var x = MainCamera.transform.right;
                 var y = MainCamera.transform.up;
                     
-                var deltapos = Deltapositionperframe(Input.touches[0]);
+                //var deltapos = Deltapositionperframe(Input.touches[0]);
+                var deltapos = Input.touches[0].deltaPosition;
                     
-                transform.position += -x * deltapos.x * 0.1f * Time.deltaTime;
-                transform.position += -y * deltapos.y * 0.1f * Time.deltaTime;
+                transform.position += -x * deltapos.x * 0.2f * Time.deltaTime;
+                transform.position += -y * deltapos.y * 0.2f * Time.deltaTime;
                 
                 //ChangeCameraScale
                 if (_beforeDis > 0)
