@@ -38,7 +38,7 @@ public hikouki hikouki_Script;
                 kumo_Script.Start();
                 break;
             case (int)Whether_type.thunder:
-                setScript.Start();
+                kaminari_Script.Start();
                 break;
             case (int)Whether_type.sunny:
                 hikouki_Script.Start();
