@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Parabox.CSG;
 
 namespace Display.Production
 {
@@ -13,43 +14,51 @@ namespace Display.Production
         private static int Objectnamecounter = 1;
         
         private static GameObject MainCamera = GameObject.Find("Main Camera");
-
-        public static void ChangeScale(GameObject gameObject)
+        
+        public static void ChangeScale()
         {
-            if (Input.touchCount == 2)
-            {
-                if (beforeDis > 0)
+                if (Input.touchCount == 2)
                 {
-                    var dis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
-                    var scale = beforeScale * (dis / beforeDis);
-                    gameObject.transform.localScale = scale;
+                    if (beforeDis > 0)
+                    {
+                        var dis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
+                        var delta = dis - beforeDis;
+                        
+                        foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
+                        {
+                            selectedGameObject.transform.localScale += new Vector3(delta, delta, delta) * 0.01f;
+                        }
+                        beforeDis = -1f;
+                    }
+                    else
+                    {
+                        beforeDis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
+                    }
                 }
-                else
-                {
-                    beforeDis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
-                }
-            }
 
-            if (Input.touchCount < 1 && beforeDis > 0)
-            {
-                beforeDis = -1f;
-                beforeScale = gameObject.transform.localScale;
-            }
+                if (Input.touchCount < 2 && beforeDis > 0)
+                {
+                    beforeDis = -1f;
+                }
+                
         }
 
-        public static void ChangePos(GameObject gameObject)
+        public static void ChangePos()
         {
-            //前フレームからの指の移動量を取得し、その分だけオブジェクトを移動させる
-            if (Input.touchCount == 1)
+            foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
-                var x = MainCamera.transform.right;
-                var y = MainCamera.transform.up;
-                
-                var deltapos = Input.touches[0].deltaPosition;
-                
-                gameObject.transform.Translate(x * deltapos.x * 0.1f * Time.deltaTime);
-                gameObject.transform.Translate(y * deltapos.y * 0.1f * Time.deltaTime);
+                //前フレームからの指の移動量を取得し、その分だけオブジェクトを移動させる
+                if (Input.touchCount == 1)
+                {
+                    var x = MainCamera.transform.right;
+                    var y = MainCamera.transform.up;
+                    
+                    var deltapos = Input.touches[0].deltaPosition;
+                    
+                    selectedGameObject.transform.Translate(x * (deltapos.x * 0.1f * Time.deltaTime));
+                    selectedGameObject.transform.Translate(y * (deltapos.y * 0.1f * Time.deltaTime));
 
+                }
             }
 
         }
@@ -80,8 +89,8 @@ namespace Display.Production
                     
                 var deltapos = Input.touches[0].deltaPosition;
                     
-                MainCamera.transform.RotateAround(MainCamera.transform.position, Vector3.up, deltapos.x * 2 * Time.deltaTime);
-                MainCamera.transform.RotateAround(MainCamera.transform.position, MainCamera.transform.right, -deltapos.y * 2 * Time.deltaTime);
+                MainCamera.transform.RotateAround(MainCamera.transform.position, Vector3.up, deltapos.x * Time.deltaTime);
+                MainCamera.transform.RotateAround(MainCamera.transform.position, MainCamera.transform.right, -deltapos.y * Time.deltaTime);
 
             }
         }
@@ -94,13 +103,14 @@ namespace Display.Production
                 {
                     var dis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
                     var delta = dis - _beforeDis;
-                    MainCamera.transform.position += MainCamera.transform.forward * delta * 0.7f;
-                    _beforeDis = -1f;
+                    MainCamera.transform.position += MainCamera.transform.forward * (delta * 0.02f);
+                    _beforeDis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
                 }
                 else
                 {
                     _beforeDis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
                 }
+
             }
 
             if (Input.touchCount < 2 && _beforeDis > 0)
@@ -112,19 +122,6 @@ namespace Display.Production
 
         public static void Camera()
         {
-            if (Input.touchCount == 1)
-            {
-                //RotateCamera
-                var x = MainCamera.transform.right;
-                var y = MainCamera.transform.up;
-                    
-                var deltapos = Deltapositionperframe(Input.touches[0]);
-                    
-                MainCamera.transform.RotateAround(MainCamera.transform.position, Vector3.up, deltapos.x * 2 * Time.deltaTime);
-                MainCamera.transform.RotateAround(MainCamera.transform.position, MainCamera.transform.right, -deltapos.y * 2 * Time.deltaTime);
-
-            }
-
             if (Input.touchCount == 2)
             {
                 //MoveCamera
@@ -134,17 +131,19 @@ namespace Display.Production
                     
                 //var deltapos = Deltapositionperframe(Input.touches[0]);
                 var deltapos = Input.touches[0].deltaPosition;
-                    
-                transform.position += -x * deltapos.x * 0.2f * Time.deltaTime;
-                transform.position += -y * deltapos.y * 0.2f * Time.deltaTime;
-                
+
+                var position = transform.position;
+                position += -x * (deltapos.x * 0.2f * Time.deltaTime);
+                position += -y * (deltapos.y * 0.2f * Time.deltaTime);
+                transform.position = position;
+
                 //ChangeCameraScale
                 if (_beforeDis > 0)
                 {
                     var dis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
                     var delta = dis - _beforeDis;
-                    MainCamera.transform.position += MainCamera.transform.forward * delta * 0.02f;
-                    _beforeDis = -1f;
+                    MainCamera.transform.position += MainCamera.transform.forward * (delta * 0.02f);
+                    _beforeDis = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
                 }
                 else
                 {
@@ -230,13 +229,23 @@ namespace Display.Production
         {
             Parabox.CSG.Model result = CSG.Subtract(ProductionManager.selectedGameObjects[0],
                 ProductionManager.selectedGameObjects[1]);
+
+            //元のオブジェクトの色を取得
+            MeshRenderer mesh = ProductionManager.selectedGameObjects[0].GetComponent<MeshRenderer>();
+            var color = mesh.material.color;
             
-            
+            //新しくオブジェクト生成
             var composite = new GameObject();
+            
+            //新しく生成したオブジェクトの位置を切り取り前のオブジェクトの位置に設定
             composite.transform.position = ProductionManager.selectedGameObjects[0].transform.position;
+            
             composite.AddComponent<MeshFilter>().sharedMesh = result.mesh;
             composite.AddComponent<MeshRenderer>().sharedMaterials = result.materials.ToArray();
 
+            //mesh = composite.GetComponent<MeshRenderer>();
+            //mesh.material.color = color;
+            
             ProductionManager.selectedGameObjects.Add(composite);
         }
         
@@ -255,16 +264,17 @@ namespace Display.Production
                 Mesh mesh = selectedGameObject.GetComponent<MeshFilter>().mesh;
                 Vector3[] vertices = mesh.vertices;
                 Vector3 centerVertex = default;
+
                 
                 for (int i = 0; i < vertices.Length; i++)
                 {
-                    if (vertices[i].y >= 0 && Mathf.Approximately(vertices[i].x, 0.0f) && Mathf.Approximately(vertices[i].z, 0.0f))
+                    if (vertices[i].y >= 0)
                     {
-                        centerVertex = vertices[i];
+                        centerVertex = new Vector3(0, vertices[i].y, 0);
                         break;
                     }
                 }
-
+                
                 for (int i = 0; i < vertices.Length; i++)
                 {
                     if (vertices[i].y >= 0)

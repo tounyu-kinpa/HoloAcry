@@ -24,10 +24,16 @@ public class RayDebug : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit)){
                     //Rayが当たるオブジェクトがあった場合はそのオブジェクトをProductionManager.selectedGameObjectsに追加
-                    Debug.Log(hit.collider.gameObject.name);
-                    ProductionManager.selectedGameObjects.Add(hit.collider.gameObject);
-                    Debug.Log(hit.collider.gameObject.name);
+                    if (ProductionManager.selectedGameObjects.Exists(x => x == hit.collider.gameObject))
+                    {
+                        ProductionManager.selectedGameObjects.Remove(hit.collider.gameObject);
+                    }
+                    else
+                    {
+                        ProductionManager.selectedGameObjects.Add(hit.collider.gameObject);
+                    }
 
+            
                     // if (hit.collider.gameObject.transform.parent == GlobalVariables.content)
                     // {
                     //     var obj = GlobalVariables.CurrentWork.transform.Find(hit.collider.gameObject.transform.name);
