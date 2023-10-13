@@ -1295,7 +1295,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 336, y: 32}
-  m_SizeDelta: {x: 284, y: 100}
+  m_SizeDelta: {x: 284, y: 150}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &162348907
 MonoBehaviour:
@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.49685532, g: 0.6672057, b: 0.745283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1403,6 +1403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UndoButton: {fileID: 162348907}
+  RedoButton: {fileID: 1296982617}
 --- !u!1 &204825888
 GameObject:
   m_ObjectHideFlags: 0
@@ -7005,6 +7007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UndoButton: {fileID: 0}
+  RedoButton: {fileID: 0}
 --- !u!1 &850360654
 GameObject:
   m_ObjectHideFlags: 0
@@ -8315,6 +8319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UndoButton: {fileID: 0}
+  RedoButton: {fileID: 0}
 --- !u!1 &1000015379
 GameObject:
   m_ObjectHideFlags: 0
@@ -10282,7 +10288,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 624, y: 32}
-  m_SizeDelta: {x: 284, y: 100}
+  m_SizeDelta: {x: 284, y: 150}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1296982617
 MonoBehaviour:
@@ -10353,7 +10359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.4784314, g: 0.6392157, b: 0.7176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10390,6 +10396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UndoButton: {fileID: 162348907}
+  RedoButton: {fileID: 1296982617}
 --- !u!1 &1311717422
 GameObject:
   m_ObjectHideFlags: 0
@@ -12282,6 +12290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UndoButton: {fileID: 0}
+  RedoButton: {fileID: 0}
 --- !u!1 &1573144831
 GameObject:
   m_ObjectHideFlags: 0
@@ -12456,6 +12466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UndoButton: {fileID: 0}
+  RedoButton: {fileID: 0}
 --- !u!1 &1573597472
 GameObject:
   m_ObjectHideFlags: 0
@@ -17706,6 +17718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b61a4fb4d0ce642be36cea3b2f88ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UndoButton: {fileID: 0}
+  RedoButton: {fileID: 0}
 --- !u!1 &2111158009
 GameObject:
   m_ObjectHideFlags: 0

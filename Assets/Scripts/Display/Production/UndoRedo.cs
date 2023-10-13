@@ -3,6 +3,7 @@ using System.Net.Security;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Display.Production;
 
 namespace UndoRedo.Production
@@ -51,8 +52,33 @@ namespace UndoRedo.Production
         private static Stack<SelectedModel> SaveStack = new Stack<SelectedModel>(); 
         private static int n = 0;   // UnMergeのとき親の値をstackに入れるときの変数
         public static SelectedModel ParentValue;
+        public Button UndoButton;
+        public Button RedoButton;
 
+        void Stert()
+        {
+            UndoButton = GetComponent<Button>();
+            RedoButton = GetComponent<Button>();
 
+        }
+
+        void Update()
+        {
+            if(undoStack.Count < 2){
+                UndoButton.interactable = false;
+            }
+            else{
+                UndoButton.interactable = true;
+            }
+        
+            if(redoStack.Count == 0){
+                RedoButton.interactable = false;
+            }
+            else{
+                RedoButton.interactable = true;
+            }
+
+        }
         
         public static void Undo()
         {
