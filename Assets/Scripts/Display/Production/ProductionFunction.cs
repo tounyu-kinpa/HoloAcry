@@ -163,8 +163,10 @@ namespace Display.Production
         {
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
+                UndoRedo.Production.UndoRedo.Do(selectedGameObject, true);
                 MeshRenderer mesh = selectedGameObject.GetComponent<MeshRenderer>();
                 mesh.material.color = color;
+                UndoRedo.Production.UndoRedo.Do(selectedGameObject);
             }
         }
 
@@ -253,7 +255,10 @@ namespace Display.Production
         {
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
+                UndoRedo.Production.UndoRedo.Do(selectedGameObject, true);
                 selectedGameObject.transform.localScale = new Vector3(x, y, z);
+                UndoRedo.Production.UndoRedo.Do(selectedGameObject);
+
             }
         }
 
@@ -292,7 +297,9 @@ namespace Display.Production
         {
             foreach (var selectedGameObject in ProductionManager.selectedGameObjects)
             {
+                UndoRedo.Production.UndoRedo.Do(selectedGameObject, true);
                 selectedGameObject.transform.rotation = Quaternion.Euler(x, y, z);
+                UndoRedo.Production.UndoRedo.Do(selectedGameObject);
             }
 
         }
