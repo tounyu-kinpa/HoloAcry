@@ -19,15 +19,10 @@ public class kaminari : MonoBehaviour
         Thunder.gameObject.SetActive(false);
         audioSource = GetComponent<AudioSource();
         audioSource.clip = audioClip;
-    }
-    // Update is called once per frame
-    public void OnClick()
-    {
         dasu=Random.Range(0.3f,0.5f);
         audioSource.Play();
         Thunder.gameObject.SetActive(true);
         Invoke("thunder_move",aida);
-    
     }
     public void thunder_move() {
         kesu=Random.Range(0.7f,1.0f);

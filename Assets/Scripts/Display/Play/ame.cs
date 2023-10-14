@@ -13,8 +13,6 @@ public class ame : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         particle.Pause();
-    }
-    public void Onclic(){
         particle.gameObject.SetActive(true);
         audioSource.Play();
         Invoke("particle_Pause",25f);

@@ -12,9 +12,6 @@ public class hikouki : MonoBehaviour
         TargetTransform=TargetObject.GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = audioClip;
-    }
-    public void OnClick()
-    {
         TargetTransform.velocity=new Vector3(6.0f,0.0f,0.0f);
         audioSource.Play();
         Invoke("object_reset",5.0f);

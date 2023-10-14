@@ -50,6 +50,6 @@ public class PlayAnimation : MonoBehaviour
     private void HandleShakeEvent()
     {
         // 端末が振られた時に行いたい処理をここに実装
-        Debug.Log("ふったね！！！！！");
+        Whether_Mode.Start();
     }
 }

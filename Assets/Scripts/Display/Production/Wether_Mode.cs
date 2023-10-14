@@ -21,14 +21,11 @@ public kaminari kaminari_Script;
 public ame ame_Script;
 public kumo kumo_Script;
 public hikouki hikouki_Script;
-
-    // Startメソッドを使い、Mainメソッドの代わりに実行する
     void Start()
     {
         setScript = GetComponent<set>();
-        //
-        whether = (int)Whether_type.thunder;
-        switch (whether)
+        Mode=0;
+        switch (Mode)
         {
             case (int)Whether_type.rain:
                 //ここにアニメーションの呼び出しを書く
