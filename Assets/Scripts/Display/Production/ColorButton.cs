@@ -23,6 +23,7 @@ public class SetColorButton : MonoBehaviour
         else
         {
             ColorSetUI = Instantiate(ColorUIPrefab, ProductionUI);
+            GlobalVariables.isUIEventHandled = true;
         }
     }
 }
