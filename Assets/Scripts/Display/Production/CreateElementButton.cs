@@ -18,7 +18,7 @@ public class CreateElementButton : MonoBehaviour
 
     private void OnEnable() {
 
-        if (GlobalVariables.CurrentWork.transform.childCount == 0)
+        if (GlobalVariables.CurrentWork != null && GlobalVariables.CurrentWork.transform.childCount == 0)
         {
             // CurrentWorkの中身ないのにcontentに子があるとき
             foreach (Transform child in GlobalVariables.content.transform)

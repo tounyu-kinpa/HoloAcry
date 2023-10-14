@@ -64,19 +64,19 @@ namespace UndoRedo.Production
 
         void Update()
         {
-            if(undoStack.Count < 2){
-                UndoButton.interactable = false;
-            }
-            else{
-                UndoButton.interactable = true;
-            }
+            // if(undoStack.Count < 2){
+            //     UndoButton.interactable = false;
+            // }
+            // else{
+            //     UndoButton.interactable = true;
+            // }
         
-            if(redoStack.Count == 0){
-                RedoButton.interactable = false;
-            }
-            else{
-                RedoButton.interactable = true;
-            }
+            // if(redoStack.Count == 0){
+            //     RedoButton.interactable = false;
+            // }
+            // else{
+            //     RedoButton.interactable = true;
+            // }
 
         }
         

@@ -38,4 +38,8 @@ public class Togglecheck_scr : MonoBehaviour
             toggle5.interactable = true;
         }
     }
+    public void ErrorCheck()
+    {
+        
+    }
 }
