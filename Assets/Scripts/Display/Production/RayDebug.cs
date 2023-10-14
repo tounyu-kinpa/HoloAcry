@@ -30,7 +30,15 @@ public class RayDebug : MonoBehaviour
                     }
                     else
                     {
-                        ProductionManager.selectedGameObjects.Add(hit.collider.gameObject);
+                        if (ProductionManager.selectedGameObjects.Count < 2)
+                        {
+                            ProductionManager.selectedGameObjects.Add(hit.collider.gameObject);
+                        }
+                        else
+                        {
+                            ProductionManager.selectedGameObjects.Insert(0, hit.collider.gameObject);
+                            ProductionManager.selectedGameObjects.RemoveAt(2);
+                        }
                     }
 
             

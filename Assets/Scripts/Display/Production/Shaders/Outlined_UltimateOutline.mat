@@ -30,7 +30,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Angle: 89
-    - _FirstOutlineWidth: 0.15
+    - _FirstOutlineWidth: 0.01
     - _SecondOutlineWidth: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

@@ -18,9 +18,6 @@ namespace Display.Production
         void Start()
         {
             
-            //ProductionManager.createdGameObjects.Add(GameObject.Find("Cube"));
-            //ProductionManager.selectedGameObjects.Add(GameObject.Find("Cube"));
-            
             foreach (var createdGameObject in createdGameObjects)
             {
 
@@ -29,21 +26,21 @@ namespace Display.Production
 
         void Update()
         {
-            if (selectedGameObjects.Count == 0)
-            {
-                ProductionFunction.Camera();
-                ProductionFunction.RotateCamera();
-            }
-            else
-            {
-                ProductionFunction.ChangeScale();
-                ProductionFunction.ChangePos();
-            }
             
-            // if (globalvariables.GetSetProperty == false)
-            // {
-            //
-            // }
+            if (GlobalVariables.isUIEventHandled == false)
+            {
+                if (selectedGameObjects.Count == 0)
+                {
+                    ProductionFunction.Camera();
+                    ProductionFunction.RotateCamera();
+                }
+                else
+                {
+                    ProductionFunction.ChangeScale();
+                    ProductionFunction.ChangePos();
+                }
+            
+            }
             
             //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)
@@ -54,12 +51,12 @@ namespace Display.Production
                 if (selectedGameObjects.Exists(x => x == createdGameObject))
                 {
                     meshRenderer.material = Outline_material;
-                    //meshRenderer.material.color = color;
+                    meshRenderer.material.color = color;
                 }
                 else
                 {
                     meshRenderer.material = Default_material;
-                    //meshRenderer.material.color = color;
+                    meshRenderer.material.color = color;
                 }
             }
         }
