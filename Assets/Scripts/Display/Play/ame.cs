@@ -10,7 +10,7 @@ public class ame : MonoBehaviour
     void Start()
     {
         // 音声ファイルを取得
-        audioSource = GetComponent<AudioSource();
+        audioSource = GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         particle.Pause();
     }

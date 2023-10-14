@@ -10,17 +10,18 @@ public class cloud : MonoBehaviour
     void Start()
     {
         TargetTransform=TargetObject.GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource();
+        audioSource = GetComponent<AudioSource>();
         audioSource.clip = audioClip;
     }
     public void OnClick()
     {
         TargetTransform.velocity=new Vector3(6.0f,0.0f,0.0f);
-        Invoke("object_stop",5.0f);
         audioSource.Play();
+        Invoke("object_stop",5.0f);
     }
     private void object_stop()
     {
         TargetTransform.velocity=new Vector3(0.0f,0.0f,0.0f);
+        Destroy(gameObject);
     }
 }
