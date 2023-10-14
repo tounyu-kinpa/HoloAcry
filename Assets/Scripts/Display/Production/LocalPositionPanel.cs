@@ -27,9 +27,9 @@ public class LocalPositionPanel : MonoBehaviour
         {
             elementName.text = ProductionManager.selectedGameObjects[0].transform.name;   
 
-            value_x.text = ProductionManager.selectedGameObjects[0].transform.localPosition.x.ToString();
-            value_y.text = ProductionManager.selectedGameObjects[0].transform.localPosition.y.ToString();
-            value_z.text = ProductionManager.selectedGameObjects[0].transform.localPosition.z.ToString();
+            value_x.text = ProductionManager.selectedGameObjects[0].transform.localPosition.x.ToString("F2");
+            value_y.text = ProductionManager.selectedGameObjects[0].transform.localPosition.y.ToString("F2");
+            value_z.text = ProductionManager.selectedGameObjects[0].transform.localPosition.z.ToString("F2");
         }
         else
         {
