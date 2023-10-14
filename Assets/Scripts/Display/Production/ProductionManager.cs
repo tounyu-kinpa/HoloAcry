@@ -10,51 +10,56 @@ namespace Display.Production
 
         public static List<GameObject> selectedGameObjects = new List<GameObject>();
         public static List<GameObject> createdGameObjects = new List<GameObject>();
-
-        public Material Default_material;
+        
+        [SerializeField] Material Outline_material;
+        [SerializeField] private Material Default_material;
         
         // Start is called before the first frame update
         void Start()
         {
-            createdGameObjects.Add(GameObject.Find("Cube"));
+            
+            //ProductionManager.createdGameObjects.Add(GameObject.Find("Cube"));
+            //ProductionManager.selectedGameObjects.Add(GameObject.Find("Cube"));
             
             foreach (var createdGameObject in createdGameObjects)
             {
-                var outline = createdGameObject.AddComponent<Outline>();
-                outline.OutlineMode = Outline.Mode.OutlineAll;
-                outline.OutlineColor =Color.red;
-                outline.OutlineWidth = 5f;
 
             }
         }
 
         void Update()
         {
-            
             if (selectedGameObjects.Count == 0)
             {
                 ProductionFunction.Camera();
-                //ProductionFunction.ChangeCameraScale();
-            }
-
-            else
-            {
-                ProductionFunction.MoveCamera();
                 ProductionFunction.RotateCamera();
             }
+            else
+            {
+                ProductionFunction.ChangeScale();
+                ProductionFunction.ChangePos();
+            }
+            
+            // if (globalvariables.GetSetProperty == false)
+            // {
+            //
+            // }
             
             //選択されているオブジェクトにアウトラインを適用する処理
             foreach (var createdGameObject in createdGameObjects)
             {
-                var outline = createdGameObject.GetComponent<Outline>();
+                var meshRenderer = createdGameObject.GetComponent<MeshRenderer>();
+                var color = meshRenderer.material.color;
                 
                 if (selectedGameObjects.Exists(x => x == createdGameObject))
                 {
-                    outline.OutlineMode = Outline.Mode.OutlineAll;
+                    meshRenderer.material = Outline_material;
+                    //meshRenderer.material.color = color;
                 }
                 else
                 {
-                    outline.OutlineMode = Outline.Mode.OutlineHidden;
+                    meshRenderer.material = Default_material;
+                    //meshRenderer.material.color = color;
                 }
             }
         }
