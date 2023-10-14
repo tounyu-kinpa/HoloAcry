@@ -9,30 +9,37 @@ public class ObjectFixer : MonoBehaviour
     {
         Debug.Log(GlobalVariables.workNumber - 2);
         //work‚ÌScaleŽæ“¾
-        float ScaleX = ProductionManager.selectedGameObjects[0].transform.localScale.x;
-        float ScaleY = ProductionManager.selectedGameObjects[0].transform.localScale.y;
-        float ScaleZ = ProductionManager.selectedGameObjects[0].transform.localScale.z;
+        float ScaleX = GlobalVariables.CurrentWork.transform.localScale.x;
+        float ScaleY = GlobalVariables.CurrentWork.transform.localScale.y;
+        float ScaleZ = GlobalVariables.CurrentWork.transform.localScale.z;
 
         List<float> ChildScaleX = new List<float>();
         List<float> ChildScaleY = new List<float>();
         List<float> ChildScaleZ = new List<float>();
 
         //work‚ÌŽq
-        for (int n = 0; n <= ProductionManager.selectedGameObjects[0].transform.childCount; n++)
+        for (int n = 0; n <= GlobalVariables.CurrentWork.transform.childCount; n++)
         {
             Debug.Log("HEAD");
 
-            ChildScaleX.Add(ProductionManager.transform.GetChild(n).localScale.x);
-            ChildScaleY[n] = ProductionManager.selectedGameObjects[0].transform.GetChild(n).localScale.y;
-            ChildScaleZ[n] = ProductionManager.selectedGameObjects[0].transform.GetChild(n).localScale.z;
+            ChildScaleX.Add(GlobalVariables.CurrentWork.transform.GetChild(n).localScale.x);
+            ChildScaleY.Add(GlobalVariables.CurrentWork.transform.GetChild(n).localScale.y);
+            ChildScaleZ.Add(GlobalVariables.CurrentWork.transform.GetChild(n).localScale.z);
 
-            Debug.Log("c");
+            Debug.Log(ScaleX);
+            Debug.Log(ScaleY);
+            Debug.Log(ScaleZ);
+
+            Debug.Log(ChildScaleX[n]);
+            Debug.Log(ChildScaleY[n]);
+            Debug.Log(ChildScaleZ[n]);
+
             if ((ScaleX * ChildScaleX[n]) > 6)
             {
                 Debug.Log("1");
                 float times = ScaleX * (6 / ChildScaleX[n]);
 
-                ProductionManager.selectedGameObjects[0].transform.GetChild(n).localScale = new Vector3(ScaleX * times, ScaleY * times, ScaleZ * times);
+                GlobalVariables.CurrentWork.transform.GetChild(n).localScale = new Vector3(ScaleX * times, ScaleY * times, ScaleZ * times);
 
             }
             else if ((ScaleY * ChildScaleY[n]) > 6)
@@ -40,13 +47,13 @@ public class ObjectFixer : MonoBehaviour
                 Debug.Log("2");
                 float times = ScaleY * (6 / ChildScaleY[n]);
 
-                ProductionManager.selectedGameObjects[0].transform.GetChild(n).localScale = new Vector3(ScaleX * times, ScaleY * times, ScaleZ * times);
+                GlobalVariables.CurrentWork.transform.GetChild(n).localScale = new Vector3(ScaleX * times, ScaleY * times, ScaleZ * times);
             }
             else if ((ScaleZ * ChildScaleZ[n]) > 6)
             {
                 Debug.Log("3");
                 float times = ScaleZ * (6 / ChildScaleZ[n]);
-                ProductionManager.selectedGameObjects[0].transform.GetChild(n).localScale = new Vector3(ScaleX * times, ScaleY * times, ScaleZ * times);
+                GlobalVariables.CurrentWork.transform.GetChild(n).localScale = new Vector3(ScaleX * times, ScaleY * times, ScaleZ * times);
             }
 
         }
