@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1672632551733391084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daba88a30f38f3f4d8df0d146acfcd08, type: 3}
+  m_Script: {fileID: 11500000, guid: 1629ed1feb7830243a38b69df727eb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 8169845044160424666}
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1672632551733391084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e668e28abcfb0ae439f4ead584aba85b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e246517e2673f14092cb6ea10c4578b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 8169845044160424666}
@@ -319,6 +319,18 @@ MonoBehaviour:
       - m_Target: {fileID: 4691607634380587584}
         m_TargetAssemblyTypeName: ObjFromStream, Assembly-CSharp
         m_MethodName: CreateOBJ
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7282362021587139156}
+        m_TargetAssemblyTypeName: DestroyButton, Assembly-CSharp
+        m_MethodName: DestroyModal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1296,6 +1308,18 @@ MonoBehaviour:
       - m_Target: {fileID: 148045999395430120}
         m_TargetAssemblyTypeName: ObjFromFile, Assembly-CSharp
         m_MethodName: LoadButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7282362021587139156}
+        m_TargetAssemblyTypeName: DestroyButton, Assembly-CSharp
+        m_MethodName: DestroyModal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
